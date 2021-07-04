@@ -1,0 +1,19 @@
+{
+  "name": "msal-node-auth-code",
+  "version": "1.0.0",
+  "description": "sample app for msal-node",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Microsoft",
+  "license": "MIT",
+  "dependencies": {
+    "@azure/msal-node": "^1.0.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.2",
+    "express-session": "^1.17.2",
+    "pg": "^8.6.0",
+    "uuid": "^8.3.1"
+  }
+}
