@@ -2,9 +2,9 @@ CREATE TABLE users
 (
    userid serial,
    email varchar(40) NOT NULL,
-   accountType varchar(20) NOT NULL,
-   CONSTRAINT permissions CHECK (accountType IN ('staff', 'administrator')),
-   PRIMARY KEY (id);
+   role varchar(20) NOT NULL,
+   CONSTRAINT permissions CHECK (role IN ('staff', 'administrator')),
+   PRIMARY KEY (userid)
 )
 
 CREATE TABLE Products

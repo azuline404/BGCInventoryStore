@@ -43,6 +43,7 @@ const authControls = {
             req.session.name = response.account.name;
             console.log(req);
             res.redirect(req.baseUrl + '/home');
+            // check if user is admin. if they are, then set req.session.role = admin; else, set it as staff.
         }).catch((error) => {
             console.log(error);
             res.status(500).send(error);
