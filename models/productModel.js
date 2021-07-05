@@ -1,5 +1,7 @@
 let pg = ('../util/postgresql');
 
+
+
 const getAll = () => {
     return new Promise((resolve, reject) => {
         pg.query(

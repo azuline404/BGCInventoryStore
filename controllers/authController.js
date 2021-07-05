@@ -52,9 +52,13 @@ const authControls = {
             console.log(req.session);
             res.render('home', {name: req.session.name, email: req.session.email});
     },
-    test: (req,res,next) => {
-        if (req.session.email) console.log(req.session.email);
-        res.render('home', {name: "boo"});
-    }
+    checkAuth: (req,res,next) => {
+        if (req.session.email) {
+            return next();
+        }
+    // IF A USER ISN'T LOGGED IN, THEN REDIRECT THEM SOMEWHERE
+    else {
+         res.redirect('/');
+    }}
 }
 module.exports = authControls;

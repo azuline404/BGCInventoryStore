@@ -9,11 +9,11 @@ CREATE TABLE users
 
 CREATE TABLE Products
 (
-    productID serial,
+    id serial,
     category varchar(30) NOT NULL,
-    skuID numeric(10,0),
+    productid numeric(10,0),
     name varchar(50) NOT NULL,
-    brand varchar(50) NOT NULL,
+    gender varchar(50) NOT NULL,
     description varchar (100),
     count numeric(10,0),
     PRIMARY KEY(productID)
