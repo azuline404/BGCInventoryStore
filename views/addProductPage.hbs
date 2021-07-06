@@ -1,0 +1,43 @@
+<form class ="ml-5 mt-5" action="/addProduct" method="post" enctype="multipart/form-data" >
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Product Name</label>
+          <input type="text" class="form-control" style = "width: 800px" name ="name" placeholder="Name">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Gender</label>
+          <select class="form-control" style = "width: 800px" name = "gender">
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+        <div class="form-group ">
+            <label for="exampleFormControlSelect1">Size</label>
+            <select class="form-control" style = "width: 800px" name = "size">
+              <option>XS</option>
+              <option>S</option>
+              <option>M</option>
+              <option>L</option>
+              <option>XL</option>
+            </select>
+          </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Description</label>
+            <textarea class="form-control" name = "description" style = "width: 800px" rows="3"></textarea>
+          </div>
+        <div class="form-group">
+          <label for="exampleFormControlSelect2">Category</label>
+          <select multiple class="form-control" style = "width: 800px" name = "category">
+            <option>Tops</option>
+            <option>Bottoms</option>
+            <option>Jackets</option>
+            <option>Hats</option>
+            <option>Accessories</option>
+          </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect2">Image</label>
+            <br/>
+            <input type="file" name="image" />
+          </div>
+          <input type="submit" value="Upload"/>
+      </form>

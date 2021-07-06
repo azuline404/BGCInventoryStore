@@ -1,3 +1,4 @@
+const userModel = require('../models/userModel')
 const msal = require('@azure/msal-node');
 const REDIRECT_URI = "http://localhost:3000/redirect";
 const config = {
@@ -41,8 +42,18 @@ const authControls = {
             console.log("\nResponse: \n:", response);
             req.session.email = response.account.username;
             req.session.name = response.account.name;
-            console.log(req);
-            res.redirect(req.baseUrl + '/home');
+            // console.log(req);
+            console.log(req.session.email);
+            // check if user is admin. if they are, then set req.session.role = admin; else, set it as staff.
+            userModel.getUserRole(req.session.email).then((response) => {
+                console.log(response[0].role);
+                isAdmin = response[0].role == "administrator"? true: false; 
+                console.log("User is an admin: " + isAdmin);
+                res.render('home', {admin: isAdmin});
+            }).catch((err)=> {
+                console.log(err);
+                res.send("There was an error!");
+            })
         }).catch((error) => {
             console.log(error);
             res.status(500).send(error);
@@ -52,9 +63,13 @@ const authControls = {
             console.log(req.session);
             res.render('home', {name: req.session.name, email: req.session.email});
     },
-    test: (req,res,next) => {
-        if (req.session.email) console.log(req.session.email);
-        res.render('home', {name: "boo"});
-    }
+    checkAuth: (req,res,next) => {
+        if (req.session.email) {
+            return next();
+        }
+    // IF A USER ISN'T LOGGED IN, THEN REDIRECT THEM SOMEWHERE
+    else {
+         res.redirect('/');
+    }}
 }
 module.exports = authControls;

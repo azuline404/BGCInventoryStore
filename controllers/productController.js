@@ -1,4 +1,5 @@
-let productsModel = require('../models/products');
+let productsModel = require('../models/productModel');
+const uploadController = require('../controllers/uploadController');
 
 const productControls = {
     viewAll: (req,res,next) => {
@@ -36,8 +37,12 @@ const productControls = {
         console.log(req.session);
         res.render('home', {name: req.session.name, email: req.session.email});
     },
+    addProductPage: (req,res,next) => {
+        res.render('addProductPage', {name: req.session.name, email: req.session.email});
+    },
     addProduct: (req,res,next) => {
-        res.render('addProductToDB', {name: req.session.name, email: req.session.email});
+            console.log(req.file.filename);
+            res.render('home', {name: req.session.name, email: req.session.email});
     }
 }
 module.exports = productControls;

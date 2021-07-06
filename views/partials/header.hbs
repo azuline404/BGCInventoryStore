@@ -15,5 +15,8 @@
         <th align = "center"><a href="/" class = "header-option">Home</a></th>
         <th align = "center"><a href="/FAQ" class = "header-option">FAQ</a></th>
         <th align = "center"><a href="/Contact" class = "header-option">Contact us</a></th>
+        {{#if admin}}
+        <th align = "center"><a href="/viewSettings" class = "header-option">Settings</a></th>
+        {{/if}}
 </table> 
 </header>
