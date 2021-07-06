@@ -1,3 +1,5 @@
+// DEPENDENCIES
+// ============
 const express = require("express");
 const hbs = require('express-handlebars');
 const exphbs = require('express-handlebars');
@@ -6,25 +8,35 @@ const mainRouter = require('./routes/routes');
 const path = require('path');
 
 
-const SERVER_PORT = process.env.PORT || 3000; // listen on port 3000
+// SET DEFAULT PORT
+// ================
+const SERVER_PORT = process.env.PORT || 3000;
 
 
-
-// Create Express App and Routes
+// INITIALIZE EXPRESS
+// ==================
 const app = express();
 
-// set up handlebars using extension name hbs
+
+// CONFIGURE HANDLEBARS
+// ====================
 app.engine('hbs', exphbs({
     defaultLayout: 'main',
     extname: '.hbs',
     layoutsDir: path.join(__dirname, 'views', 'layouts'),
     partialsDir: __dirname + '/views/partials/'
 }));
-app.use(express.static(path.join(__dirname, '/public')));
-// set the view engine to hbs
+
 app.set('view engine', 'hbs');
 
-// create a session (main use is to keep the username/email)
+
+// SPECIFY JS/CSS/MEDIA PATH
+// =========================
+app.use(express.static(path.join(__dirname, '/public')));
+
+
+// BUILD SESSION
+// =============
 app.use(session({
     secret: 'secret-key',
     resave: false,
@@ -32,11 +44,9 @@ app.use(session({
 }));
 
 
-// tell the app to use the routes from routes/routes.js
+// EXPRESS ROUTER
+// ==============
 app.use(mainRouter);
-
-app.use(express.static(path.join(__dirname, '/public')));
-
 
 // app.post('/profile', upload.single('avatar'), function (req, res, next) {
 //     // req.file is the `avatar` file
@@ -44,7 +54,6 @@ app.use(express.static(path.join(__dirname, '/public')));
 //   })
 
 
-// start the app and listen
-
-
+// START SERVER
+// ============
 app.listen(SERVER_PORT, () => console.log(`Server is currently running on port ${SERVER_PORT}!`))
