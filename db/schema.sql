@@ -3,13 +3,13 @@ CREATE TABLE users (
     user_id serial NOT NULL,
     username text NOT NULL,
     email text NOT NULL,
-    user_role text NOT NULL,
-    CHECK (user_role in ('staff', 'admin')),
+    role text NOT NULL,
+    CHECK (role in ('staff', 'admin')),
     PRIMARY KEY (user_id)
 );
 
-INSERT INTO users (username, email, user_role)
-	VALUES ('eldon_wong', 'EWong@bgcengineering.ca', 'admin');
+INSERT INTO users (username, email, role)
+	VALUES ('eldon_wong', 'EWong@bgcengineering.ca', 'admin'), ('abiel_kim', 'abielk@sfu.ca', 'admin');
 
 -- PRODUCTS
 CREATE TABLE products 
