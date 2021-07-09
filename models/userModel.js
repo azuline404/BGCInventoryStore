@@ -1,4 +1,4 @@
-const pg = require('../util/postgresql');
+const pg = require('../db/postgresql');
 
 const userModelControls = {
     getUserRole : (email) => {

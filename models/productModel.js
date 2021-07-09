@@ -1,5 +1,5 @@
-const pool = require("../util/postgresql");
-let pg = ('../util/postgresql');
+const pool = require("../db/postgresql");
+let pg = ('../db/postgresql');
 
 
 async function getAllProducts()

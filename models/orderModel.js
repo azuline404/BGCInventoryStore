@@ -1,1 +1,1 @@
-const pg = require('../util/postgres');
+const pg = require('../db/postgres');
