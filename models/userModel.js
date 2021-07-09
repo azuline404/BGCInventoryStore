@@ -5,7 +5,7 @@ const userModelControls = {
     console.log(email);
     return new Promise((resolve, reject) => {
         pg.query(
-            `SELECT role from users WHERE email = '${email}'`)
+            `SELECT * from users WHERE email = '${email}'`)
             .then((res, err) => {
             if (err) {
                 reject(err);

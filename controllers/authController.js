@@ -46,13 +46,10 @@ const authControls = {
             console.log(req.session.email);
             // check if user is admin. if they are, then set req.session.role = admin; else, set it as staff.
             userModel.getUserRole(req.session.email).then((response) => {
+                // console.log(response);
                 console.log(response[0].role);
-                // isAdmin = response[0].role == "administrator"? true: false; 
-                
-                // *************************************
-                isAdmin = true
-                // *************************************
-                
+                isAdmin = response[0].role == "administrator"? true: false; 
+            
                 console.log("User is an admin: " + isAdmin);
                 res.render('home', {admin: isAdmin});
             }).catch((err)=> {

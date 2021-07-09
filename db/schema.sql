@@ -1,15 +1,15 @@
 -- USERS
 CREATE TABLE users (
     user_id serial NOT NULL,
-    username text NOT NULL,
-    email text NOT NULL,
-    role text NOT NULL,
-    CHECK (role in ('staff', 'admin')),
+    username varchar(40) NOT NULL,
+    email varchar(320) NOT NULL,
+    role varchar(40) NOT NULL,
+    CONSTRAINT permissions CHECK (role IN ('staff', 'administrator')),
     PRIMARY KEY (user_id)
 );
 
-INSERT INTO users (username, email, role)
-	VALUES ('eldon_wong', 'EWong@bgcengineering.ca', 'admin'), ('abiel_kim', 'abielk@sfu.ca', 'admin');
+
+INSERT INTO users (username, email, role) VALUES ('eldon_wong', 'EWong@bgcengineering.ca', 'administrator')
 
 -- PRODUCTS
 CREATE TABLE products 
