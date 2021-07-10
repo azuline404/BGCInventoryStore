@@ -52,6 +52,7 @@ const productControls = {
         try {
             const bottles = await productsModel.getAllBottles();
             console.log(bottles.rows);
+            res.render('shoppingPage', {bottles: bottles.rows})
         } catch (err) {
             console.log(err)
         }
