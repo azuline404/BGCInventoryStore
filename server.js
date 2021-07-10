@@ -1,7 +1,6 @@
 // DEPENDENCIES
 // ============
 const express = require("express");
-const hbs = require('express-handlebars');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
 const mainRouter = require('./routes/routes');
@@ -65,6 +64,22 @@ app.get('/Contact', (req, res) => {
 app.get('/detail', (req, res) => {
     res.render("detail", {layout:'main'});
 })
+
+var hbs = exphbs.create({});
+hbs.handlebars.registerHelper('grouped_each', function(every, context, options) {
+    var out = "", subcontext = [], i;
+    if (context && context.length > 0) {
+        for (i = 0; i < context.length; i++) {
+            if (i > 0 && i % every === 0) {
+                out += options.fn(subcontext);
+                subcontext = [];
+            }
+            subcontext.push(context[i]);
+        }
+        out += options.fn(subcontext);
+    }
+    return out;
+});
 
 // app.get('/shoppingPage', (req, res) => {
 //     res.render("shoppingPage", {layout:'main'});
