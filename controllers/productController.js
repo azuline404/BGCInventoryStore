@@ -5,37 +5,7 @@ let pg = ('../db/postgresql');
 
 
 const productControls = {
-    viewAll: (req,res,next) => {
-            /* ask productModel to get each product
-            // value coming back from db should be an array of products, each containing an array of objects (different types);
-            // AllItems = [product1 = [
-                    {
-                        color: red
-                        item count: 3
-                        image: testimage1.jpg
-                    },
-                    {
-                        color: green
-                        item count: 1
-                        image: testimage2.jpg
-                    },
-                ]
-                , product2 =  [
-                    {
-                        color: red
-                        item count: 3
-                        image: testimage1.jpg
-                    },
-                    {
-                        color: green
-                        item count: 1
-                        image: testimage2.jpg
-                    },
-                ]
-            ];
-            */
-            res.render('shoppingPage', {name: req.session.name, email: req.session.email});
-    },
+
     viewCategory: (req,res,next) => {
         console.log(req.session);
         res.render('home', {name: req.session.name, email: req.session.email});
@@ -46,6 +16,16 @@ const productControls = {
     addProduct: (req,res,next) => {
             console.log(req.file.filename);
             res.render('home', {name: req.session.name, email: req.session.email});
+    },
+    viewAllProducts: async (req,res,next) => {
+        try {
+            const bottles = await productsModel.getAllBottles();
+            const shirts = await productsModel.getAllShirts();
+            const backpacks = await productsModel.getAllBackpacks();
+            res.render('allProductsPage', {bottles: bottles.rows, shirts: shirts.rows, backpacks:backpacks.rows});
+        } catch (err) {
+            console.log(err)
+        }
     },
     viewBottles: async (req,res,next) => {
         try {
