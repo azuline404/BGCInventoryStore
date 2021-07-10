@@ -52,11 +52,18 @@ const productControls = {
         try {
             const bottles = await productsModel.getAllBottles();
             const backpacks = await productsModel.getAllBackpacks();
+            const shirts = await productsModel.getAllShirts();
+            const products = await productsModel.getAllProducts();
             console.log("<============================== ALL THE BOTTLES: ==============================>")
             console.log(bottles.rows)
             console.log("<============================= ALL THE BACKPACKS: =============================>")
             console.log(backpacks.rows)
-            res.render('shoppingPage', {bottles: bottles.rows, backpacks: backpacks.rows})
+            console.log("<============================= ALL THE SHIRTS: =============================>")
+            console.log(shirts.rows)
+            console.log("<============================= ALL THE PRODUCTS: =============================>")
+            console.log(products.rows)
+
+            res.render('shoppingPage', {bottles: bottles.rows, backpacks: backpacks.rows, shirts: shirts.rows})
         } catch (err) {
             console.log(err)
         }

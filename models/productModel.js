@@ -25,12 +25,24 @@ async function queryDB(q) {
 // ==========================
 const productModelControls = {
 
+    async getAllProducts() {
+        return await queryDB(`SELECT * FROM products`)
+    },
+
     async getAllBottles() {
         return await queryDB(`SELECT * FROM bottles INNER JOIN products ON bottles.product_id = products.product_id`)
     },
 
     async getAllBackpacks() {
         return await queryDB(`SELECT * FROM backpacks INNER JOIN products ON backpacks.product_id = products.product_id`)
+    },
+
+    async getAllShirts() {
+        return await queryDB(`SELECT * FROM shirts INNER JOIN products ON shirts.product_id = products.product_id`)
+    },
+
+    async getAllUsers() {
+        return await queryDB(`SELECT * FROM users`)
     }
 }
 

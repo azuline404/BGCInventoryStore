@@ -44,10 +44,22 @@ CREATE TABLE bottles
     CONSTRAINT bottles_products_FK FOREIGN KEY (product_id) REFERENCES products (product_id)
 );
 
+CREATE TABLE shirts
+(
+    product_id int NOT NULL,
+    shirt_id serial NOT NULL,
+    info_code varchar(40) NOT NULL,
+    product_location varchar(40) NOT NULL,
+    product_count int NOT NULL,
+    product_img varchar(200) NOT NULL,
+    PRIMARY KEY (shirt_id),
+    CONSTRAINT shirts_products_FK FOREIGN KEY (product_id) REFERENCES products (product_id)
+);
 
 
+ 
 -- MANUALLY POPULATE DB
--- sample for db retrieval
+-- initial sample for db retrieval
 -- 
 -- sample bottles
 INSERT INTO products (product_name, product_desc, category)
@@ -62,6 +74,13 @@ VALUES ('backpack_a', 'backpack good for a', 'backpack'), ('backpack_b', 'backpa
 
 INSERT INTO backpacks (product_id, info_code, product_location, product_count, product_img)
 VALUES (6, 'S', 'burnaby', 8, 'backpack.jpg'), (7, 'S', 'vancouver', 10, 'backpack.jpg'), (8, 'M', 'richmond', 14, 'backpack.jpg'), (9, 'M', 'burnaby', 1, 'backpack.jpg'),(10, 'L', 'vancouver', 10, 'backpack.jpg');
+
+-- sample shirts
+INSERT INTO products (product_name, product_desc, category)
+VALUES ('shirt_a', 'shirt good for a', 'shirt'), ('shirt_b', 'shirt good for b', 'shirt'), ('shirt_c', 'shirt good for c', 'shirt'), ('shirt_d', 'shirt good for d', 'shirt'),('shirt_e', 'shirt good for e', 'shirt');
+
+INSERT INTO shirts (product_id, info_code, product_location, product_count, product_img)
+VALUES (11, 'M', 'burnaby', 8, 'shirt.jpg'), (12, 'S', 'vancouver', 10, 'shirt.jpg'), (13, 'M', 'richmond', 14, 'shirt.jpg'), (14, 'M', 'burnaby', 1, 'shirt.jpg'),(15, 'L', 'vancouver', 10, 'shirt.jpg');
 -- 
 -- 
 -- 
