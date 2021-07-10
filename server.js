@@ -66,9 +66,9 @@ app.get('/detail', (req, res) => {
     res.render("detail", {layout:'main'});
 })
 
-app.get('/shoppingPage', (req, res) => {
-    res.render("shoppingPage", {layout:'main'});
-})
+// app.get('/shoppingPage', (req, res) => {
+//     res.render("shoppingPage", {layout:'main'});
+// })
 // START SERVER
 // ============
 app.listen(SERVER_PORT, () => console.log(`Server is currently running on port ${SERVER_PORT}!`))
