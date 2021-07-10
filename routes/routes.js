@@ -6,6 +6,7 @@ const authController = require('../controllers/AuthController');
 const orderController = require('../controllers/orderController');
 const productController = require('../controllers/productController');
 const uploadController = require('../controllers/uploadController');
+const Controller404 = require('../controllers/404Controller')
 
 
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -18,6 +19,7 @@ router.get('/home',authController.checkAuth, authController.home);
 router.get('/addProductPage', authController.checkAuth, productController.addProductPage);
 router.post('/addProduct', uploadController.upload.single('image'), productController.addProduct);
 router.get('/shoppingPage',productController.viewShoppingPage)
+router.get('/*',Controller404.notFound)
 // router.post('/addProduct', productController.addProduct);
 
 module.exports = router;

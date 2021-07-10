@@ -1,6 +1,9 @@
 let productsModel = require('../models/productModel');
 const uploadController = require('../controllers/uploadController');
 
+let pg = ('../db/postgresql');
+
+
 const productControls = {
     viewAll: (req,res,next) => {
             /* ask productModel to get each product
@@ -44,8 +47,23 @@ const productControls = {
             console.log(req.file.filename);
             res.render('home', {name: req.session.name, email: req.session.email});
     },
-    viewShoppingPage:(req,res,next) => {
-        res.render('shoppingPage', {name: req.session.name, email: req.session.email});
-    },
+    viewShoppingPage: async (req,res,next) => {
+
+        try {
+            const bottles = await productsModel.getAllBottles();
+            console.log(bottles);
+        } catch (err)
+        {
+            console.log(err)
+        }
+
+        // try {
+        //     const bottles = await productsModel.query(`SELECT * FROM bottles`);
+        //     console.log(bottles);
+        // } catch (err) {
+        //     console.log(err);
+        // }
+
+    }
 }
 module.exports = productControls;
