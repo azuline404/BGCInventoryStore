@@ -8,16 +8,15 @@ CREATE TABLE users (
     PRIMARY KEY (user_id)
 );
 
-
-INSERT INTO users (username, email, role) VALUES ('eldon_wong', 'EWong@bgcengineering.ca', 'administrator')
+INSERT INTO users (username, email, role) VALUES ('abiel_kim', 'abielkim@hotmail.com', 'administrator');
 
 -- PRODUCTS
 CREATE TABLE products 
 (
     product_id serial NOT NULL,
-    product_name text NOT NULL,
-    product_desc text NOT NULL, 
-    category text NOT NULL,
+    product_name varchar(40) NOT NULL,
+    product_desc varchar(40) NOT NULL, 
+    category varchar(40) NOT NULL,
     PRIMARY KEY (product_id)
 );
 
@@ -32,8 +31,8 @@ CREATE TABLE bottles
 CREATE TABLE bottles_stock
 (
     product_id serial NOT NULL,
-    info_code text NOT NULL,
-    product_location text NOT NULL,
+    info_code varchar(40) NOT NULL,
+    product_location varchar(40) NOT NULL,
     product_count int NOT NULL,
     PRIMARY KEY (product_id),
     CONSTRAINT bottles_stock_products_FK FOREIGN KEY (product_id) REFERENCES bottles (product_id)
