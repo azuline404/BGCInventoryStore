@@ -43,6 +43,9 @@ const productControls = {
     addProduct: (req,res,next) => {
             console.log(req.file.filename);
             res.render('home', {name: req.session.name, email: req.session.email});
-    }
+    },
+    viewShoppingPage:(req,res,next) => {
+        res.render('shoppingPage', {name: req.session.name, email: req.session.email});
+    },
 }
 module.exports = productControls;

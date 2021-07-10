@@ -1,0 +1,62 @@
+.Back-btn{
+    font-size: 20px;
+}
+
+
+.box{
+    margin-top: 100px;
+    margin-left: 100px;
+    width:640px;
+    height:640px;
+    position:relative;
+}
+
+.box-img{
+    position:absolute;
+    top:0;
+    left:0;
+    opacity: 0;
+}
+
+.box-left{
+    position:absolute;
+    width:30px;
+    height:70px;
+    background-color: #00000050;
+    color: #ccc;
+    top:320px;
+    border-radius:0 5px 5px 0;
+    text-align:center;
+    line-height:70px;
+    font-size:27px;
+}
+
+.box-left:hover{
+    background-color:#00000050;
+    color:#fff;
+}
+
+.box-right{
+    position:absolute;
+    width:30px;
+    height:70px;
+    background-color: #00000050;
+    color: #ccc;
+    top:320px;
+    border-radius: 5px 0 5px 0;
+    text-align:center;
+    line-height:70px;
+    font-size:27px;
+    right:0px;
+}
+
+.box-right:hover{
+    background-color:#00000050;
+    color:#fff;
+}
+
+#productIntroduction{
+    position: relative;
+    top: -400px;
+    left: 1000px;
+}

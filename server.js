@@ -53,7 +53,22 @@ app.use(mainRouter);
 //     // req.body will hold the text fields, if there were any
 //   })
 
+app.get('/FAQ', (req, res) => {
+    res.render("FAQ", {layout:'main'});
+})
 
+app.get('/Contact', (req, res) => {
+    res.render("Contact", {layout:'main'});
+})
+
+//product detail page
+app.get('/detail', (req, res) => {
+    res.render("detail", {layout:'main'});
+})
+
+app.get('/shoppingPage', (req, res) => {
+    res.render("shoppingPage", {layout:'main'});
+})
 // START SERVER
 // ============
 app.listen(SERVER_PORT, () => console.log(`Server is currently running on port ${SERVER_PORT}!`))
