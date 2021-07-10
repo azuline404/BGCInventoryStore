@@ -32,9 +32,9 @@
 {{!-- The shopping page item --}}
 <table border = "0" width = "100%" height = "46%">
     <tr>
-        <td colspan = "5"><h2>Backpack</h2><hr></td>
+        <td colspan = "5"><h2>{{category}}</h2><hr></td>
     </tr>
-    {{#grouped_each 4 bottles}}
+    {{#grouped_each 4 backpacks}}
     <tr>
             {{#each this }}
         <th>
@@ -50,11 +50,11 @@
                          <div class = "pop_part">
                              <img class = "close" src="image/close.png">
                              <div class = "product-img">
-                                <img src="image/backpack.jpg" alt="">
+                                <img src="./uploads/{{product_img}}" alt="">
                             </div>
                         <div class = "info">
-                            <h2>Backpack <br> <br><span>Men's sport</span></h2>
-                             <p>this is the pargrah,this is the pargrah,this is the pargrah,this is the pargrah</p>
+                            <h2>{{product_name}}<br> <br><span>{{category}}</span></h2>
+                             <p>{{product_desc}}</p>
                             <a href="#" class = "add-cart-btn">Add to Cart</a>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                 <div class="show-right" onclick="right_click(1)">&gt;</div>
                     <h4 style="text-align:center">{{product_name}}</h4>
                     <p style="text-align:center">{{product_desc}}</p>
-                    <a class = "view-btn" href="/detail" >View Detail</a>
+                    <a class = "view-btn" href="/detail">View Detail</a>
                 </div> 
         </th>
                 {{/each}}

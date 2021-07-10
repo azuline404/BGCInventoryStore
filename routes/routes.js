@@ -18,7 +18,9 @@ router.get('/redirect',authController.redirect);
 router.get('/home',authController.checkAuth, authController.home);
 router.get('/addProductPage', authController.checkAuth, productController.addProductPage);
 router.post('/addProduct', uploadController.upload.single('image'), productController.addProduct);
-router.get('/shoppingPage',productController.viewShoppingPage)
+router.get('/shopBottles',productController.viewBottles)
+router.get('/shopBackpacks',productController.viewBackpacks)
+router.get('/shopShirts',productController.viewShirts)
 router.get('/*',Controller404.notFound)
 // router.post('/addProduct', productController.addProduct);
 
