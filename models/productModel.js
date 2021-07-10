@@ -26,7 +26,7 @@ async function queryDB(q) {
 const productModelControls = {
 
     async getAllBottles() {
-        return await queryDB(`SELECT * FROM bottles`)
+        return await queryDB(`SELECT * FROM bottles INNER JOIN products ON bottles.product_id = products.product_id`)
     },
 
     async getAllJackets() {
