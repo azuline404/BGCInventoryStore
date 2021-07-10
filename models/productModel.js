@@ -3,20 +3,20 @@ let pg = ('../db/postgresql');
 
 // FUNCTIONS
 // =========
-async function query (q) {
+async function queryDB(q) {
     const client = await pool.connect()
     let res
     try {
-      await client.query('BEGIN')
-      try {
-        res = await client.query(q)
-        await client.query('COMMIT')
-      } catch (err) {
-        await client.query('ROLLBACK')
-        throw err
-      }
+        await client.query('BEGIN')
+        try {
+            res = await client.query(q)
+            await client.query('COMMIT')
+        } catch (err) {
+            await client.query('ROLLBACK')
+            throw err
+        }
     } finally {
-      client.release()
+        client.release()
     }
     return res
 }
@@ -26,11 +26,11 @@ async function query (q) {
 const productModelControls = {
 
     async getAllBottles() {
-        return await query(`SELECT * FROM bottles`)
+        return await queryDB(`SELECT * FROM bottles`)
     },
 
     async getAllJackets() {
-        return await query(`SELECT * FROM jackets`)
+        return await queryDB(`SELECT * FROM jackets`)
     }
 }
 
