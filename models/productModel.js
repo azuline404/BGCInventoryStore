@@ -1,51 +1,42 @@
 const pool = require("../db/postgresql");
 let pg = ('../db/postgresql');
 
+// FUNCTIONS
+// =========
+async function query (q) {
+    const client = await pool.connect()
+    let res
+    try {
+      await client.query('BEGIN')
+      try {
+        res = await client.query(q)
+        await client.query('COMMIT')
+      } catch (err) {
+        await client.query('ROLLBACK')
+        throw err
+      }
+    } finally {
+      client.release()
+    }
+    return res
+}
 
-
+// EXPORT SPECIALIZED QUERIES
+// ==========================
 const productModelControls = {
 
-    async query (q) {
-        const client = await pool.connect()
-        let res
-        try {
-          await client.query('BEGIN')
-          try {
-            res = await client.query(q)
-            await client.query('COMMIT')
-          } catch (err) {
-            await client.query('ROLLBACK')
-            throw err
-          }
-        } finally {
-          client.release()
-        }
-        return res
-    },
-    
     async getAllBottles() {
-        const client = await pool.connect()
-        let res
-        try {
-          await client.query('BEGIN')
-          try {
-            res = await client.query(`SELECT * FROM bottles`)
-            await client.query('COMMIT')
-          } catch (err) {
-            await client.query('ROLLBACK')
-            throw err
-          }
-        } finally {
-          client.release()
-        }
-        return res
+        return await query(`SELECT * FROM bottles`)
     },
+
+    async getAllJackets() {
+        return await query(`SELECT * FROM jackets`)
+    }
 }
 
 module.exports = productModelControls;
 
 /*
-
 const productModelControls = {
 
     async getAllProducts()
@@ -95,5 +86,4 @@ const productModelControls = {
 }
 
 module.exports = productModelControls;
-
 */

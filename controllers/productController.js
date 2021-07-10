@@ -51,9 +51,8 @@ const productControls = {
 
         try {
             const bottles = await productsModel.getAllBottles();
-            console.log(bottles);
-        } catch (err)
-        {
+            console.log(bottles.rows);
+        } catch (err) {
             console.log(err)
         }
 
@@ -66,4 +65,5 @@ const productControls = {
 
     }
 }
+
 module.exports = productControls;
