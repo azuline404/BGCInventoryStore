@@ -1,243 +1,63 @@
----
-page_type: sample
-languages:
-- javascript
-products:
-- nodejs
-- azure-active-directory
-description: "Add authentication to a Node.js web application with the Microsoft Authentication Library for Node.js (MSAL Node)."
-urlFragment: "quickstart-v2-nodejs-webapp-msal"
----
+BGC Engineering Inventory Store Project Proposal
+
+
+
+
+
+
+
+
+Members: 
+Tommy Chang
+Abiel Kim
+Wenqing Liu
+Junchen Li
+Mohamed Moataz Jmal
+
+Project Name:
+BGC Inventory Store
+ 
+Overview of the Inventory Store:
+BGC internal website designed for staff members to request promotional items and gear for both personal and client benefits. 
+ 
+Overview of the issues in the existing web application:
+The current web application uses technologies such as Microsoft Sharepoint, Microsoft SQL Server as the backend to keep record of the virtual store inventory. However, certain functionalities, in particular server-side calculations, fail and result in incorrect values in the database.  As for the front-end, the UI is fairly dated; the user experience is lacking in terms of user friendliness, design, and appeal.
+ 
+How will the problems be solved:
+This project consists of a complete revamping of the existing site. Front-end technologies such as HTML/CSS/JavaScript will be used to provide a better user experience. The backend will use Node.js as a server-side language with a PostgreSQL/MySQL database. The new web application will provide the most integral functions of the existing inventory store along with additional features if time permits. 
+ 
+How will this project make life better? 
+The new website will provide a better user experience for BGC staff members. On the staff (member) side, the website will be easier to navigate and use. On the administrative (admin team) side, users will no longer have to manually correct invalid entries in the database with new valid server-logic, reducing human errors.
+ 
+Scope of the project:
+The scope of the project is to develop an E-commerce website with two user roles views: Staff and Administrator. The 2 main features are for staff members to be able to make requests for available items, and for administrators to fulfill those requests. There are also many other individual features such as generating reports.
+The epics of our project is to:
+Ability to login using the Azure Active Directory API (Iteration 1)
+Ability to view/filter items on a shopping page (client)  (Iteration 1)
+Ability to create an order for a Personal or Client request
+Ability to modify an order’s request status as an Administrator
+Status: Waitlist/Completed/Cancelled/Submitted
+Implement server-side logic to handle updating of values (item quantity)
+Ability to view all items in the database (shopping page - filtered, staff) 
+Ability to view/edit items in the database (admin)
+Ability to view all requests (admin-side). Perhaps filter by status.
+This is a tentative ordering of Epics and may change based on priority.
+ 
+Sample of User Stories:
+Task: Logging in
+Staff/Administrator is able to log in to the website using their BGC Outlook credentials
+Task: Viewing landing page
+After logging in, the user is redirected to a landing page. The landing page will consist of headings that will redirect the user to a product viewing page or other additional information/guidelines.
+Task: Creating an order and adding items
+When the user adds an item, an order(cart) will be created if not already. Further additions will be placed in the cart. 
+Task: Filling order information
+When the user checks out their cart, they will have to fill out a form with their information and agree to BGC internal policies.
+Task: Editing Inventory (Admin) 
+An administrator should be able to edit existing inventory (adding new item, updating values, deleting)
+Task: Processing orders (Admin)
+An administrator should be able to process an order waiting for approval. This means changing the order status, and fulfilling the request (either completed or rejected).
+ 
+
+ 
+ 
 
-# Add user authentication to a Node web app with MSAL
-
-This sample Node.js web application uses the Microsoft Authentication Library for Node.js (MSAL Node.js) to sign in users by using the OAuth 2.0 authorization code flow.
-
-You can find additional information about supporting user sign-in in your web apps by using the Microsoft identity platform on docs.microsoft.com: [Scenario: Web app that signs in users](https://docs.microsoft.com/azure/active-directory/develop/scenario-web-app-sign-user-overview?tabs=aspnetcore).
-
-## Prerequisites
-
-- [Node.js](https://nodejs.org/en/)
-
-## Register the application
-
-First, complete the steps in [Register an application with the Microsoft identity platform](https://docs.microsoft.com/azure/active-directory/develop/quickstart-register-app) to register the app.
-
-Use the following settings for your app registration:
-
-- Name: `MSAL Node Sample` (suggested)
-- Supported account types: **Accounts in any organizational directory and personal Microsoft accounts**
-- Platform type: **Web**
-- Redirect URI: `http://localhost:3000/redirect`
-- Client secret: `*********` (record this value after creation - it's shown only once)
-
-## Clone the repository
-
-Next, get the files included in this code sample.
-
-SSH:
-
-```bash
-$ git clone git@github.com:AzureAD/ms-identity-node.git
-```
-
-HTTP:
-
-```bash
-$ git clone https://github.com/AzureAD/ms-identity-node.git
-```
-
-You can also download the repository by selecting **Download ZIP** from the repository's dropdown menu. You can decompress it locally and explore the code.
-
-## Install the package
-
-To install the MSAL Node package:
-
-```bash
-npm install @azure/msal-node
-```
-
-If you are customizing MSAL Node or building locally:
-
-```bash
-npm run build:package
-```
-
-## Configure the sample code
-
-Open the *index.js* file and find the `config` object. Modify the `config` object with values from your [app's registration in the Azure portal](https://docs.microsoft.com/azure/active-directory/develop/quickstart-register-app).
-
-Find your app's registration in the [Azure portal](https://portal.azure.com) and populate the `config` object with the following values:
-
-* `clientId`: **Application (client) ID**
-* `authority`: `https://login.microsoftonline.com/common`
-* `clientSecret`: `********` (recorded during app registration - see [Prerequisites](#))
-
-You have finished the basic configuration!
-
-> TIP: You can support different account types by specifying other [authority options](https://docs.microsoft.com/azure/active-directory/develop/msal-client-application-configuration). Unless you have a need to restrict users of your app to a single organization, we suggest you use the default authority shown here. User restrictions can be placed later in the application flow if needed.
-
-## Run the sample app
-
-1. From the command line, let npm install any needed dependencies.  This only needs to be done once.
-
-    ```bash
-    $ npm install
-    ```
-
-1. Once the dependencies are installed, you can run the sample application by using the following command:
-
-    ```bash
-    $ npm start
-    ```
-
-1. Navigate to http://localhost:3000 (or whatever port number specified) with the browser of your choice.
-
-#### Customize application start
-
-To customize the start script, modify the *package.json* file.
-
-## Add authentication to an existing application
-
-### Import the Configuration Object
-
-If you set up the sample with your app registration, you may be able to copy this object directly into your application.
-
-```js
-const config = {
-    auth: {
-        clientId: "12d77c73-d09d-406a-3asd-3d4e576f7d9b",
-        authority: "https://login.microsoftonline.com/common",
-        clientSecret: ""
-    },
-    system: {
-        loggerOptions: {
-            loggerCallback(loglevel, message, containsPii) {
-                console.log(message);
-            },
-            piiLoggingEnabled: false,
-            logLevel: msal.LogLevel.Verbose,
-        }
-    }
-};
-```
-
-### Configure Dependencies
-
-Add the dependency on MSAL Node to your Node app.
-
-```js
-const msal = require('@azure/msal-node');
-```
-
-### Initialize MSAL Node at runtime
-
-Initialize the app object within your web app.
-
-```js
-const pca = new msal.ConfidentialClientApplication(config);
-```
-
-### Configure sign-in request
-
-Choose the route that requires sign-in. Within that route, set up permissions and direct the MSAL Node app object to attempt sign-in.
-
-In this code sample, the user is immediately signed-in. If you want all users to be logged in before they view anything, then you can use the same process. Add the sign-in code to the default route:
-
-```js
-app.get('/', (req, res) => {
-```
-
-Next, pick the `scopes` related to the user. If you're logging in a user, you must at minimum request access to basic user information. The default scope of `user.read` grants that basic access. To learn more, see the [Microsoft Graph permissions reference](https://docs.microsoft.com/graph/permissions-reference).
-
-```js
-    const authCodeUrlParameters = {
-        scopes: ["user.read"],
-        redirectUri: "http://localhost:3000/redirect",
-    };
-```
-
-The `redirectUri` is the return route. After logging in a user, they'll hit this route. Your application logic will take over here. You'll want to customize the `redirectUri` for your application.
-
-Next, direct the user to authenticate. The following code block directs the user based on the `authority` you set in the config and directs the user as needed.
-
-```js
-    pca.getAuthCodeUrl(authCodeUrlParameters).then((response) => {
-        res.redirect(response);
-    }).catch((error) => console.log(JSON.stringify(error)));
-```
-
-Putting together the routing and all the logic for starting the sign-in yields the following code:
-
-```js
-app.get('/', (req, res) => {
-    const authCodeUrlParameters = {
-        scopes: ["user.read"],
-        redirectUri: "http://localhost:3000/redirect",
-    };
-
-    pca.getAuthCodeUrl(authCodeUrlParameters).then((response) => {
-        res.redirect(response);
-    }).catch((error) => console.log(JSON.stringify(error)));
-});
-```
-
-### Configure sign-in response
-
-The next step occurs after the redirect. Your application must first *complete* the sign-in flow by processing the code and validating the incoming request.
-
-First, configure the route where your app should receive the response. This must match your app registration's configuration in the Azure portal.
-
-```js
-app.get('/redirect', (req, res) => {
-```
-
-Next, your app logic validates the scopes and route. The `scopes` must match the request and the `redirectUri` must match the **Redirect URI** you configured in the app registration in the Azure portal, as well the route.
-
-```js
-    const tokenRequest = {
-        code: req.query.code,
-        scopes: ["user.read"],
-        redirectUri: "http://localhost:3000/redirect",
-    };
-```
-
-The above code is the *configuration* for validating the response. The following code *validates* the response and completes the sign-in.
-
-```js
-    pca.acquireTokenByCode(tokenRequest).then((response) => {
-        console.log("\nResponse: \n:", response);
-        res.sendStatus(200);
-    }).catch((error) => {
-        console.log(error);
-        res.status(500).send(error);
-    });
-```
-
-Putting together the routing and all the logic for completing the sign-in yields the following code:
-
-```js
-app.get('/redirect', (req, res) => {
-    const tokenRequest = {
-        code: req.query.code,
-        scopes: ["user.read"],
-        redirectUri: "http://localhost:3000/redirect",
-    };
-
-    pca.acquireTokenByCode(tokenRequest).then((response) => {
-        console.log("\nResponse: \n:", response);
-        res.sendStatus(200);
-    }).catch((error) => {
-        console.log(error);
-        res.status(500).send(error);
-    });
-});
-```
-
-## The user experience
-
-What happens if the user logs in, closes the window, returns to the site, and logs in again?
-
-Microsoft supports several complex scenarios with several forms of authentication: certificates, hardware keys, federated experiences, and even biometrics in some cases. Let our the Microsoft Authentication Library (MSAL) handle the complexity of deciding the simplest way of logging in the user.
-
-> NOTE: Silent flows are not used with this scenario. See [Authentication flows](https://docs.microsoft.com/azure/active-directory/develop/msal-authentication-flows) for a discussion of the interaction between flows.
