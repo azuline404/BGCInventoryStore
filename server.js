@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars');
 const session = require('express-session');
 const mainRouter = require('./routes/routes');
 const path = require('path');
+const bodyParser = require('body-parser');
 
 
 // SET DEFAULT PORT
@@ -32,8 +33,6 @@ app.set('view engine', 'hbs');
 // SPECIFY JS/CSS/MEDIA PATH
 // =========================
 app.use(express.static(path.join(__dirname, '/public')));
-
-
 // BUILD SESSION
 // =============
 app.use(session({
@@ -41,16 +40,11 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
-
+app.use(express.json()) 
 
 // EXPRESS ROUTER
 // ==============
 app.use(mainRouter);
-
-// app.post('/profile', upload.single('avatar'), function (req, res, next) {
-//     // req.file is the `avatar` file
-//     // req.body will hold the text fields, if there were any
-//   })
 
 app.get('/FAQ', (req, res) => {
     res.render("FAQ", {layout:'main'});

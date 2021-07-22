@@ -43,7 +43,13 @@ const productModelControls = {
 
     async getAllUsers() {
         return await queryDB(`SELECT * FROM users`)
-    }
+    },
+    async insertProduct(name,description,value,category){
+        return await queryDB(`INSERT INTO products (product_name, product_desc, value, category) VALUES ('${name}', '${description}', '${value}', '${category}') RETURNING product_id`)
+    },
+    async insertJacket(sku_id, product_id, size, gender, color, location, count, imgurl){
+        return await queryDB(`INSERT INTO jackets (sku_id, product_id, size, gender, color, product_location, product_count, product_img) VALUES ('${sku_id}', '${product_id}', '${size}', '${gender}', '${color}', '${location}', '${count}', '${imgurl}')`)
+    },
 }
 
 module.exports = productModelControls;

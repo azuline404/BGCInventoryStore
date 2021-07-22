@@ -1,3 +1,5 @@
+var numberOfRows = 1;
+
 window.addEventListener('load', function () {
     document.getElementById("addJacketBtn").addEventListener("click", addJacketRow);
     document.getElementById("deleteJacketBtn").addEventListener("click", deleteJacketRow);
@@ -6,17 +8,37 @@ window.addEventListener('load', function () {
 function deleteJacketRow() {
     var rows = document.getElementById("rows-div");
     rows.removeChild(rows.lastChild);
-}
-function addJacketRow() {
+    if (rows.childElementCount > 0) {
+        numberOfRows--;
+    }
     
+}
+
+
+function addJacketRow() {
+    numberOfRows += 1;
     var rowsDiv = document.getElementById("rows-div");
     var formRow = document.createElement('div');
     formRow.className = "form-row";
 
 
+    var skuGroup = document.createElement('div');
+    skuGroup.className = "form-group col-md-1.5";
+
+    var skuLabel = document.createElement('label')
+    skuLabel.textContent = "SKU ID#"
+
+    var skuInput = document.createElement('input')
+    skuInput.setAttribute('type', 'text')
+    skuInput.className = "form-control"
+    skuInput.setAttribute("name", "sku" + numberOfRows);
+    
+    skuGroup.appendChild(skuLabel);
+    skuGroup.appendChild(skuInput);
+
     // for gender
     var genderGroup = document.createElement('div');
-    genderGroup.className = "form-group col-md-2";
+    genderGroup.className = "form-group col-md-1.5";
 
     var genderLabel = document.createElement('label')
     genderLabel.textContent = "Gender"
@@ -24,6 +46,7 @@ function addJacketRow() {
 
     var genderList = document.createElement('select')
     genderList.className = "form-control";
+    genderList.setAttribute("name", "gender" + numberOfRows);
     var male = document.createElement('option');
     male.text = "Male"
     var female = document.createElement('option');
@@ -39,14 +62,15 @@ function addJacketRow() {
     genderGroup.appendChild(genderList);
 
 
-    // for sizes 
+    //sizes 
     var sizeGroup = document.createElement('div');
-    sizeGroup.className = "form-group col-md-2";
+    sizeGroup.className = "form-group col-md-1.5";
 
     var sizeLabel = document.createElement('label')
     sizeLabel.textContent = "Size"
 
     var sizeList = document.createElement('select')
+    sizeList.setAttribute("name", "size" + numberOfRows);
     sizeList.className = "form-control"
     var XS = document.createElement('option');
     XS.text = "XS"
@@ -70,7 +94,7 @@ function addJacketRow() {
 
     // colors 
     var colorGroup = document.createElement('div');
-    colorGroup.className = "form-group col-md-2";
+    colorGroup.className = "form-group col-md-1.5";
 
     var colorLabel = document.createElement('label')
     colorLabel.textContent = "Color"
@@ -78,13 +102,14 @@ function addJacketRow() {
     var colorInput = document.createElement('input')
     colorInput.setAttribute('type', 'text')
     colorInput.className = "form-control"
+    colorInput.setAttribute("name", "color" + numberOfRows);
     
     colorGroup.appendChild(colorLabel);
     colorGroup.appendChild(colorInput);
 
     // location
     var locationGroup = document.createElement('div');
-    locationGroup.className = "form-group col-md-2";
+    locationGroup.className = "form-group col-md-1.5";
 
     var locationLabel = document.createElement('label')
     locationLabel.textContent = "Location"
@@ -92,12 +117,12 @@ function addJacketRow() {
     var locationInput = document.createElement('input')
     locationInput.setAttribute('type', 'text')
     locationInput.className = "form-control"
+    locationInput.setAttribute("name", "location" + numberOfRows);
 
     locationGroup.appendChild(locationLabel);
     locationGroup.appendChild(locationInput);
-    
-    // count
 
+    // count 
     var countGroup = document.createElement('div');
     countGroup.className = "form-group col-md-1";
 
@@ -105,28 +130,31 @@ function addJacketRow() {
     countLabel.textContent = "Count"
 
     var countInput = document.createElement('input')
-    countInput.setAttribute('type', 'text')
+    countInput.setAttribute('type', 'number')
     countInput.className = "form-control"
+    countInput.setAttribute("name", "count" + numberOfRows);
 
     countGroup.appendChild(countLabel);
     countGroup.appendChild(countInput);
 
 
     // image
-
     var imageGroup = document.createElement('div');
-    imageGroup.className = "form-group col-md-2";
+    imageGroup.className = "form-group col-md-1.5";
 
     var imageLabel = document.createElement('label')
-    imageLabel.textContent = "Image"
+    imageLabel.textContent = "Image Name"
 
     var imageInput = document.createElement('input')
-    imageInput.setAttribute('type', 'file')
+    imageInput.setAttribute('type', 'text')
+    imageInput.className = "form-control"
+    imageInput.setAttribute("name", "image" + numberOfRows);
 
     imageGroup.appendChild(imageLabel);
     imageGroup.appendChild(imageInput);
 
-    var lastDiv = document.getElementById("lastDiv");
+    // add the attributes to the row
+    formRow.appendChild(skuGroup);
     formRow.appendChild(genderGroup);
     formRow.appendChild(sizeGroup);
     formRow.appendChild(colorGroup);
@@ -134,6 +162,7 @@ function addJacketRow() {
     formRow.appendChild(countGroup);
     formRow.appendChild(imageGroup);
 
+    // add the entire row to the div
     rowsDiv.appendChild(formRow);
 
 }

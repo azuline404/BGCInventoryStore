@@ -16,8 +16,8 @@ router.use(express.static(path.join(__dirname, 'public')));
 router.get('/', authController.authenticate);
 router.get('/redirect',authController.redirect);
 router.get('/home',authController.checkAuth, authController.home);
-router.get('/addProductPage', authController.checkAuth, productController.addProductPage);
-router.post('/addProduct', uploadController.upload.single('image'), productController.addProduct);
+router.get('/addJacketPage', authController.checkAuth, productController.addJacketPage);
+router.post('/addProduct', uploadController.uploadFile, productController.addJacket);
 router.get('/shopBottles',productController.viewBottles)
 router.get('/shopBackpacks',productController.viewBackpacks)
 router.get('/shopShirts',productController.viewShirts)
