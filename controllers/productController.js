@@ -17,7 +17,6 @@ const productControls = {
             console.log(req.body);
 
             // insert into products using first three fields, name, description, and value
-
             // After insertion, retreieve the product ID, and delete the name, description, and value fields for better indexing of the JSON object
             try {
                 var product_id = await productsModel.insertProduct(req.body.name, req.body.description, req.body.value, `Jacket`);
@@ -35,7 +34,7 @@ const productControls = {
                     var location = req.body[Object.keys(req.body)[i*7 + 4]]
                     var count = req.body[Object.keys(req.body)[i*7 + 5]]
                     var imgurl = req.body[Object.keys(req.body)[i*7 + 6]]
-                    const result = await productsModel.insertJacket(sku_id, product_id.rows[0].product_id, size, gender, color, location, count, imgurl);
+                    const result = await productsModel.insertProductDetails(sku_id, product_id.rows[0].product_id, size, gender, color, location, count, imgurl);
                 }
                 res.render('home', {name: req.session.name, email: req.session.email});
             } catch (err) {
