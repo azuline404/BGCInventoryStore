@@ -1,5 +1,3 @@
--- USERS
---------
 CREATE TABLE users (
     user_id serial NOT NULL,
     username varchar(50) NOT NULL,
@@ -55,13 +53,13 @@ CREATE TABLE orders
     order_id serial NOT NULL,
     requester_id int NOT NULL,
     fulfiller_id int NOT NULL,
-    status varchar(50), NOT NULL,
+    status varchar(50) NOT NULL,
     request_type varchar(50) NOT NULL,
     date_created date NOT NULL,
     date_completed date NOT NULL,
     PRIMARY KEY (order_id),
     CONSTRAINT requester_id_FK FOREIGN KEY (requester_id) REFERENCES users (user_id),
-    CONSTRAINT fulfiller_id_FK FOREIGN KEY (fulfiller_id) REFERENCES users (user_id),
+    CONSTRAINT fulfiller_id_FK FOREIGN KEY (fulfiller_id) REFERENCES users (user_id)
 );
 
 CREATE TABLE order_lines
@@ -71,5 +69,5 @@ CREATE TABLE order_lines
     order_count int NOT NULL,
     PRIMARY KEY (order_id, sku_id),
     CONSTRAINT order_id_FK FOREIGN KEY (order_id) REFERENCES orders (order_id),
-    CONSTRAINT sku_id_FK FOREIGN KEY (sku_id) REFERENCES product_details (sku_id),
+    CONSTRAINT sku_id_FK FOREIGN KEY (sku_id) REFERENCES product_details (sku_id)
 );
