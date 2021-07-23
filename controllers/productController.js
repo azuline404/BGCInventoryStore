@@ -27,7 +27,6 @@ const productControls = {
             console.log(err)
         }
     },
-
     viewAllProducts: async (req,res,next) => {
         try {
             const bottles = await productsModel.getAllBottles();

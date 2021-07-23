@@ -67,7 +67,7 @@ var closeBtns = document.querySelectorAll('.close');
 var popup = function(popupClick){
     popupViews[popupClick].classList.add('active')
 }
-popupBtns.forEach((popupBtn , i)=> {
+popupBtns.forEach((popupBtn , i) => {
     popupBtn.addEventListener("click", ()=> {
         popup(i);
     });

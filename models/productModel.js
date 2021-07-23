@@ -26,19 +26,19 @@ async function queryDB(q) {
 const productModelControls = {
 
     async getAllProducts() {
-        return await queryDB(`SELECT * FROM products`)
+        return await queryDB(`SELECT * FROM products INNER JOIN product_details ON products.product_id = product_details.product_id`)
     },
 
     async getAllBottles() {
-        return await queryDB(`SELECT * FROM bottles INNER JOIN products ON bottles.product_id = products.product_id`)
+        return await queryDB(`SELECT * FROM products INNER JOIN product_details ON products.product_id = product_details.product_id WHERE products.category = 'bottle'`)
     },
 
     async getAllBackpacks() {
-        return await queryDB(`SELECT * FROM backpacks INNER JOIN products ON backpacks.product_id = products.product_id`)
+        return await queryDB(`SELECT * FROM products INNER JOIN product_details ON products.product_id = product_details.product_id WHERE products.category = 'backpack'`)
     },
 
     async getAllShirts() {
-        return await queryDB(`SELECT * FROM shirts INNER JOIN products ON shirts.product_id = products.product_id`)
+        return await queryDB(`SELECT * FROM products INNER JOIN product_details ON products.product_id = product_details.product_id WHERE products.category = 'shirt'`)
     },
 
     async getAllUsers() {
