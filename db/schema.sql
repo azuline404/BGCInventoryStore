@@ -1,86 +1,121 @@
--- USERS
+--USERS
+-------
 CREATE TABLE users (
     user_id serial NOT NULL,
-    username varchar(40) NOT NULL,
+    username varchar(50) NOT NULL,
     email varchar(320) NOT NULL,
-    role varchar(40) NOT NULL,
+    role varchar(50) NOT NULL,
     CONSTRAINT permissions CHECK (role IN ('staff', 'administrator')),
     PRIMARY KEY (user_id)
 );
 
 INSERT INTO users (username, email, role) VALUES ('abiel_kim', 'abielkim@hotmail.com', 'administrator');
 
--- PRODUCTS
+
+--LOCATIONS
+-----------
+CREATE TABLE locations 
+(
+    location_name varchar(50) NOT NULL,
+    PRIMARY KEY (location_name)
+);
+
+
+--PRODUCTS
+----------
 CREATE TABLE products 
 (
     product_id serial NOT NULL,
-    product_name varchar(40) NOT NULL,
-    product_desc varchar(40) NOT NULL, 
-    category varchar(40) NOT NULL,
+    product_name varchar(50) NOT NULL,
+    product_desc varchar(300) NOT NULL, 
+    category varchar(50) NOT NULL,
     PRIMARY KEY (product_id)
 );
 
-CREATE TABLE backpacks
+CREATE TABLE product_details
 (
     product_id int NOT NULL,
-    backpack_id serial NOT NULL,
-    info_code varchar(40) NOT NULL,
-    product_location varchar(40) NOT NULL,
+    sku_id int NOT NULL,
+    size varchar(50),
+    gender varchar(50),
+    color varchar(50),
+    product_location varchar(50) NOT NULL,
     product_count int NOT NULL,
     product_img varchar(200) NOT NULL,
-    PRIMARY KEY (backpack_id),
-    CONSTRAINT backpacks_products_FK FOREIGN KEY (product_id) REFERENCES products (product_id)
-);
-
-CREATE TABLE bottles
-(
-    product_id int NOT NULL,
-    bottle_id serial NOT NULL,
-    info_code varchar(40) NOT NULL,
-    product_location varchar(40) NOT NULL,
-    product_count int NOT NULL,
-    product_img varchar(200) NOT NULL,
-    PRIMARY KEY (bottle_id),
-    CONSTRAINT bottles_products_FK FOREIGN KEY (product_id) REFERENCES products (product_id)
-);
-
-CREATE TABLE shirts
-(
-    product_id int NOT NULL,
-    shirt_id serial NOT NULL,
-    info_code varchar(40) NOT NULL,
-    product_location varchar(40) NOT NULL,
-    product_count int NOT NULL,
-    product_img varchar(200) NOT NULL,
-    PRIMARY KEY (shirt_id),
-    CONSTRAINT shirts_products_FK FOREIGN KEY (product_id) REFERENCES products (product_id)
+    PRIMARY KEY (sku_id),
+    CONSTRAINT product_id_FK FOREIGN KEY (product_id) REFERENCES products (product_id),
+    CONSTRAINT location_FK FOREIGN KEY (product_location) REFERENCES locations (location_name) 
 );
 
 
- 
--- MANUALLY POPULATE DB
--- initial sample for db retrieval
--- 
--- sample bottles
-INSERT INTO products (product_name, product_desc, category)
-VALUES ('bottle_a', 'bottle good for a', 'bottle'), ('bottle_b', 'bottle good for b', 'bottle'), ('bottle_c', 'bottle good for c', 'bottle'), ('bottle_d', 'bottle good for d', 'bottle'),('bottle_e', 'bottle good for e', 'bottle');
+--ORDERS
+--------
+CREATE TABLE orders
+(
+    order_id serial NOT NULL,
+    requester_id int NOT NULL,
+    fulfiller_id int NOT NULL,
+    status varchar(50) NOT NULL,
+    request_type varchar(50) NOT NULL,
+    date_created date NOT NULL,
+    date_completed date NOT NULL,
+    PRIMARY KEY (order_id),
+    CONSTRAINT requester_id_FK FOREIGN KEY (requester_id) REFERENCES users (user_id),
+    CONSTRAINT fulfiller_id_FK FOREIGN KEY (fulfiller_id) REFERENCES users (user_id)
+);
 
-INSERT INTO bottles (product_id, info_code, product_location, product_count, product_img)
-VALUES (1, 'L', 'burnaby', 5, 'bottle.jpg'), (2, 'S', 'vancouver', 3, 'bottle.jpg'), (3, 'M', 'richmond', 2, 'bottle.jpg'), (4, 'M', 'metrotown', 2, 'bottle.jpg'),(5, 'L', 'burnaby', 4, 'bottle.jpg');
+CREATE TABLE order_lines
+(
+    order_id int NOT NULL,
+    sku_id int NOT NULL,
+    order_count int NOT NULL,
+    PRIMARY KEY (order_id, sku_id),
+    CONSTRAINT order_id_FK FOREIGN KEY (order_id) REFERENCES orders (order_id),
+    CONSTRAINT sku_id_FK FOREIGN KEY (sku_id) REFERENCES product_details (sku_id)
+);
 
--- sample backpacks
-INSERT INTO products (product_name, product_desc, category)
-VALUES ('backpack_a', 'backpack good for a', 'backpack'), ('backpack_b', 'backpack good for b', 'backpack'), ('backpack_c', 'backpack good for c', 'backpack'), ('backpack_d', 'backpack good for d', 'backpack'),('backpack_e', 'backpack good for e', 'backpack');
 
-INSERT INTO backpacks (product_id, info_code, product_location, product_count, product_img)
-VALUES (6, 'S', 'burnaby', 8, 'backpack.jpg'), (7, 'S', 'vancouver', 10, 'backpack.jpg'), (8, 'M', 'richmond', 14, 'backpack.jpg'), (9, 'M', 'burnaby', 1, 'backpack.jpg'),(10, 'L', 'vancouver', 10, 'backpack.jpg');
+--SAMPLE PRODUCTS
+-----------------
+--Locations
+INSERT INTO locations (location_name)
+VALUES ('Burnaby'),('Vancouver'),('Richmond'),('Surry'),('Metrotown'),('New Westminster');
 
--- sample shirts
-INSERT INTO products (product_name, product_desc, category)
-VALUES ('shirt_a', 'shirt good for a', 'shirt'), ('shirt_b', 'shirt good for b', 'shirt'), ('shirt_c', 'shirt good for c', 'shirt'), ('shirt_d', 'shirt good for d', 'shirt'),('shirt_e', 'shirt good for e', 'shirt');
+--Sample Bottle
+INSERT INTO products(product_id,product_name,product_desc,category)
+VALUES (1,'bottle_a','this is the bottles_a','bottle'),(2,'bottle_b','this is the bottles_b','bottle'),(3,'bottle_c','this is the bottles_c','bottle'),
+(4,'bottle_d','this is the bottles_d','bottle'),(5,'bottle_e','this is the bottles_e','bottle'),(6,'bottle_f','this is the bottles_f','bottle'),
+(7,'bottle_g','this is the bottles_g','bottle'),(8,'bottle_h','this is the bottles_h','bottle'),(9,'bottle_i','this is the bottles_i','bottle');
 
-INSERT INTO shirts (product_id, info_code, product_location, product_count, product_img)
-VALUES (11, 'M', 'burnaby', 8, 'shirt.jpg'), (12, 'S', 'vancouver', 10, 'shirt.jpg'), (13, 'M', 'richmond', 14, 'shirt.jpg'), (14, 'M', 'burnaby', 1, 'shirt.jpg'),(15, 'L', 'vancouver', 10, 'shirt.jpg');
--- 
--- 
--- 
+INSERT INTO product_details (product_id, sku_id, size, gender, color, product_location,product_count,product_img)
+VALUES (1, 1454758, 'L','Unisex','Blue','Richmond',8,'bottle.jpg'),(2, 2151244, 'M','Unisex','Blue','Burnaby',4,'bottle.jpg'),
+(3, 8408836, 'S','Unisex','Blue','Vancouver',8,'bottle.jpg'),(4, 4842890, 'L','Femele','Red','Surry',8,'bottle.jpg'),
+(5, 2605310, 'M','Femele','Red','Metrotown',3,'bottle.jpg'),(6, 4584389, 'S','Femele','Red','Vancouver',3,'bottle.jpg'),
+(7, 3332352, 'L','Male','Brown','Vancouver',3,'bottle.jpg'),(8, 4109764, 'M','Male','Brown','Burnaby',7,'bottle.jpg'),
+(9, 8312233, 'S','Male','Brown','Vancouver',2,'bottle.jpg');
+
+--Sample Backpack
+INSERT INTO products(product_id,product_name,product_desc,category)
+VALUES (10,'backpack_a','this is the backpack_a','backpack'),(11,'backpack_b','this is the backpack_b','backpack'),(12,'backpack_c','this is the backpack_c','backpack'),
+(13,'backpack_d','this is the backpack_d','backpack'),(14,'backpack_e','this is the backpack_e','backpack'),(15,'backpack_f','this is the backpack_f','backpack'),
+(16,'backpack_g','this is the backpack_g','backpack'),(17,'backpack_h','this is the backpack_h','backpack'),(18,'backpack_i','this is the backpack_i','backpack');
+
+INSERT INTO product_details (product_id, sku_id, size, gender, color, product_location,product_count,product_img)
+VALUES (10, 2156419, 'L','Unisex','Blue','Surry',4,'backpack.jpg'),(11, 2945257, 'M','Unisex','Blue','Richmond',4,'backpack.jpg'),
+(12, 6845645, 'S','Unisex','Blue','Richmond',6,'backpack.jpg'),(13, 7180095, 'L','Unisex','Yellow','Richmond',9,'backpack.jpg'),
+(14, 9867550, 'M','Unisex','Yellow','Vancouver',7,'backpack.jpg'),(15, 7715502, 'S','Unisex','Yellow','Surry',5,'backpack.jpg'),
+(16, 1385245, 'L','Male','Black','Surry',2,'backpack.jpg'),(17, 2632964, 'M','Male','Black','Burnaby',9,'backpack.jpg'),
+(18, 1362805, 'S','Male','Black','Metrotown',8,'backpack.jpg');
+
+--Sample Shirts
+INSERT INTO products(product_id,product_name,product_desc,category)
+VALUES (19,'shirt_a','this is the shirt_a','shirt'),(20,'shirt_b','this is the shirt_b','shirt'),(21,'shirt_c','this is the shirt_c','shirt'),
+(22,'shirt_d','this is the shirt_d','shirt'),(23,'shirt_e','this is the shirt_e','shirt'),(24,'shirt_f','this is the shirt_f','shirt'),
+(25,'shirt_g','this is the shirt_g','shirt'),(26,'shirt_h','this is the shirt_h','shirt'),(27,'shirt_i','this is the shirt_i','shirt');
+
+INSERT INTO product_details (product_id, sku_id, size, gender, color, product_location,product_count,product_img)
+VALUES (19, 6725214, 'L','Male','Green','New Westminster',4,'shirt.jpg'),(20, 2958512, 'M','Male','Green','Vancouver',8,'shirt.jpg'),
+(21, 1119808, 'S','Male','Green','Richmond',9,'shirt.jpg'),(22, 2089404, 'L','Unisex','Blue','Vancouver',4,'shirt.jpg'),
+(23, 7455465, 'M','Unisex','Blue','New Westminster',4,'shirt.jpg'),(24, 1190943, 'S','Unisex','Blue','New Westminster',9,'shirt.jpg'),
+(25, 3681206, 'L','Male','Black','Surry',8,'shirt.jpg'),(26, 4506044, 'M','Male','Black','Burnaby',6,'shirt.jpg'),
+(27, 1150547, 'S','Male','Black','Metrotown',5,'shirt.jpg');

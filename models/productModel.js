@@ -26,76 +26,28 @@ async function queryDB(q) {
 const productModelControls = {
 
     async getAllProducts() {
-        return await queryDB(`SELECT * FROM products`)
+        return await queryDB(`SELECT * FROM products INNER JOIN product_details ON products.product_id = product_details.product_id`)
     },
 
     async getAllBottles() {
-        return await queryDB(`SELECT * FROM bottles INNER JOIN products ON bottles.product_id = products.product_id`)
+        return await queryDB(`SELECT * FROM products INNER JOIN product_details ON products.product_id = product_details.product_id WHERE products.category = 'bottle'`)
     },
 
     async getAllBackpacks() {
-        return await queryDB(`SELECT * FROM backpacks INNER JOIN products ON backpacks.product_id = products.product_id`)
+        return await queryDB(`SELECT * FROM products INNER JOIN product_details ON products.product_id = product_details.product_id WHERE products.category = 'backpack'`)
     },
 
     async getAllShirts() {
-        return await queryDB(`SELECT * FROM shirts INNER JOIN products ON shirts.product_id = products.product_id`)
+        return await queryDB(`SELECT * FROM products INNER JOIN product_details ON products.product_id = product_details.product_id WHERE products.category = 'shirt'`)
     },
 
     async getAllUsers() {
         return await queryDB(`SELECT * FROM users`)
-    }
+    },
+    
+    async getOneProduct(n) {
+        return await queryDB(`SELECT * FROM products INNER JOIN product_details ON products.product_id = product_details.product_id WHERE products.product_id =` + n)
+    },
 }
 
 module.exports = productModelControls;
-
-/*
-const productModelControls = {
-
-    async getAllProducts()
-    {
-        try {
-            const res = await pg.query(`SELECT * FROM products`)
-            return res.rows
-        } catch (err) {
-            return err.stack
-        }
-    },
-    
-    async getProductsByCategory(productCategory)
-    {
-        try {
-            const res = await pg.query(`SELECT * FROM products WHERE category = ${productCategory}`);
-            return res.rows
-        } catch (err) {
-            return err.stack
-        }
-    },
-    
-    async getAllBottles()
-    {
-        try {
-            const res = await pg.query(`SELECT * FROM bottles`);
-            return res.rows;
-        } catch (err) {
-            return err.stack
-        }
-    },
-    
-    async getProductByID(productID)
-    {
-        try {
-            const res = await pg.query(`SELECT * FROM products WHERE productID = ${productID}`)
-            return res.rows
-        } catch(err) {
-            return err.stack
-        }
-    }
-    
-    // INVOCATION:
-    // var allProducts = await getAllProducts()
-    // var allProductsInCategory = await getProductsByCategory('bottles')
-    // var specificProduct = await getProductByID()
-}
-
-module.exports = productModelControls;
-*/

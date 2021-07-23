@@ -50,7 +50,17 @@ const productControls = {
         } catch (err) {
             console.log(err)
         }
-    }
+    },
+    viewDetail: async (req,res,next) => {
+        try {
+            let productId = req.params.productId;
+            const productDetail = await productsModel.getOneProduct(productId);
+            console.log(productDetail);
+            res.render('detail',{productDetails: productDetail.rows});
+        } catch (err) {
+            console.log(err)
+        }
+    },
 }
 
 module.exports = productControls;
