@@ -46,7 +46,7 @@ const productModelControls = {
     },
 
     async getProductByID(id){
-        return await queryDB(`SELECT * FROM products INNER JOIN product_details ON products.product_id = product_details.product_id WHERE product_id = ${id}`)
+        return await queryDB(`SELECT * FROM products INNER JOIN product_details ON products.product_id = product_details.product_id WHERE products.product_id = ${id}`)
     }
 }
 
