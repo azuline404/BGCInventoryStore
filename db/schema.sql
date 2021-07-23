@@ -54,11 +54,11 @@ CREATE TABLE orders
 (
     order_id serial NOT NULL,
     requester_id int NOT NULL,
-    fulfiller_id int NOT NULL,
+    fulfiller_id int,
     status varchar(50) NOT NULL,
-    request_type varchar(50) NOT NULL,
+    request_type varchar(50),
     date_created date NOT NULL,
-    date_completed date NOT NULL,
+    date_completed date,
     PRIMARY KEY (order_id),
     CONSTRAINT requester_id_FK FOREIGN KEY (requester_id) REFERENCES users (user_id),
     CONSTRAINT fulfiller_id_FK FOREIGN KEY (fulfiller_id) REFERENCES users (user_id)
