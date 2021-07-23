@@ -45,8 +45,8 @@ const productModelControls = {
         return await queryDB(`SELECT * FROM users`)
     },
 
-    async getEachItem(category,id){
-        return await queryDB(`SELECT * FROM products WHERE product_id =` + id)
+    async getProductByID(id){
+        return await queryDB(`SELECT * FROM products INNER JOIN product_details ON products.product_id = product_details.product_id WHERE product_id = ${id}`)
     }
 }
 
