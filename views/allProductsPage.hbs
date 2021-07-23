@@ -1,21 +1,20 @@
-<div id="filters">
-    <select name="category" id="">
-        <option value="">Select by Category</option>
-        <option value="Shirts">Shirts</option>
-        <option value="Jacket">Jacket</option>
-        <option value="Coat">Coat</option>
-        <option value="Jeans">Jeans</option>
-        <option value="Pants">Pants</option>
-        <option value="Shoes">Shoes</option>
-        <option value="Accessories">Accessories</option>
+<form id = "filters" action="/filter" method = "get">
+    <select name="category" id="list" onchange="getSelectValue();">
+        <option value = "all">Select by Category</option>
+        <option value = "all" value="">Show all</option>
+        <option value = "shirts" value="Shirts">Shirts</option>
+        <option value = "backpacks" value="Backpack">Backpacks</option>
+        <option value = "bottles" value="Bottles">Bottles</option>
     </select>
 
-    <select name="sortBy" id="">
+    {{!-- <select name="sortBy" id="">
         <option value="">Sort by</option>
         <option value="Shirts">New Arrivals</option>
         <option value="Jacket">Rating</option>
-    </select>
-</div>
+    </select> --}}
+</form>
+
+
 
 {{!-- <div class="container">
 {{#grouped_each 3 books}}
@@ -32,15 +31,15 @@
 {{!-- The shopping page item --}}
 <br>
 <table border = "0" width = "100%" height = "46%">
-    <tr>
-        <td colspan = "5"><h2>Bottles</h2><hr></td>
+    <tr style="display: block;" class = "all bottles">
+        <td colspan = "5" ><h2 style = "margin:20px 0 0 50px; font-size:50px;">Bottles</h2><hr></td>
     </tr>
     {{#grouped_each 4 bottles}}
-    <tr>
+    <tr style="display: block;" class = "all bottles">
             {{#each this }}
         <th>
             <div class = "product">
-                <div class="showAllProduct">
+                <div class="showAllProduct" style="display: block;" class = "all bottles">
                     <img src="./uploads/{{product_img}}" class="mainImage mainImage1" style="opacity:1;">
                     <img src="image/bottle.jpg" class="mainImage mainImage1" style="opacity:0;">
                     <img src="image/clothing.jpg" class="mainImage mainImage1" style="opacity:0;">
@@ -56,7 +55,7 @@
                         <div class = "info">
                             <h2>{{product_name}}<br> <br><span>{{category}}</span></h2>
                              <p>{{product_desc}}</p>
-                            <a href="#" class = "add-cart-btn">Add to Cart</a>
+                            <a href="/after_add/{{category}}/{{product_id}}" class = "add-cart-btn">Add to Cart</a>
                         </div>
                     </div>
                 </div>
@@ -76,15 +75,15 @@
         </tr>
         {{/grouped_each}}
 
-    <tr>
-        <td colspan = "5"><h2>Backpacks</h2><hr></td>
+    <tr style="display: block;" class = "all backpacks">
+        <td colspan = "5"><h2 style = "margin:20px 0 0 50px; font-size:50px;">Backpacks</h2><hr></td>
     </tr>
     {{#grouped_each 4 backpacks}}
-    <tr>
+    <tr style="display: block;"class = "all backpacks" >
             {{#each this }}
         <th>
-            <div class = "product">
-                <div class="showAllProduct">
+            <div class = "product" >
+                <div class="showAllProduct" style="display: block;" class = "all backpacks">
                     <img src="./uploads/{{product_img}}" class="mainImage mainImage1" style="opacity:1;">
                     <img src="image/bottle.jpg" class="mainImage mainImage1" style="opacity:0;">
                     <img src="image/clothing.jpg" class="mainImage mainImage1" style="opacity:0;">
@@ -100,7 +99,7 @@
                         <div class = "info">
                             <h2>{{product_name}}<br> <br><span>{{category}}</span></h2>
                              <p>{{product_desc}}</p>
-                            <a href="#" class = "add-cart-btn">Add to Cart</a>
+                            <a href="/after_add/{{category}}/{{product_id}}" class = "add-cart-btn">Add to Cart</a>
                         </div>
                     </div>
                 </div>
@@ -120,15 +119,15 @@
         </tr>
         {{/grouped_each}}
 
-    <tr>
-        <td colspan = "5"><h2>Shirts</h2><hr></td>
+    <tr style="display: block;" class = "all shirts">
+        <td colspan = "5"><h2 style = "margin:20px 0 0 50px; font-size:50px;">Shirts</h2><hr></td>
     </tr>
     {{#grouped_each 4 shirts}}
-    <tr>
+    <tr style="display: block;"  class = "all shirts">
             {{#each this }}
         <th>
-            <div class = "product">
-                <div class="showAllProduct">
+            <div class = "product" >
+                <div class="showAllProduct" style="display: block;"  class = "all shirts">
                     <img src="./uploads/{{product_img}}" class="mainImage mainImage1" style="opacity:1;">
                     <img src="image/bottle.jpg" class="mainImage mainImage1" style="opacity:0;">
                     <img src="image/clothing.jpg" class="mainImage mainImage1" style="opacity:0;">
@@ -144,7 +143,7 @@
                         <div class = "info">
                             <h2>{{product_name}}<br> <br><span>{{category}}</span></h2>
                              <p>{{product_desc}}</p>
-                            <a href="#" class = "add-cart-btn">Add to Cart</a>
+                            <a href="/after_add/{{category}}/{{product_id}}" class = "add-cart-btn">Add to Cart</a>
                         </div>
                     </div>
                 </div>
@@ -184,4 +183,32 @@ closeBtns.forEach((closeBtn)=> {
         });
     });
 });
+
+
+const allCategoryPosts = document.querySelectorAll('.all');
+
+function getSelectValue(){
+    var selectedValue = document.getElementById("list").value;
+
+
+    console.log("here " + selectedValue)
+
+
+    if (selectedValue == "all"){
+        for (let j = 0; j < allCategoryPosts.length; j++){
+            allCategoryPosts[j].style.display = "block"
+        }
+    }
+    else{
+        for(let k = 0; k < allCategoryPosts.length; k++){
+            if(allCategoryPosts[k].classList.contains(selectedValue)){
+                allCategoryPosts[k].style.display = "block";
+                } 
+            else {
+                allCategoryPosts[k].style.display = "none";
+                }
+        }
+    }
+}
+
 </script>

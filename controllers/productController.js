@@ -17,6 +17,17 @@ const productControls = {
             console.log(req.file.filename);
             res.render('home', {name: req.session.name, email: req.session.email});
     },
+
+    viewSettings:async (req,res,next) =>{
+        console.log("in the productcontrollers")
+        try {
+            const shirts = await productsModel.getAllShirts();
+            res.render('viewSettings')
+        } catch (err) {
+            console.log(err)
+        }
+    },
+
     viewAllProducts: async (req,res,next) => {
         try {
             const bottles = await productsModel.getAllBottles();

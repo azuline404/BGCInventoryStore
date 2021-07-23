@@ -43,6 +43,10 @@ const productModelControls = {
 
     async getAllUsers() {
         return await queryDB(`SELECT * FROM users`)
+    },
+
+    async getEachItem(category,id){
+        return await queryDB(`SELECT * FROM products WHERE product_id =` + id)
     }
 }
 

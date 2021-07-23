@@ -52,9 +52,6 @@ app.use(mainRouter);
 //     // req.body will hold the text fields, if there were any
 //   })
 
-app.get('/FAQ', (req, res) => {
-    res.render("FAQ", {layout:'main'});
-})
 
 app.get('/Contact', (req, res) => {
     res.render("Contact", {layout:'main'});

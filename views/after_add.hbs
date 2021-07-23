@@ -1,0 +1,43 @@
+<div>
+    <h1 style="margin: 200px 0 0 230px; font-size:50px">Adding shpooing cart successfully! 🥳🥳</h1>
+</div>
+
+<table border = "0" width = "100%" height = "20%" bgcolor = "bisque">
+    {{#each each_item}}
+    <tr>
+        <th>Product Name</th>
+        <th>Order Number</th>
+        <th>Inventory Balance</th>
+    </tr>
+    <tr>
+        <td>{{product_name}}</td>
+        <td>{{product_desc}}</td>
+    </tr>
+    {{/each}}
+</table>
+
+<table border = "0" width = "100%" height = "20%" bgcolor = "bisque">
+    <tr>
+        <th align = "center">
+            <div class = "container">
+                <a href="/shopAllProducts">
+                    <div class = "categories" style="margin: 20px 0 0 50px; padding:10px;">
+                        <img src="image/all.jpg" class = "item-image">
+                        <div class = "image-title" >All categories</div>
+                    </div>
+                </a>
+            </div>
+        </th>
+
+        <th align = "center">
+            <div class = "container">
+                <a href="/shopCart">
+                    <div class = "categories" style="margin-right:100px; padding:10px;">
+                        <img src="image/cart.jpg" class = "item-image">
+                        <div class = "image-title">View the Cart</div>
+                    </div>
+                </a>
+            </div>
+        </th>
+    </tr>
+</table>
