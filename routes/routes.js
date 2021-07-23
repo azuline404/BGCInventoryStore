@@ -27,7 +27,7 @@ router.get('/shopAllProducts',productController.viewAllProducts)
 
 router.get('/viewSettings',productController.viewSettings)
 router.get('/faq',faqController.viewFAQ)
-router.get('/after_add/:category/:product_id',cartController.viewSubPage)
+router.get('/after_add/:product_id',cartController.viewSubPage)
 router.get('/shopCart',cartController.viewCart)
 router.get('/checkoutPage',checkoutController.viewCheckout)
 router.get('/*',Controller404.notFound)
