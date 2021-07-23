@@ -6,9 +6,20 @@ let productsModel = require('../models/productModel');
 const cartPage = {
     viewSubPage: async (req, res) => {
         try{
-            var id = req.params.product_id;
-            const new_item = await productsModel.getProductByID(id);
+            console.log('=====================================')
+            console.log(req.session.user_id);
+            console.log('=====================================')
+
+            var product_id = req.params.product_id;
+            var sku_id = req.params.sku_id;
+            const new_item = await productsModel.getProductBySkuID(sku_id)
+            
+            // add new item to order/cart
+            // await productsModel.addProductBySkuIDToCart(req.session.user_id, sku_id)
+            
+            // render new item summary
             res.render('after_add',{new_item: new_item.rows});
+
         }catch (err){
             console.log(err)
         }

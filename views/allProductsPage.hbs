@@ -34,7 +34,7 @@
     </tr>
     {{#grouped_each 4 bottles}}
     <tr style="display: block;" class = "all bottles">
-            {{#each this }}
+            {{#each this}}
         <th>
             <div class = "product">
                 <div class="showAllProduct" style="display: block;" class = "all bottles">
@@ -53,7 +53,7 @@
                         <div class = "info">
                             <h2>{{product_name}}<br> <br><span>{{category}}</span></h2>
                              <p>{{product_desc}}</p>
-                            <a href="/after_add/{{product_id}}" class = "add-cart-btn">Add to Cart</a>
+                            <a href="/after_add/{{product_id}}/{{sku_id}}" class = "add-cart-btn">Add to Cart</a>
                         </div>
                     </div>
                 </div>
@@ -77,10 +77,10 @@
         <td colspan = "5"><h2 style = "margin:20px 0 0 50px; font-size:50px;">Backpacks</h2><hr></td>
     </tr>
     {{#grouped_each 4 backpacks}}
-    <tr style="display: block;"class = "all backpacks">
-            {{#each this }}
+    <tr style="display: block;"class="all backpacks">
+            {{#each this}}
         <th>
-            <div class = "product" >
+            <div class="product">
                 <div class="showAllProduct" style="display: block;" class = "all backpacks">
                     <img src="./uploads/{{product_img}}" class="mainImage mainImage1" style="opacity:1;">
                     <img src="image/bottle.jpg" class="mainImage mainImage1" style="opacity:0;">
@@ -97,7 +97,7 @@
                         <div class = "info">
                             <h2>{{product_name}}<br> <br><span>{{category}}</span></h2>
                              <p>{{product_desc}}</p>
-                            <a href="/after_add/{{product_id}}" class="add-cart-btn">Add to Cart</a>
+                            <a href="/after_add/{{product_id}}/{{sku_id}}" class="add-cart-btn">Add to Cart</a>
                         </div>
                     </div>
                 </div>
@@ -141,7 +141,7 @@
                         <div class = "info">
                             <h2>{{product_name}}<br> <br><span>{{category}}</span></h2>
                              <p>{{product_desc}}</p>
-                            <a href="/after_add/{{product_id}}" class = "add-cart-btn">Add to Cart</a>
+                            <a href="/after_add/{{product_id}}/{{sku_id}}" class = "add-cart-btn">Add to Cart</a>
                         </div>
                     </div>
                 </div>

@@ -45,8 +45,23 @@ const productModelControls = {
         return await queryDB(`SELECT * FROM users`)
     },
 
-    async getProductByID(id){
-        return await queryDB(`SELECT * FROM products INNER JOIN product_details ON products.product_id = product_details.product_id WHERE product_id = ${id}`)
+    async getProductByID(product_id){
+        return await queryDB(`SELECT * FROM products INNER JOIN product_details ON products.product_id = product_details.product_id WHERE products.product_id = ${product_id}`)
+    },
+
+    async getProductBySkuID(sku_id){
+        return await queryDB(`SELECT * FROM products INNER JOIN product_details ON products.product_id = product_details.product_id WHERE product_details.sku_id = ${sku_id}`)
+    },
+
+    async addProductBySkuIDToCart(user_id, sku_id){
+        
+        await queryDB(`IF NOT EXISTS (
+            SELECT * FROM users INNER JOIN orders ON users.user_id = orders.requester_id WHERE status='incomplete'
+        ) INSERT INTO orders (requester_id, status, date_created) VALUES (${user_id}, 'incomplete', NOW())`)
+
+        // return await queryDB(`
+        //     INSERT INTO orders ()
+        // `)
     }
 }
 
