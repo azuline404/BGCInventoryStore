@@ -13,11 +13,35 @@ const productControls = {
     addProductPage: (req,res,next) => {
         res.render('addProductPage', {name: req.session.name, email: req.session.email});
     },
-    addProduct: (req,res,next) => {
-            console.log(req.file.filename);
-            res.render('home', {name: req.session.name, email: req.session.email});
-    },
+    addProduct: async (req,res,next) => {
+            console.log(req.body);
 
+            // insert into products using first three fields, name, description, and value
+            // After insertion, retreieve the product ID, and delete the name, description, and value fields for better indexing of the JSON object
+            try {
+                var product_id = await productsModel.insertProduct(req.body.name, req.body.description, req.body.value, req.body.category);
+                console.log("product_id: " + product_id.rows[0].product_id);
+                delete req.body.name;
+                delete req.body.description;
+                delete req.body.value
+                var numOfVarieties = Object.keys(req.body).length/7
+                console.log(numOfVarieties);
+                for (var i = 0; i < numOfVarieties; i++) {
+                    var sku_id = req.body[Object.keys(req.body)[i*7]]
+                    var gender = req.body[Object.keys(req.body)[i*7 + 1]]
+                    var size = req.body[Object.keys(req.body)[i*7 + 2]]
+                    var color = req.body[Object.keys(req.body)[i*7 + 3]]
+                    var location = req.body[Object.keys(req.body)[i*7 + 4]]
+                    var count = req.body[Object.keys(req.body)[i*7 + 5]]
+                    var imgurl = req.body[Object.keys(req.body)[i*7 + 6]]
+                    const result = await productsModel.insertProductDetails(sku_id, product_id.rows[0].product_id, size, gender, color, location, count, imgurl);
+                }
+                res.render('home', {name: req.session.name, email: req.session.email});
+            } catch (err) {
+                console.log(err)
+            }
+        
+    },
     viewSettings:async (req,res,next) =>{
         console.log("in the productcontrollers")
         try {

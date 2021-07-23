@@ -11,6 +11,9 @@ CREATE TABLE users (
 
 INSERT INTO users (username, email, role) VALUES ('abiel_kim', 'abielkim@hotmail.com', 'administrator');
 INSERT INTO users (username, email, role) VALUES ('tazjmal', 'tazjmal633@gmail.com', 'administrator');
+INSERT INTO users (username, email, role) VALUES ('tommychang', 'tommychang97@gmail.com', 'administrator');
+
+
 
 --LOCATIONS
 -----------
