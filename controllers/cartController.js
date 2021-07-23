@@ -22,10 +22,7 @@ const cartPage = {
     },
 
     viewCart: async (req, res)=>{
-        // try{
-        //     var 
-        // }
-        // res.render('shoppingCart')
+        res.render('shoppingCart')
     }
 }
 module.exports = cartPage;

@@ -1,0 +1,42 @@
+<h1 class = "check_h1">You're almost there..</h1>
+<h2 class = "check_h2">Required Checkout Form</h2>
+
+<div class="row">
+    <div class="col-75">
+        <div class="checkout_container">
+            <form id="validate" action="#">
+                <div class="row">
+                    <div class="col-50">
+                        <h3>Billing Address</h3>
+                        <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+                        <input class = "checkout_input" type="text" id="fname" name="fullname" placeholder="Your Name" required>
+                        <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                        <input class = "checkout_input" type="text" id="email" name="email" placeholder="XXXXXXX@XXXX.com" required>
+                        <label for="city"><i class="fa fa-institution"></i> City</label>
+                        <input class = "checkout_input" type="text" id="city" name="city" placeholder="Your location (Only city required)" required>
+
+
+                    {{!-- Should be type of request --}}
+                    </div>
+                    <div class="col-50">
+                        <h3 style = "margin:10px 0 0 180px;">
+                            User Agreement 
+                        </h3>
+                        <p style = "text-align: left; margin: 20px 0 0 0">
+                            This Agreement contains the entire agreement between the Parties and supersedes any previous understanding, 
+                            commitments or agreements, oral or written. Further, this Agreement may not be modified, changed, 
+                            or otherwise altered in any respect except by a written agreement signed by both Parties.
+                            IN WITNESS WHEREOF, this Agreement, including the attached Schedule, was signed by the Parties under the hands of their duly authorized representatives 
+                            and made effective as of the [Commencement date].
+                        </p>
+                    </div>
+                    <label>
+                    <input type="checkbox" checked="checked" name="sameadr" required> I am agree all aggrement. 
+                    </label>
+                </div>
+                <input type="submit" value="Continue to checkout" class="btn">
+            </form>
+        </div>
+    </div>
+    
+</div>
