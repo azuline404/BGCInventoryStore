@@ -1,86 +1,75 @@
 -- USERS
+--------
 CREATE TABLE users (
     user_id serial NOT NULL,
-    username varchar(40) NOT NULL,
+    username varchar(50) NOT NULL,
     email varchar(320) NOT NULL,
-    role varchar(40) NOT NULL,
+    role varchar(50) NOT NULL,
     CONSTRAINT permissions CHECK (role IN ('staff', 'administrator')),
     PRIMARY KEY (user_id)
 );
 
 INSERT INTO users (username, email, role) VALUES ('abiel_kim', 'abielkim@hotmail.com', 'administrator');
 
+
+-- LOCATIONS
+------------
+CREATE TABLE locations 
+(
+    location_name varchar(50) NOT NULL,
+    PRIMARY KEY (location_name)
+);
+
+
 -- PRODUCTS
+-----------
 CREATE TABLE products 
 (
     product_id serial NOT NULL,
-    product_name varchar(40) NOT NULL,
-    product_desc varchar(40) NOT NULL, 
-    category varchar(40) NOT NULL,
+    product_name varchar(50) NOT NULL,
+    product_desc varchar(300) NOT NULL, 
+    category varchar(50) NOT NULL,
     PRIMARY KEY (product_id)
 );
 
-CREATE TABLE backpacks
+CREATE TABLE product_details
 (
     product_id int NOT NULL,
-    backpack_id serial NOT NULL,
-    info_code varchar(40) NOT NULL,
-    product_location varchar(40) NOT NULL,
+    sku_id int NOT NULL,
+    size varchar(50),
+    gender varchar(50),
+    color varchar(50),
+    product_location varchar(50) NOT NULL,
     product_count int NOT NULL,
     product_img varchar(200) NOT NULL,
-    PRIMARY KEY (backpack_id),
-    CONSTRAINT backpacks_products_FK FOREIGN KEY (product_id) REFERENCES products (product_id)
-);
-
-CREATE TABLE bottles
-(
-    product_id int NOT NULL,
-    bottle_id serial NOT NULL,
-    info_code varchar(40) NOT NULL,
-    product_location varchar(40) NOT NULL,
-    product_count int NOT NULL,
-    product_img varchar(200) NOT NULL,
-    PRIMARY KEY (bottle_id),
-    CONSTRAINT bottles_products_FK FOREIGN KEY (product_id) REFERENCES products (product_id)
-);
-
-CREATE TABLE shirts
-(
-    product_id int NOT NULL,
-    shirt_id serial NOT NULL,
-    info_code varchar(40) NOT NULL,
-    product_location varchar(40) NOT NULL,
-    product_count int NOT NULL,
-    product_img varchar(200) NOT NULL,
-    PRIMARY KEY (shirt_id),
-    CONSTRAINT shirts_products_FK FOREIGN KEY (product_id) REFERENCES products (product_id)
+    PRIMARY KEY (sku_id),
+    CONSTRAINT product_id_FK FOREIGN KEY (product_id) REFERENCES products (product_id),
+    CONSTRAINT location_FK FOREIGN KEY (product_location) REFERENCES locations (location_name) 
 );
 
 
- 
--- MANUALLY POPULATE DB
--- initial sample for db retrieval
--- 
--- sample bottles
-INSERT INTO products (product_name, product_desc, category)
-VALUES ('bottle_a', 'bottle good for a', 'bottle'), ('bottle_b', 'bottle good for b', 'bottle'), ('bottle_c', 'bottle good for c', 'bottle'), ('bottle_d', 'bottle good for d', 'bottle'),('bottle_e', 'bottle good for e', 'bottle');
+-- ORDERS
+---------
+CREATE TABLE orders
+(
+    order_id serial NOT NULL,
+    requester_id int NOT NULL,
+    fulfiller_id int NOT NULL,
+    status varchar(50), NOT NULL,
+    request_type varchar(50) NOT NULL,
+    date_created date NOT NULL,
+    date_completed date NOT NULL,
+    PRIMARY KEY (order_id),
+    CONSTRAINT requester_id_FK FOREIGN KEY (requester_id) REFERENCES users (user_id),
+    CONSTRAINT fulfiller_id_FK FOREIGN KEY (fulfiller_id) REFERENCES users (user_id),
+);
 
-INSERT INTO bottles (product_id, info_code, product_location, product_count, product_img)
-VALUES (1, 'L', 'burnaby', 5, 'bottle.jpg'), (2, 'S', 'vancouver', 3, 'bottle.jpg'), (3, 'M', 'richmond', 2, 'bottle.jpg'), (4, 'M', 'metrotown', 2, 'bottle.jpg'),(5, 'L', 'burnaby', 4, 'bottle.jpg');
-
--- sample backpacks
-INSERT INTO products (product_name, product_desc, category)
-VALUES ('backpack_a', 'backpack good for a', 'backpack'), ('backpack_b', 'backpack good for b', 'backpack'), ('backpack_c', 'backpack good for c', 'backpack'), ('backpack_d', 'backpack good for d', 'backpack'),('backpack_e', 'backpack good for e', 'backpack');
-
-INSERT INTO backpacks (product_id, info_code, product_location, product_count, product_img)
-VALUES (6, 'S', 'burnaby', 8, 'backpack.jpg'), (7, 'S', 'vancouver', 10, 'backpack.jpg'), (8, 'M', 'richmond', 14, 'backpack.jpg'), (9, 'M', 'burnaby', 1, 'backpack.jpg'),(10, 'L', 'vancouver', 10, 'backpack.jpg');
-
--- sample shirts
-INSERT INTO products (product_name, product_desc, category)
-VALUES ('shirt_a', 'shirt good for a', 'shirt'), ('shirt_b', 'shirt good for b', 'shirt'), ('shirt_c', 'shirt good for c', 'shirt'), ('shirt_d', 'shirt good for d', 'shirt'),('shirt_e', 'shirt good for e', 'shirt');
-
-INSERT INTO shirts (product_id, info_code, product_location, product_count, product_img)
-VALUES (11, 'M', 'burnaby', 8, 'shirt.jpg'), (12, 'S', 'vancouver', 10, 'shirt.jpg'), (13, 'M', 'richmond', 14, 'shirt.jpg'), (14, 'M', 'burnaby', 1, 'shirt.jpg'),(15, 'L', 'vancouver', 10, 'shirt.jpg');
--- 
--- 
--- 
+CREATE TABLE order_lines
+(
+    order_id int NOT NULL,
+    sku_id int NOT NULL,
+    order_count int NOT NULL,
+    PRIMARY KEY (order_id, sku_id),
+    CONSTRAINT order_id_FK FOREIGN KEY (order_id) REFERENCES orders (order_id),
+    CONSTRAINT sku_id_FK FOREIGN KEY (sku_id) REFERENCES product_details (sku_id),
+);
