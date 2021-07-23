@@ -9,6 +9,7 @@ const uploadController = require('../controllers/uploadController');
 const faqController = require('../controllers/faqController');
 const Controller404 = require('../controllers/404Controller')
 const cartController = require('../controllers/cartController')
+const checkoutController = require('../controllers/checkoutController')
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
@@ -28,6 +29,7 @@ router.get('/viewSettings',productController.viewSettings)
 router.get('/faq',faqController.viewFAQ)
 router.get('/after_add/:category/:product_id',cartController.viewSubPage)
 router.get('/shopCart',cartController.viewCart)
+router.get('/checkoutPage',checkoutController.viewCheckout)
 router.get('/*',Controller404.notFound)
 
 module.exports = router;
