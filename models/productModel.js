@@ -62,41 +62,14 @@ const productModelControls = {
         }
         order_id = order_id.rows[0].order_id;
 
+        // insert product into cart, if already exists increment count
         await queryDB(`UPDATE order_lines SET order_count=order_count+1 WHERE sku_id='${sku_id}';`)
         await queryDB(`
             INSERT INTO order_lines (order_id, sku_id, order_count)
             SELECT '${order_id}', '${sku_id}', '1'
             WHERE NOT EXISTS (SELECT * FROM order_lines WHERE sku_id='${sku_id}');
         `)
-
-        // await queryDB(`
-        //     INSERT INTO order_lines (order_id, sku_id, order_count)
-        //     VALUES ('${order_id}', '${sku_id}', '1')
-        //     ON CONFLICT (sku_id) DO UPDATE 
-        //     SET order_count = order_count+1
-        //     WHERE sku_id='${sku_id}';
-        // `)
-<<<<<<< HEAD
-
-        // insert product into cart
-        // await queryDB(`
-        //     IF EXISTS (SELECT * FROM order_lines WHERE sku_id='${sku_id}') THEN
-        //         UPDATE order_lines SET order_count=order_count+1 WHERE sku_id='${sku_id}';
-        //     ELSE
-        //         INSERT INTO order_lines VALUES '${order_id}', '${sku_id}', '1';
-        //     END IF;
-        // `)
-
     }
-=======
-    },
-    async insertProduct(name,description,value,category){
-        return await queryDB(`INSERT INTO products (product_name, product_desc, value, category) VALUES ('${name}', '${description}', '${value}', '${category}') RETURNING product_id`)
-    },
-    async insertProductDetails(sku_id, product_id, size, gender, color, location, count, imgurl){
-        return await queryDB(`INSERT INTO product_details (sku_id, product_id, size, gender, color, product_location, product_count, product_img) VALUES ('${sku_id}', '${product_id}', '${size}', '${gender}', '${color}', '${location}', '${count}', '${imgurl}')`)
-    },
->>>>>>> 9bb5c81c8ba571ba59a78ecd58ba5aa8fcbccbb8
 }
 
 module.exports = productModelControls;
