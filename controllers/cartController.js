@@ -45,7 +45,8 @@ const cartPage = {
             console.log(cart)
 
             res.render('shoppingCart',{
-                cart: cart.rows
+                cart: cart.rows,
+                order_id
             })
         } catch (err) {
             console.log(err)
