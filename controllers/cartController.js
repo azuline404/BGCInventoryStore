@@ -12,12 +12,12 @@ const cartPage = {
 
             var product_id = req.params.product_id;
             var sku_id = req.params.sku_id;
-            const new_item = await productsModel.getProductBySkuID(sku_id)
             
             // add new item to order/cart
-            // await productsModel.addProductBySkuIDToCart(req.session.user_id, sku_id)
+            await productsModel.addProductToCart(req.session.user_id, sku_id)
             
             // render new item summary
+            const new_item = await productsModel.getProductBySkuID(sku_id)
             res.render('after_add',{new_item: new_item.rows});
 
         }catch (err){
