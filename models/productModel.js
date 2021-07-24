@@ -76,6 +76,7 @@ const productModelControls = {
         //     SET order_count = order_count+1
         //     WHERE sku_id='${sku_id}';
         // `)
+<<<<<<< HEAD
 
         // insert product into cart
         // await queryDB(`
@@ -87,6 +88,15 @@ const productModelControls = {
         // `)
 
     }
+=======
+    },
+    async insertProduct(name,description,value,category){
+        return await queryDB(`INSERT INTO products (product_name, product_desc, value, category) VALUES ('${name}', '${description}', '${value}', '${category}') RETURNING product_id`)
+    },
+    async insertProductDetails(sku_id, product_id, size, gender, color, location, count, imgurl){
+        return await queryDB(`INSERT INTO product_details (sku_id, product_id, size, gender, color, product_location, product_count, product_img) VALUES ('${sku_id}', '${product_id}', '${size}', '${gender}', '${color}', '${location}', '${count}', '${imgurl}')`)
+    },
+>>>>>>> 9bb5c81c8ba571ba59a78ecd58ba5aa8fcbccbb8
 }
 
 module.exports = productModelControls;
