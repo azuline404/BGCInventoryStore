@@ -87,7 +87,7 @@ INSERT INTO locations (location_name)
 VALUES ('Burnaby'),('Vancouver'),('Richmond'),('Surry'),('Metrotown'),('New Westminster');
 
 --Sample Bottle
-INSERT INTO products(product_id,product_name,product_desc,category)
+INSERT INTO products(product_id,product_name,product_desc,category,value)
 VALUES (1,'bottle_a','this is the bottles_a','bottle',1),(2,'bottle_b','this is the bottles_b','bottle',2),(3,'bottle_c','this is the bottles_c','bottle',3),
 (4,'bottle_d','this is the bottles_d','bottle',4),(5,'bottle_e','this is the bottles_e','bottle',5),(6,'bottle_f','this is the bottles_f','bottle',6),
 (7,'bottle_g','this is the bottles_g','bottle',7),(8,'bottle_h','this is the bottles_h','bottle',8),(9,'bottle_i','this is the bottles_i','bottle',9);
@@ -100,7 +100,7 @@ VALUES (1, 1454758, 'L','Unisex','Blue','Richmond',8,'bottle.jpg'),(2, 2151244, 
 (9, 8312233, 'S','Male','Brown','Vancouver',2,'bottle.jpg');
 
 --Sample Backpack
-INSERT INTO products(product_id,product_name,product_desc,category)
+INSERT INTO products(product_id,product_name,product_desc,category,value)
 VALUES (10,'backpack_a','this is the backpack_a','backpack',8),(11,'backpack_b','this is the backpack_b','backpack',8),(12,'backpack_c','this is the backpack_c','backpack',8),
 (13,'backpack_d','this is the backpack_d','backpack',8),(14,'backpack_e','this is the backpack_e','backpack',8),(15,'backpack_f','this is the backpack_f','backpack',8),
 (16,'backpack_g','this is the backpack_g','backpack',8),(17,'backpack_h','this is the backpack_h','backpack',8),(18,'backpack_i','this is the backpack_i','backpack',8);
@@ -113,7 +113,7 @@ VALUES (10, 2156419, 'L','Unisex','Blue','Surry',4,'backpack.jpg'),(11, 2945257,
 (18, 1362805, 'S','Male','Black','Metrotown',8,'backpack.jpg');
 
 --Sample Shirts
-INSERT INTO products(product_id,product_name,product_desc,category)
+INSERT INTO products(product_id,product_name,product_desc,category,value)
 VALUES (19,'shirt_a','this is the shirt_a','shirt',8),(20,'shirt_b','this is the shirt_b','shirt',8),(21,'shirt_c','this is the shirt_c','shirt',8),
 (22,'shirt_d','this is the shirt_d','shirt',8),(23,'shirt_e','this is the shirt_e','shirt',8),(24,'shirt_f','this is the shirt_f','shirt',8),
 (25,'shirt_g','this is the shirt_g','shirt',8),(26,'shirt_h','this is the shirt_h','shirt',8),(27,'shirt_i','this is the shirt_i','shirt',8);
