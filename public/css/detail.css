@@ -1,11 +1,6 @@
-.Back-btn{
-    font-size: 20px;
-}
-
-
 .box{
     margin-top: 100px;
-    margin-left: 100px;
+    margin-left: 200px;
     width:640px;
     height:640px;
     position:relative;
@@ -56,7 +51,32 @@
 }
 
 #productIntroduction{
+    width: 20%;
+    border-radius: 25px;
+    border-color: gray;
+    border-style: solid;
+    padding: 70px;
     position: relative;
-    top: -400px;
-    left: 1000px;
+    top: -550px;
+    left: 1200px;
+}
+
+#add_to_cart{
+    z-index : 1;
+    color:white;
+    background-color: #555;
+    position: absolute;
+    left:50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 1px;
+    padding:10px 15px;
+    border-radius: 50px;
+}
+
+#add_to_cart:hover {
+    background-color: #555;
+    color: grey;
 }

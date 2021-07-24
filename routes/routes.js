@@ -24,7 +24,7 @@ router.get('/shopBottles',productController.viewBottles)
 router.get('/shopBackpacks',productController.viewBackpacks)
 router.get('/shopShirts',productController.viewShirts)
 router.get('/shopAllProducts',productController.viewAllProducts)
-
+router.get('/detail/:productId',productController.viewDetail)
 router.get('/viewSettings',productController.viewSettings)
 router.get('/faq',faqController.viewFAQ)
 router.get('/after_add/:product_id/:sku_id',cartController.viewSubPage)

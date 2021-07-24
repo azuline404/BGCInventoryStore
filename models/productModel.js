@@ -71,7 +71,11 @@ const productModelControls = {
             SELECT '${order_id}', '${sku_id}', '1'
             WHERE NOT EXISTS (SELECT * FROM order_lines WHERE sku_id='${sku_id}');
         `)
-    }
+    },
+    
+    async getOneProduct(n) {
+        return await queryDB(`SELECT * FROM products INNER JOIN product_details ON products.product_id = product_details.product_id WHERE products.product_id =` + n)
+    },
 }
 
 module.exports = productModelControls;
