@@ -24,6 +24,7 @@ const productControls = {
                 delete req.body.name;
                 delete req.body.description;
                 delete req.body.value
+                delete req.body.category
                 var numOfVarieties = Object.keys(req.body).length/7
                 console.log(numOfVarieties);
                 for (var i = 0; i < numOfVarieties; i++) {
@@ -64,6 +65,7 @@ const productControls = {
     viewBottles: async (req,res,next) => {
         try {
             const bottles = await productsModel.getAllBottles();
+            console.log(bottles.rows);
             res.render('bottlesPage', {bottles: bottles.rows, category: "Bottles"})
         } catch (err) {
             console.log(err)

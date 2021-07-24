@@ -1,6 +1,6 @@
 const checkoutPage = {
     viewCheckout: (req, res) => {
-        res.render('checkoutPage');
+        res.render('checkoutPage', {email: req.session.email});
     }
 }
 
