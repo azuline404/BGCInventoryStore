@@ -170,12 +170,12 @@ var popup = function(popupClick){
     popupViews[popupClick].classList.add('active')
 }
 popupBtns.forEach((popupBtn , i)=> {
-    popupBtn.addEventListener("click", ()=> {
+    popupBtn.addEventListener("click", () => {
         popup(i);
     });
 });
 closeBtns.forEach((closeBtn)=> {
-    closeBtn.addEventListener("click", ()=> {
+    closeBtn.addEventListener("click", () => {
         popupViews.forEach((popupViews) => {
             popupViews.classList.remove('active');
         });

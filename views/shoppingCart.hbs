@@ -3,52 +3,29 @@
         <tr>
             <th class = "cartTh">Product</th>
             <th class = "cartTh">Quantity</th>
-            <th class = "cartTh">Comment</th>
+            <th class = "cartTh">Description</th>
         </tr>
+
+        {{#each cart}}
         <tr>
             <td class = "cartTd">
                 <div class = "cart-info">
-                    <img src="image/bottle.jpg" alt="">
+                    <img src="/image/{{product_img}}" alt="">
                     <div>
-                        <p>Red Printed Tshirt</p>
-                        <small>Price: 50</small>
+                        <p>{{product_name}}</p>
                         <br>
                         <a href="">Remove</a>
                     </div>
                 </div>
             </td>
 
-            <td class="cartTd"><input type="number" value="1"></td>
-        </tr>
-        <tr>
-            <td class = "cartTd">
-                <div class = "cart-info">
-                    <img src="image/clothing.jpg" alt="">
-                    <div>
-                        <p>Red Printed Tshirt</p>
-                        <small>Price: 50</small>
-                        <br>
-                        <a href="">Remove</a>
-                    </div>
-                </div>
-            </td>
+            <td class="cartTd"><input type="number" value={{order_count}}></td>
 
-            <td class="cartTd"><input type="number" value="1"></td>
-        </tr>
-        <tr>
-            <td class = "cartTd">
-                <div class = "cart-info">
-                    <img src="image/backpack.jpg" alt="">
-                    <div>
-                        <p>Red Printed Tshirt</p>
-                        <small>Price: 50</small>
-                        <br>
-                        <a href="">Remove</a>
-                    </div>
-                </div>
+            <td class="cartTd">
+                <p>{{product_desc}}</p>
             </td>
-            <td class="cartTd"><input type="number" value="1"></td>
         </tr>
+        {{/each}}
     </table>
 
     <a href="/checkoutPage" class = "check-out-button">Check Out</a>

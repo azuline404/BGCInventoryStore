@@ -1,24 +1,27 @@
 let pg = ('../db/postgresql');
 const pool = require('../db/postgresql');
 let productsModel = require('../models/productModel');
+let ordersModel = require('../models/orderModel');
 
 
 const cartPage = {
     viewSubPage: async (req, res) => {
         try{
-            console.log('=====================================')
-            console.log(req.session.user_id);
-            console.log('=====================================')
-
-            var product_id = req.params.product_id;
+            var product_id = req.params.product_id; // delete***************
             var sku_id = req.params.sku_id;
             
             // add new item to order/cart
-            await productsModel.addProductToCart(req.session.user_id, sku_id)
+            var order_id = await productsModel.createCartForRequesterID(req.session.user_id);
+            await productsModel.addProductToCart(order_id, sku_id);
             
             // render new item summary
             const new_item = await productsModel.getProductBySkuID(sku_id)
-            res.render('after_add',{new_item: new_item.rows});
+
+            // dispatch order_id to after_add, so it can viewed later at shoppingCart.hbs
+            res.render('after_add',{
+                new_item: new_item.rows,
+                order_id
+            });
 
         }catch (err){
             console.log(err)
@@ -32,14 +35,22 @@ const cartPage = {
     },
 
     viewCart: async (req, res)=>{
-        res.render('shoppingCart')
+        try {
+            // retrieve order_id form after_add
+            var order_id = req.params.order_id
+
+            // retrieve shopping cart and dispatch to shoppingCart.hbs
+            const cart = await ordersModel.getProductsByOrderID(order_id)
+
+            console.log(cart)
+
+            res.render('shoppingCart',{
+                cart: cart.rows
+            })
+        } catch (err) {
+            console.log(err)
+        }
     }
 }
-module.exports = cartPage;
 
-//         const backpacks = await productsModel.getAllBackpacks();
-//         res.render('allProductsPage', {bottles: bottles.rows, shirts: shirts.rows, backpacks:backpacks.rows});
-//     } catch (err) {
-//         console.log(err)
-//     }
-// },
+module.exports = cartPage;
