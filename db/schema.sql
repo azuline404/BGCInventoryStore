@@ -13,6 +13,7 @@ INSERT INTO users (username, email, role) VALUES ('abiel_kim', 'abielkim@hotmail
 INSERT INTO users (username, email, role) VALUES ('tazjmal', 'tazjmal633@gmail.com', 'administrator');
 INSERT INTO users (username, email, role) VALUES ('tommychang', 'tommychang97@gmail.com', 'administrator');
 INSERT INTO users (username, email, role) VALUES ('wenqing', 'wenqingl@sfu.ca', 'administrator');
+INSERT INTO users (username, email, role) VALUES ('junchenl', '2664454673@qq.com', 'administrator');
 
 
 

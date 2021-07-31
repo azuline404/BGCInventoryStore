@@ -44,10 +44,9 @@ const productControls = {
         
     },
     viewSettings:async (req,res,next) =>{
-        console.log("in the productcontrollers")
         try {
-            const shirts = await productsModel.getAllShirts();
-            res.render('viewSettings')
+            res.render('connectPage')
+
         } catch (err) {
             console.log(err)
         }
