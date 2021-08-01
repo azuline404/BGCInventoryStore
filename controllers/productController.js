@@ -6,6 +6,9 @@ let pg = ('../db/postgresql');
 
 const productControls = {
 
+    viewcontact: (req,res,next)=>{
+        res.render('contact');
+    },
     viewCategory: (req,res,next) => {
         console.log(req.session);
         res.render('home', {name: req.session.name, email: req.session.email});

@@ -30,6 +30,7 @@ router.get('/after_add/:product_id/:sku_id',cartController.viewSubPage)
 router.get('/shopCart/:order_id',cartController.viewCart)
 router.get('/checkoutPage/:order_id',checkoutController.viewCheckout)
 router.get('/connectPage',productController.viewSettings)
+router.get('/contact',productController.viewcontact)
 router.get('/*',Controller404.notFound)
 
 module.exports = router;

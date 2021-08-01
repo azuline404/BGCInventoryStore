@@ -1,10 +1,10 @@
 .connect-container{
-    position:relative;
+    /* position:relative; */
     width: 100%;
 }
 
 .connect-navigation{
-    position:fixed;
+    /* position:fixed; */
     width:300px;
     height:100%;
     background:#003147;
@@ -22,7 +22,7 @@
 }
 
 .connect-navigation ul{
-    position: absolute;
+    /* position: absolute; */
     top: 0;
     left: 0;
     width: 100%;
@@ -79,6 +79,7 @@
     min-height: 100vh;
     background: #f5f5f5;
     transition: 0.5s;
+    margin:-750px 0 0 0;
 }
 .connect-main.active{
     width:calc(100% - 60px);
@@ -193,6 +194,7 @@
 
 }
 .connect-title2{
+
     color: #fff;
 
 }
