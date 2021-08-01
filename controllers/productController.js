@@ -1,5 +1,6 @@
 let productsModel = require('../models/productModel');
 const uploadController = require('../controllers/uploadController');
+const userModelControls = require('../models/userModel');
 
 let pg = ('../db/postgresql');
 
@@ -46,9 +47,10 @@ const productControls = {
             }
         
     },
-    viewSettings:async (req,res,next) =>{
+    viewSettings:async (req,res) =>{
         try {
-            res.render('connectPage')
+            const user = await userModelControls.getAlluser();
+            res.render('connectPage',{user:user.rows})
 
         } catch (err) {
             console.log(err)

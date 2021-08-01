@@ -1,3 +1,4 @@
+const { query } = require('express');
 const pg = require('../db/postgresql');
 
 const userModelControls = {
@@ -14,6 +15,10 @@ const userModelControls = {
             resolve(res.rows);
         });
     });
+    },
+
+    async getAlluser(){
+        return await pg.query(`SELECT * FROM users`)
     }
 }
 module.exports = userModelControls;

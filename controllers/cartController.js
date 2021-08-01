@@ -7,7 +7,6 @@ let ordersModel = require('../models/orderModel');
 const cartPage = {
     viewSubPage: async (req, res) => {
         try{
-            var product_id = req.params.product_id; // delete***************
             var sku_id = req.params.sku_id;
             
             // add new item to order/cart
