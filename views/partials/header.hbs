@@ -1,22 +1,86 @@
 <header>
-    <table align = "center" border = "0" width = "90%" height = "10%" bgcolor = "#2874F0">
+    <table align="center" border="0" width="90%" height="10%" bgcolor="#2874F0">
+        <tr>
+            <td align="center"><img src="/image/logo.png"></td>
+            <th style="font-size:30px;">Promontional Gear</th>
+            <td align="center">
+                <div class="search-box">
+                    <form>
+                        <div class="search-input">
+                            <input type="text" placeholder=" Search more information in site" name="search">
+                            <div class="autocom-box">
+                            </div>
+                            <a href="/faq"><img src="/image/cart.svg" style = "margin:-20px 0 0 250px;"></a>
+                        </div>
+                    </form>
+                </div>
+            </td>
+            <th align="center"><a href="/home" class="header-option">Home</a></th>
+            <th align="center"><a href="/faq" class="header-option">FAQ</a></th>
+            <th align="center"><a href="/contact" class="header-option">Contact us</a></th>
+            {{#if admin}}
+            <th align="center"><a href="/connectPage" class="header-option">Settings</a></th>
+            {{/if}}
+    </table>
 
-    <tr>
-        <td align = "center"><img src = "/image/logo.png"></td>
-        <th style = "font-size:30px;">Promontional Gear</th>
-        <td align = "center">
-             <div class = "search-box">
-        <form>
-            <input type="text" placeholder=" Search more information in site" name = "search" class ="search-input"/>
-            <button type = "submit"><img src="/image/cart.svg"></button>
-        </form>
-            </div>
-     </td>
-        <th align = "center"><a href="/home" class = "header-option">Home</a></th>
-        <th align = "center"><a href="/faq" class = "header-option">FAQ</a></th>
-        <th align = "center"><a href="/contact" class = "header-option">Contact us</a></th>
-        {{#if admin}}
-        <th align = "center"><a href="/connectPage" class = "header-option">Settings</a></th>
-        {{/if}}
-</table> 
+    <script src="/public/js/channel.js"></script>
+    <script>
+        const searchWrapper = document.querySelector(".search-input");
+        const inputBox = searchWrapper.querySelector("input");
+        const suggBox = searchWrapper.querySelector(".autocom-box");
+
+        let channel_list = [
+            "A bottle",
+            "A shirt",
+            "Bottle",
+            "Blue Shirt",
+            "Contact page",
+            "What can we do with filter",
+            "How to shop",
+            "How to add product in cart",
+            "How to contact people",
+            "How to find location",
+            "How to buy",
+            "Where the contact list",
+        ];
+
+        inputBox.onkeyup = (e) => {
+            let userData = e.target.value;
+            let emptyArray = [];
+            if (userData) {
+                emptyArray = channel_list.filter((data) => {
+                    return data.toLocaleLowerCase().startsWith(userData.toLocaleLowerCase());
+                });
+                emptyArray = emptyArray.map((data) => {
+                    return data = '<li>' + data + '</li>'
+                });
+                console.log(emptyArray);
+                searchWrapper.classList.add("active");
+                showSuggestions(emptyArray);
+                let allList = suggBox.querySelectorAll("li");
+                for (let w = 0; w < allList; w++) {
+                    allList[w].setAttribute("onclick", "select(this)");
+                }
+            } else {
+                searchWrapper.classList.remove("active");
+            }
+        }
+
+        function select(element) {
+            let selectUserData = element.textContent;
+            inputBox.value = selectUserData;
+            searchWrapper.classList.remove("active");
+        }
+
+        function showSuggestions(list) {
+            let listData;
+            if (!list.length) {
+                userValue = inputBox.value;
+                listData = '<li>' + userValue + '</li>';
+            } else {
+                listData = list.join('');
+            }
+            suggBox.innerHTML = listData;
+        }
+    </script>
 </header>
