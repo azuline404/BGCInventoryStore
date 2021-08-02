@@ -82,8 +82,8 @@ CREATE TABLE product_details_offices
     sku_id int NOT NULL,
     location varchar(50) NOT NULL,
     quantity int NOT NULL,
-    CONSTRAINT sku_id_fk FOREIGN KEY (sku_id) REFERENCES sku_id (product_details),
-    CONSTRAINT office_fk FOREIGN KEY (office) REFERENCES locations (location_name),
+    CONSTRAINT sku_id_fk FOREIGN KEY (sku_id) REFERENCES product_details (sku_id),
+    CONSTRAINT office_fk FOREIGN KEY (location) REFERENCES locations (location_name),
     PRIMARY KEY (sku_id, location)
 
 );
