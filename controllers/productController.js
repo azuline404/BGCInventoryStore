@@ -39,6 +39,7 @@ const productControls = {
                     var imgurl = req.body[Object.keys(req.body)[i*5 + 4]]
                     console.log(sku_id + " " + gender + " " + size + " " + color + " " + imgurl + " ");
                     const result = await productsModel.insertProductDetails(sku_id, product_id.rows[0].product_id, size, gender, color,imgurl);
+                    const result2 = await productsModel.insertEmptyProductCount(sku_id);
                 }
                 res.render('home', {name: req.session.name, email: req.session.email});
             } catch (err) {
@@ -56,8 +57,42 @@ const productControls = {
     },
     viewSettings:async (req,res) =>{
         try {
-            const user = await userModelControls.getAlluser();
-            res.render('connectPage',{user:user.rows})
+            var products = await productsModel.getAllProducts();
+            var officeCounts = await productsModel.getAllProductCounts();
+            var productList = [];
+            console.log(officeCounts);
+            for (var i = 0; i < products.rows.length; i++) {
+                var currentProduct = products.rows[i];
+                var sku_id = currentProduct.sku_id;
+                for (var j = 0; j < officeCounts.rows.length; j++) {
+                    var currentQuantity = officeCounts.rows[j];
+                    if (currentQuantity["sku_id"] == sku_id) {
+                        switch (currentQuantity.location) {
+                            case "Burnaby":
+                                currentProduct["BurnabyQuantity"] = currentQuantity["quantity"];
+                                break;
+                            case "Metrotown":
+                                currentProduct["MetrotownQuantity"] = currentQuantity["quantity"];
+                                break;
+                            case "New Westminster":
+                                currentProduct["NewWestminsterQuantity"] = currentQuantity["quantity"];
+                                break;
+                            case "Richmond":
+                                currentProduct["RichmondQuantity"] = currentQuantity["quantity"];
+                                break;
+                            case "Surrey":
+                                currentProduct["SurreyQuantity"] = currentQuantity["quantity"];
+                                break;
+                            case "Vancouver":
+                                currentProduct["VancouverQuantity"] = currentQuantity["quantity"];
+                                break;
+                        }
+                    }
+                }
+                productList.push(currentProduct);
+            }
+            console.log(productList);
+            res.render('connectPage',{items: productList})
 
         } catch (err) {
             console.log(err)
@@ -108,6 +143,9 @@ const productControls = {
             console.log(err)
         }
     },
+    updateProduct: async (req,res,next) => {
+        console.log(req.body);
+    }
 }
 
 module.exports = productControls;

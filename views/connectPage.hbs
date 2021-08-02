@@ -1,3 +1,9 @@
+<link rel="stylesheet" href="/css/connect.css">
+<script src="/js/connect.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
 <div class="connect-container">
     <div class="connect-navigation">
         <ul>
@@ -109,59 +115,58 @@
         </form>
 
         {{!-- modify Page --}}
-        <div class="connect-details" id="matter-2" style="display: none">
-            <div class="recentOrders">
+            <div class="recentOrders"id = "matter-2">
                 <div class="cardHeader">
                     <h2>Product Info</h2>
                 </div>
-
-                <table>
+                <table id = "product-table">
                     <thead>
                         <tr>
-                            <td>Name</td>
-                            <td>Price</td>
-                            <td>Status</td>
+                            <th>Product ID</th>
+                            <th>SKU_ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Value</th>
+                            <th>Category</th>
+                            <th>Gender</th>
+                            <th>Size</th>
+                            <th>Color</th>
+                            <th>Product_img</th>
+                            <th>Burnaby Qty</th>
+                            <th>Metro Qty</th>
+                            <th>New West Qty</th>
+                            <th>Richmond Qty</th>
+                            <th>Surrey Qty</th>
+                            <th>Vancouver Qty</th>
                         </tr>
                     </thead>
-
                     <tbody>
+                        {{#each items}}
                         <tr>
-                            <td>Order 1</td>
-                            <td>$1200</td>
-                            <td><span class="status deliever">Completed</span></td>
-                            <td><a href="" style="color: rgb(255, 123, 0);">View</a></td>
-                        </tr>
-
-                        <tr>
-                            <td>Order 2</td>
-                            <td>$1200</td>
-                            <td><span class="status pending">Pending</span></td>
-                            <td><a href="" style="color: rgb(255, 123, 0);">View</a></td>
-                        </tr>
-
-                        <tr>
-                            <td>Order 3</td>
-                            <td>$1200</td>
-                            <td><span class="status out">Wait List</span></td>
-                            <td><a href="" style="color: rgb(255, 123, 0);">View</a></td>
-                        </tr>
-
-                        <tr>
-                            <td>Order 4</td>
-                            <td>$1200</td>
-                            <td><span class="status return">Rejected</span></td>
-                            <td><a href="" style="color: rgb(255, 123, 0);">View</a></td>
-                        </tr>
+                            <td>{{product_id}}</td>
+                            <td>{{sku_id}}</td>
+                            <td>{{product_name}}</td>
+                            <td>{{product_desc}}</td>
+                            <td>{{value}}</td>
+                            <td>{{category}}</td>
+                            <td>{{gender}}</td>
+                            <td>{{size}}</td>
+                            <td>{{color}}</td>
+                            <td>{{product_img}}</td>
+                            <td>{{BurnabyQuantity}}</td>
+                            <td>{{MetrotownQuantity}}</td>
+                            <td>{{NewWestminsterQuantity}}</td>
+                            <td>{{SurreyQuantity}}</td>
+                            <td>{{RichmondQuantity}}</td>
+                            <td>{{VancouverQuantity}}</td>
+                            <td><button type="button" id="edit" class="edit btn btn-success">Edit</button>
+                            <button type="button" id="save" class="save btn btn-primary" style="display: none">Save</button>
+                            <button type="button" id="cancel" class="cancel btn btn-danger" style="display: none">Cancel</button></td>
+                         </tr>
+                        {{/each}}
 
                     </tbody>
                 </table>
-
-            </div>
-            <div class="tttt">
-                <div class="cardHeader">
-                    <img src="/image/change_detail.png"
-                        style="width:450px; height:300px;position:relative;margin:-350px 0 0 600px;">
-                </div>
             </div>
         </div>
 
@@ -271,28 +276,3 @@
     </div>
 </div>
 
-
-<script>
-    function toggleMenu() {
-        let toggle = document.querySelector('.connect-toggle');
-        let navigation = document.querySelector('.connect-navigation');
-        let main = document.querySelector('.connect-main');
-        toggle.classList.toggle('active');
-        navigation.classList.toggle('active');
-        main.classList.toggle('active');
-    };
-
-
-    function get_option(obj) {
-        var temp = "none";
-        for (var i = 1; i < 5; i++) {
-            if (i == obj)
-                temp = "block";
-            else
-                temp = "none";
-            document.getElementById("matter-" + i).style.display = temp;
-        }
-    }
-
-
-</script>

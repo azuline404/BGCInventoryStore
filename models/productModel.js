@@ -82,9 +82,20 @@ const productModelControls = {
     async insertProductDetails(sku_id, product_id, size, gender, color, imgurl){
         return await queryDB(`INSERT INTO product_details (sku_id, product_id, size, gender, color, product_img) VALUES ('${sku_id}', '${product_id}', '${size}', '${gender}', '${color}', '${imgurl}')`)
     },
-    // async getAllProducts(){
-    //     return await queryDB(`SELECT * FROM products INNER JOIN product_details ON products.product_id = product_details.product_ID INNER JOIN`)
-    // },
+    async insertEmptyProductCount(sku_id){
+        await queryDB(`INSERT INTO product_details_offices (sku_id, location, quantity) VALUES ('${sku_id}', 'Burnaby', '0')`)
+        await queryDB(`INSERT INTO product_details_offices (sku_id, location, quantity) VALUES ('${sku_id}', 'Metrotown', '0')`)
+        await queryDB(`INSERT INTO product_details_offices (sku_id, location, quantity) VALUES ('${sku_id}', 'New Westminster', '0')`)
+        await queryDB(`INSERT INTO product_details_offices (sku_id, location, quantity) VALUES ('${sku_id}', 'Richmond', '0')`)
+        await queryDB(`INSERT INTO product_details_offices (sku_id, location, quantity) VALUES ('${sku_id}', 'Surrey', '0')`)
+        await queryDB(`INSERT INTO product_details_offices (sku_id, location, quantity) VALUES ('${sku_id}', 'Vancouver', '0')`)
+    },  
+    async getAllProducts(){
+        return await queryDB(`SELECT * FROM product_details INNER JOIN products ON product_details.product_id = products.product_id`)
+    },
+    async getAllProductCounts(){
+        return await queryDB(`SELECT * FROM product_details_offices`)
+    }
 }
 
 module.exports = productModelControls;

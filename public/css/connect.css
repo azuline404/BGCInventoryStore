@@ -1,3 +1,11 @@
+#product-table th, td {
+  width: 120px;
+  height:80px;
+  overflow: hidden;
+  text-align:center;
+  margin-right:10px;
+}
+
 .connect-container{
     /* position:relative; */
     width: 100%;
@@ -79,7 +87,7 @@
     min-height: 100vh;
     background: #f5f5f5;
     transition: 0.5s;
-    margin:-768px 0 0 0;
+    margin:-1000px 0 0 0;
 }
 .connect-main.active{
     width:calc(100% - 60px);

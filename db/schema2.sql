@@ -92,7 +92,7 @@ CREATE TABLE product_details_offices
 -----------------
 --Locations
 INSERT INTO locations (location_name)
-VALUES ('Burnaby'),('Vancouver'),('Richmond'),('Surry'),('Metrotown'),('New Westminster');
+VALUES ('Burnaby'),('Vancouver'),('Richmond'),('Surrey'),('Metrotown'),('New Westminster');
 
 --Sample Bottle
 INSERT INTO products(product_id,product_name,product_desc,category,value)
