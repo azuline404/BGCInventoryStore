@@ -73,18 +73,41 @@ const productModelControls = {
         `)
     },
     
-    async getOneProduct(n) {
+    /*async getOneProduct(n) {
         return await queryDB(`SELECT * FROM products INNER JOIN product_details ON products.product_id = product_details.product_id WHERE products.product_id =` + n)
-    },
+    },*/
+
     async insertProduct(name,description,value,category){
         return await queryDB(`INSERT INTO products (product_name, product_desc, value, category) VALUES ('${name}', '${description}', '${value}', '${category}') RETURNING product_id`)
     },
+
     async insertProductDetails(sku_id, product_id, size, gender, color, imgurl){
         return await queryDB(`INSERT INTO product_details (sku_id, product_id, size, gender, color, product_img) VALUES ('${sku_id}', '${product_id}', '${size}', '${gender}', '${color}', '${imgurl}')`)
     },
+    
     // async getAllProducts(){
     //     return await queryDB(`SELECT * FROM products INNER JOIN product_details ON products.product_id = product_details.product_ID INNER JOIN`)
     // },
+
+    async getOneProduct(m){
+        return await queryDB(`SELECT * FROM products WHERE product_id = ` + m)
+    },
+
+    async getAllSizes(m){
+        return await queryDB(`SELECT DISTINCT size FROM product_details WHERE product_id = ` + m)
+    },
+
+    async getAllColors(m){
+        return await queryDB(`SELECT DISTINCT color FROM product_details WHERE product_id = ` + m)
+    },
+
+    async getAllGenders(m){
+        return await queryDB(`SELECT DISTINCT gender FROM product_details WHERE product_id = ` + m)
+    },
+
+    async getAllImage(m){
+        return await queryDB(`SELECT DISTINCT product_img FROM product_details WHERE product_id = ` + m)
+    },
 }
 
 module.exports = productModelControls;

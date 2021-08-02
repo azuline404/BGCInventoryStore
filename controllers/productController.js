@@ -102,8 +102,11 @@ const productControls = {
         try {
             let productId = req.params.productId;
             const productDetail = await productsModel.getOneProduct(productId);
-            console.log(productDetail);
-            res.render('detail',{productDetails: productDetail.rows});
+            const productSizes = await productsModel.getAllSizes(productId);
+            const productColors = await productsModel.getAllColors(productId);
+            const productImages = await productsModel.getAllImage(productId);
+            const productGenders = await productsModel.getAllGenders(productId);
+            res.render('detail',{productDetails: productDetail.rows, productSizes: productSizes.rows, productColors: productColors.rows, productImages: productImages.rows, productGenders: productGenders.rows});
         } catch (err) {
             console.log(err)
         }

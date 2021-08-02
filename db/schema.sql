@@ -94,7 +94,8 @@ VALUES (1,'bottle_a','this is the bottles_a','bottle',1),(2,'bottle_b','this is 
 (7,'bottle_g','this is the bottles_g','bottle',7),(8,'bottle_h','this is the bottles_h','bottle',8),(9,'bottle_i','this is the bottles_i','bottle',9);
 
 INSERT INTO product_details (product_id, sku_id, size, gender, color, product_location,product_count,product_img)
-VALUES (1, 1454758, 'L','Unisex','Blue','Richmond',8,'bottle.jpg'),(2, 2151244, 'M','Unisex','Blue','Burnaby',4,'bottle.jpg'),
+VALUES (1, 1454758, 'L','Unisex','Blue','Richmond',8,'bottle.jpg'),(1, 1454759, 'S','Unisex','Red','Richmond',8,'bottle.jpg'),
+(1, 1454750, 'L','Unisex','Blue','Richmond',8,'bottle.jpg'),(2, 2151244, 'M','Unisex','Blue','Burnaby',4,'bottle.jpg'),
 (3, 8408836, 'S','Unisex','Blue','Vancouver',8,'bottle.jpg'),(4, 4842890, 'L','Femele','Red','Surry',8,'bottle.jpg'),
 (5, 2605310, 'M','Femele','Red','Metrotown',3,'bottle.jpg'),(6, 4584389, 'S','Femele','Red','Vancouver',3,'bottle.jpg'),
 (7, 3332352, 'L','Male','Brown','Vancouver',3,'bottle.jpg'),(8, 4109764, 'M','Male','Brown','Burnaby',7,'bottle.jpg'),
