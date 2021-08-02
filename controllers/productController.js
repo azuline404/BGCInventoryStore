@@ -8,11 +8,11 @@ let pg = ('../db/postgresql');
 const productControls = {
 
     viewcontact: (req,res,next)=>{
-        res.render('contact');
+        res.render('contact', {admin: req.session.isAdmin});
     },
     viewCategory: (req,res,next) => {
         console.log(req.session);
-        res.render('home', {name: req.session.name, email: req.session.email});
+        res.render('home', {name: req.session.name, email: req.session.email, admin: req.session.isAdmin});
     },
     addProductPage: (req,res,next) => {
         res.render('addProductPage', {name: req.session.name, email: req.session.email});
@@ -41,7 +41,7 @@ const productControls = {
                     const result = await productsModel.insertProductDetails(sku_id, product_id.rows[0].product_id, size, gender, color,imgurl);
                     const result2 = await productsModel.insertEmptyProductCount(sku_id);
                 }
-                res.render('home', {name: req.session.name, email: req.session.email});
+                res.render('home', {name: req.session.name, email: req.session.email,admin: req.session.isAdmin});
             } catch (err) {
                 console.log(err)
             }
@@ -147,7 +147,41 @@ const productControls = {
         }
     },
     updateProduct: async (req,res,next) => {
-        console.log(req.body);
+        try {
+            console.log(req.body.obj)
+            console.log(req.body.prevObj);
+            newProduct = req.body.obj;
+            oldProduct = req.body.prevObj;
+            productID = oldProduct[0]
+            skuID = oldProduct[1]
+
+            // products 
+            newName = newProduct[2];
+            newDesc = newProduct[3];
+            newValue = newProduct[4]
+            newCategory = newProduct[5];
+
+            // productDetails
+            newGender = newProduct[6];
+            newSize = newProduct[7];
+            newColor = newProduct[8];
+            newImage = newProduct[9];
+
+            // productDetailsOfficesTable
+            newBurnabyQty = newProduct[10];
+            newMetroQty = newProduct[11];
+            newNewWestQty = newProduct[12];
+            newRichmondQty = newProduct[13];
+            newSurreyQty = newProduct[14];
+            newVancouverQty = newProduct[15];
+
+
+            await productsModel.updateProductTable(productID, newName, newDesc, newValue, newCategory);
+            await productsModel.updateProductDetailsTable(skuID, newGender, newSize, newColor, newImage);
+            await productsModel.updateProductDetailsOfficesTable(skuID, newBurnabyQty, newMetroQty, newNewWestQty, newRichmondQty, newSurreyQty, newVancouverQty);
+        } catch (err) {
+            console.log(err)
+        }
     }
 }
 

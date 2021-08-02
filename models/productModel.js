@@ -116,7 +116,22 @@ const productModelControls = {
 
     async getAllImage(m){
         return await queryDB(`SELECT DISTINCT product_img FROM product_details WHERE product_id = ` + m)
-    }
+    },
+    async updateProductTable(productID, newName, newDesc, newValue, newCategory){
+        return await queryDB(`UPDATE products set product_name = '${newName}', product_desc = '${newDesc}', value = '${newValue}', category = '${newCategory}' WHERE product_id = '${productID}'`)
+    },
+    async updateProductDetailsTable(skuID, newGender, newSize, newColor, newImage){
+        return await queryDB(`UPDATE product_details set gender = '${newGender}', size = '${newSize}', color = '${newColor}', product_img = '${newImage}' 
+        WHERE sku_id = '${skuID}'`);
+    },
+    async updateProductDetailsOfficesTable(skuID, newBurnabyQty, newMetroQty, newNewWestQty, newRichmondQty, newSurreyQty, newVancouverQty) {
+        await queryDB(`UPDATE product_details_offices SET quantity = '${newBurnabyQty}' WHERE location = 'Burnaby' and sku_id = '${skuID}'`)
+        await queryDB(`UPDATE product_details_offices SET quantity = '${newMetroQty}' WHERE location = 'Metrotown' and sku_id = '${skuID}'`)
+        await queryDB(`UPDATE product_details_offices SET quantity = '${newNewWestQty}' WHERE location = 'New Westminster' and sku_id = '${skuID}'`)
+        await queryDB(`UPDATE product_details_offices SET quantity = '${newRichmondQty}' WHERE location = 'Richmond' and sku_id = '${skuID}'`)
+        await queryDB(`UPDATE product_details_offices SET quantity = '${newSurreyQty}' WHERE location = 'Surrey' and sku_id = '${skuID}'`)
+        await queryDB(`UPDATE product_details_offices SET quantity = '${newVancouverQty}' WHERE location = 'Vancouver' and sku_id = '${skuID}'`)
+    },
 }
 
 module.exports = productModelControls;

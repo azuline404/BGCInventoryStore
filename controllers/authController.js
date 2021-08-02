@@ -53,7 +53,7 @@ const authControls = {
                 console.log(req.session.user_id);
                 console.log('=====================================')
                 isAdmin = response[0].role == "administrator"? true: false; 
-            
+                req.session.isAdmin = true;
                 console.log("User is an admin: " + isAdmin);
                 res.render('home', {admin: isAdmin});
             }).catch((err)=> {
@@ -67,7 +67,8 @@ const authControls = {
     },
     home: (req,res,next) => {
             console.log(req.session);
-            res.render('home', {name: req.session.name, email: req.session.email});
+            
+            res.render('home', {admin: req.session.isAdmin});
     },
     checkAuth: (req,res,next) => {
         if (req.session.email) {

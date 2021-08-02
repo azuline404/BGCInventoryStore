@@ -9,6 +9,7 @@
     // https://stackoverflow.com/questions/35386064/jquery-editing-one-row-at-a-time
 
     $('#product-table').find('.save, .cancel').hide();
+    
     $('#product-table').on('click', '.edit', function() {
         $('#product-table').find('.save, .cancel').hide();
         $('#product-table').find('.edit').show();
@@ -21,7 +22,7 @@
         });
     });
 
-    $('#save').on('click', function() {
+    $('.save').on('click', function() {
         var $btn = $(this);
         $('#product-table').find('.save, .cancel').hide();
         $btn.hide().siblings('.edit').show();
@@ -29,7 +30,21 @@
         $.each(currentTD, function () {
             $(this).prop('contenteditable', false)
         });
-        var data = {'bob':'foo','paul':'dog'};
+        var $row = $(this).closest("tr");
+        var $tds = $row.find("td"); 
+        var obj = {}
+        var prevObj = {};
+        var i = 0;
+        $.each($tds, function() {               // Visits every single <td> element
+            obj[i] = $(this).text()     // Prints out the text within the <td>
+            prevObj[i] = $(this).attr("initialval")
+            i++
+        });
+        
+        console.log(obj);
+        console.log(prevObj);
+
+        var data = {obj, prevObj}
         $.ajax({
             url: '/updateProduct',
             type: 'POST',
@@ -40,9 +55,8 @@
             }
           });
     });
-    });
 
-    $('#product-table').on('click', '.cancel', function() {
+    $('.cancel').on('click', function() {
         var $btn = $(this);
         $('#product-table').find('.save, .cancel').hide();
         $btn.hide().siblings('.edit').show();
@@ -52,6 +66,8 @@
             $(this).prop('contenteditable', false)
         });
     });
+    });
+
 
 
 function toggleMenu() {
