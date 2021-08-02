@@ -29,23 +29,30 @@ const productControls = {
                 delete req.body.description;
                 delete req.body.value
                 delete req.body.category
-                var numOfVarieties = Object.keys(req.body).length/7
+                var numOfVarieties = Object.keys(req.body).length/5
                 console.log(numOfVarieties);
                 for (var i = 0; i < numOfVarieties; i++) {
-                    var sku_id = req.body[Object.keys(req.body)[i*7]]
-                    var gender = req.body[Object.keys(req.body)[i*7 + 1]]
-                    var size = req.body[Object.keys(req.body)[i*7 + 2]]
-                    var color = req.body[Object.keys(req.body)[i*7 + 3]]
-                    var location = req.body[Object.keys(req.body)[i*7 + 4]]
-                    var count = req.body[Object.keys(req.body)[i*7 + 5]]
-                    var imgurl = req.body[Object.keys(req.body)[i*7 + 6]]
-                    const result = await productsModel.insertProductDetails(sku_id, product_id.rows[0].product_id, size, gender, color, location, count, imgurl);
+                    var sku_id = req.body[Object.keys(req.body)[i*5]]
+                    var gender = req.body[Object.keys(req.body)[i*5 + 1]]
+                    var size = req.body[Object.keys(req.body)[i*5 + 2]]
+                    var color = req.body[Object.keys(req.body)[i*5 + 3]]
+                    var imgurl = req.body[Object.keys(req.body)[i*5 + 4]]
+                    console.log(sku_id + " " + gender + " " + size + " " + color + " " + imgurl + " ");
+                    const result = await productsModel.insertProductDetails(sku_id, product_id.rows[0].product_id, size, gender, color,imgurl);
                 }
                 res.render('home', {name: req.session.name, email: req.session.email});
             } catch (err) {
                 console.log(err)
             }
         
+    },
+    retrieveAllProducts: async(req,res,next) => {
+        try {
+            const products = await productsModel.getAllProducts();
+            res.render('allProductsPage', {bottles: bottles.rows, shirts: shirts.rows, backpacks:backpacks.rows});
+        } catch (err) {
+            console.log(err)
+        }
     },
     viewSettings:async (req,res) =>{
         try {
