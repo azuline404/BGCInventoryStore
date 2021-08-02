@@ -1,12 +1,11 @@
+<!--
 {{#each productDetails}}
 <div class="box">
-    <div class="box-img" style="opacity: 1;"><img src="../uploads/{{product_img}}" height="640" width="640" /></div>
+    <div class="box-img" style="opacity: 1;"><img src="/uploads/{{product_img}}" height="640" width="640" /></div>
 
     <div class="box-left" onclick="leftButton()">&lt;</div>
     <div class="box-right" onclick="rightButton()">&gt;</div>
 </div>
-
-
 
 <div id="productIntroduction">
 
@@ -20,4 +19,72 @@
 
 </div>
 
-{{/each}}
+{{/each}}-->
+
+
+<div class="detailContainer">
+
+
+  <!-- Left Column -->
+  <div class="left-column">
+    {{#each productImages}}
+    <img data-image="black" src="/uploads/{{product_img}}" alt="123" style="640px">
+    {{/each}}
+  </div>
+
+
+
+  <!-- Right Column -->
+  <div class="right-column">
+
+    <!-- Product Description -->
+    <div class="product-description">
+      {{#each productDetails}}
+      <span>{{category}}</span>
+      <h1>{{product_name}}</h1>
+      <p>{{product_desc}}</p>
+      {{/each}}
+    </div>
+
+    <!-- Product Configuration -->
+    <div class="product-configuration">
+
+      <!-- Product Color -->
+      <div class="product-config">
+        <span>Color</span>
+        <div class="product-choose">
+          {{#each productColors}}
+          <button>{{color}}</button>
+          {{/each}}
+        </div>
+
+
+        <!-- size Configuration -->
+        <span>Size</span>
+        <div class="product-choose">
+          {{#each productSizes}}
+          <button>{{size}}</button>
+          {{/each}}
+        </div>
+
+
+        <!-- size Configuration -->
+        <span>Gender</span>
+        <div class="product-choose">
+          {{#each productGenders}}
+          <button>{{gender}}</button>
+          {{/each}}
+        </div>
+
+
+      </div>
+
+      <!-- Product Cart -->
+      <div class="product-cart">
+        <!--<span>148$</span>-->
+        <a href="#" class="cart-btn">Add to cart</a>
+      </div>
+    </div>
+
+
+  </div>
