@@ -107,36 +107,20 @@ function addJacketRow() {
     colorGroup.appendChild(colorLabel);
     colorGroup.appendChild(colorInput);
 
-    // location
-    var locationGroup = document.createElement('div');
-    locationGroup.className = "form-group col-md-1.5";
+    // // location
+    // var locationGroup = document.createElement('div');
+    // locationGroup.className = "form-group col-md-1.5";
 
-    var locationLabel = document.createElement('label')
-    locationLabel.textContent = "Location"
+    // var locationLabel = document.createElement('label')
+    // locationLabel.textContent = "Location"
 
-    var locationInput = document.createElement('input')
-    locationInput.setAttribute('type', 'text')
-    locationInput.className = "form-control"
-    locationInput.setAttribute("name", "location" + numberOfRows);
+    // var locationInput = document.createElement('input')
+    // locationInput.setAttribute('type', 'text')
+    // locationInput.className = "form-control"
+    // locationInput.setAttribute("name", "location" + numberOfRows);
 
-    locationGroup.appendChild(locationLabel);
-    locationGroup.appendChild(locationInput);
-
-    // count 
-    var countGroup = document.createElement('div');
-    countGroup.className = "form-group col-md-1";
-
-    var countLabel = document.createElement('label')
-    countLabel.textContent = "Count"
-
-    var countInput = document.createElement('input')
-    countInput.setAttribute('type', 'number')
-    countInput.className = "form-control"
-    countInput.setAttribute("name", "count" + numberOfRows);
-
-    countGroup.appendChild(countLabel);
-    countGroup.appendChild(countInput);
-
+    // locationGroup.appendChild(locationLabel);
+    // locationGroup.appendChild(locationInput);
 
     // image
     var imageGroup = document.createElement('div');
@@ -158,8 +142,8 @@ function addJacketRow() {
     formRow.appendChild(genderGroup);
     formRow.appendChild(sizeGroup);
     formRow.appendChild(colorGroup);
-    formRow.appendChild(locationGroup);
-    formRow.appendChild(countGroup);
+    // formRow.appendChild(locationGroup);
+    // formRow.appendChild(countGroup);
     formRow.appendChild(imageGroup);
 
     // add the entire row to the div

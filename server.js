@@ -78,6 +78,8 @@ hbs.handlebars.registerHelper('grouped_each', function(every, context, options) 
     return out;
 });
 
+app.use(express.json());
+
 // app.get('/shoppingPage', (req, res) => {
 //     res.render("shoppingPage", {layout:'main'});
 // })

@@ -8,11 +8,11 @@ let pg = ('../db/postgresql');
 const productControls = {
 
     viewcontact: (req,res,next)=>{
-        res.render('contact');
+        res.render('contact', {admin: req.session.isAdmin});
     },
     viewCategory: (req,res,next) => {
         console.log(req.session);
-        res.render('home', {name: req.session.name, email: req.session.email});
+        res.render('home', {name: req.session.name, email: req.session.email, admin: req.session.isAdmin});
     },
     addProductPage: (req,res,next) => {
         res.render('addProductPage', {name: req.session.name, email: req.session.email});
@@ -29,28 +29,70 @@ const productControls = {
                 delete req.body.description;
                 delete req.body.value
                 delete req.body.category
-                var numOfVarieties = Object.keys(req.body).length/7
+                var numOfVarieties = Object.keys(req.body).length/5
                 console.log(numOfVarieties);
                 for (var i = 0; i < numOfVarieties; i++) {
-                    var sku_id = req.body[Object.keys(req.body)[i*7]]
-                    var gender = req.body[Object.keys(req.body)[i*7 + 1]]
-                    var size = req.body[Object.keys(req.body)[i*7 + 2]]
-                    var color = req.body[Object.keys(req.body)[i*7 + 3]]
-                    var location = req.body[Object.keys(req.body)[i*7 + 4]]
-                    var count = req.body[Object.keys(req.body)[i*7 + 5]]
-                    var imgurl = req.body[Object.keys(req.body)[i*7 + 6]]
-                    const result = await productsModel.insertProductDetails(sku_id, product_id.rows[0].product_id, size, gender, color, location, count, imgurl);
+                    var sku_id = req.body[Object.keys(req.body)[i*5]]
+                    var gender = req.body[Object.keys(req.body)[i*5 + 1]]
+                    var size = req.body[Object.keys(req.body)[i*5 + 2]]
+                    var color = req.body[Object.keys(req.body)[i*5 + 3]]
+                    var imgurl = req.body[Object.keys(req.body)[i*5 + 4]]
+                    console.log(sku_id + " " + gender + " " + size + " " + color + " " + imgurl + " ");
+                    const result = await productsModel.insertProductDetails(sku_id, product_id.rows[0].product_id, size, gender, color,imgurl);
+                    const result2 = await productsModel.insertEmptyProductCount(sku_id);
                 }
-                res.render('home', {name: req.session.name, email: req.session.email});
+                res.render('home', {name: req.session.name, email: req.session.email,admin: req.session.isAdmin});
             } catch (err) {
                 console.log(err)
             }
         
     },
+    retrieveAllProducts: async(req,res,next) => {
+        try {
+            const products = await productsModel.getAllProducts();
+            res.render('allProductsPage', {bottles: bottles.rows, shirts: shirts.rows, backpacks:backpacks.rows});
+        } catch (err) {
+            console.log(err)
+        }
+    },
     viewSettings:async (req,res) =>{
         try {
-            const user = await userModelControls.getAlluser();
-            res.render('connectPage',{user:user.rows})
+            var products = await productsModel.getAllProducts();
+            var officeCounts = await productsModel.getAllProductCounts();
+            var productList = [];
+            console.log(officeCounts);
+            for (var i = 0; i < products.rows.length; i++) {
+                var currentProduct = products.rows[i];
+                var sku_id = currentProduct.sku_id;
+                for (var j = 0; j < officeCounts.rows.length; j++) {
+                    var currentQuantity = officeCounts.rows[j];
+                    if (currentQuantity["sku_id"] == sku_id) {
+                        switch (currentQuantity.location) {
+                            case "Burnaby":
+                                currentProduct["BurnabyQuantity"] = currentQuantity["quantity"];
+                                break;
+                            case "Metrotown":
+                                currentProduct["MetrotownQuantity"] = currentQuantity["quantity"];
+                                break;
+                            case "New Westminster":
+                                currentProduct["NewWestminsterQuantity"] = currentQuantity["quantity"];
+                                break;
+                            case "Richmond":
+                                currentProduct["RichmondQuantity"] = currentQuantity["quantity"];
+                                break;
+                            case "Surrey":
+                                currentProduct["SurreyQuantity"] = currentQuantity["quantity"];
+                                break;
+                            case "Vancouver":
+                                currentProduct["VancouverQuantity"] = currentQuantity["quantity"];
+                                break;
+                        }
+                    }
+                }
+                productList.push(currentProduct);
+            }
+            console.log(productList);
+            res.render('connectPage',{items: productList})
 
         } catch (err) {
             console.log(err)
@@ -95,12 +137,52 @@ const productControls = {
         try {
             let productId = req.params.productId;
             const productDetail = await productsModel.getOneProduct(productId);
-            console.log(productDetail);
-            res.render('detail',{productDetails: productDetail.rows});
+            const productSizes = await productsModel.getAllSizes(productId);
+            const productColors = await productsModel.getAllColors(productId);
+            const productImages = await productsModel.getAllImage(productId);
+            const productGenders = await productsModel.getAllGenders(productId);
+            res.render('detail',{productDetails: productDetail.rows, productSizes: productSizes.rows, productColors: productColors.rows, productImages: productImages.rows, productGenders: productGenders.rows});
         } catch (err) {
             console.log(err)
         }
     },
+    updateProduct: async (req,res,next) => {
+        try {
+            console.log(req.body.obj)
+            console.log(req.body.prevObj);
+            newProduct = req.body.obj;
+            oldProduct = req.body.prevObj;
+            productID = oldProduct[0]
+            skuID = oldProduct[1]
+
+            // products 
+            newName = newProduct[2];
+            newDesc = newProduct[3];
+            newValue = newProduct[4]
+            newCategory = newProduct[5];
+
+            // productDetails
+            newGender = newProduct[6];
+            newSize = newProduct[7];
+            newColor = newProduct[8];
+            newImage = newProduct[9];
+
+            // productDetailsOfficesTable
+            newBurnabyQty = newProduct[10];
+            newMetroQty = newProduct[11];
+            newNewWestQty = newProduct[12];
+            newRichmondQty = newProduct[13];
+            newSurreyQty = newProduct[14];
+            newVancouverQty = newProduct[15];
+
+
+            await productsModel.updateProductTable(productID, newName, newDesc, newValue, newCategory);
+            await productsModel.updateProductDetailsTable(skuID, newGender, newSize, newColor, newImage);
+            await productsModel.updateProductDetailsOfficesTable(skuID, newBurnabyQty, newMetroQty, newNewWestQty, newRichmondQty, newSurreyQty, newVancouverQty);
+        } catch (err) {
+            console.log(err)
+        }
+    }
 }
 
 module.exports = productControls;

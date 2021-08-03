@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="/css/connect.css">
+<script src="/js/connect.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <div class="connect-container">
     <div class="connect-navigation">
         <ul>
@@ -94,14 +98,6 @@
                         <input type="text" name="color1" class="form-control" required>
                     </div>
                     <div class="form-group col-md-1.5">
-                        <label>Location</label>
-                        <input type="text" name="location1" class="form-control" required>
-                    </div>
-                    <div class="form-group col-md-1">
-                        <label>Count</label>
-                        <input type="number" name="count1" class="form-control" min="1" required>
-                    </div>
-                    <div class="form-group col-md-1.5">
                         <label>Image Name</label>
                         <input type="text" name="imgurl1" class="form-control" required />
                     </div>
@@ -118,189 +114,176 @@
 
         {{!-- modify Page --}}
         <div class="connect-details" id="matter-2" style="display: none">
-            <div class="recentOrders">
-                <div class="cardHeader">
-                    <h2>Modify Products Info</h2>
-                </div>
+            <div class="grid-container">
+                <div class="recentOrders">
+                    <div class="cardHeader">
+                        <h2>Modify Products Info</h2>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product ID</th>
+                                <th>SKU_ID</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Value</th>
+                                <th>Category</th>
+                                <th>Gender</th>
+                                <th>Size</th>
+                                <th>Color</th>
+                                <th>Product_img</th>
+                                <th>Burnaby Qty</th>
+                                <th>Metro Qty</th>
+                                <th>New West Qty</th>
+                                <th>Richmond Qty</th>
+                                <th>Surrey Qty</th>
+                                <th>Vancouver Qty</th>
+                            </tr>
+                        </thead>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <td>Name</td>
-                            <td>Price</td>
-                            <td>Status</td>
-                        </tr>
-                    </thead>
+                        <tbody>
+                            {{#each items}}
+                            <tr>
+                                <td>{{product_id}}</td>
+                                <td>{{sku_id}}</td>
+                                <td>{{product_name}}</td>
+                                <td>{{product_desc}}</td>
+                                <td>{{value}}</td>
+                                <td>{{category}}</td>
+                                <td>{{gender}}</td>
+                                <td>{{size}}</td>
+                                <td>{{color}}</td>
+                                <td>{{product_img}}</td>
+                                <td>{{BurnabyQuantity}}</td>
+                                <td>{{MetrotownQuantity}}</td>
+                                <td>{{NewWestminsterQuantity}}</td>
+                                <td>{{SurreyQuantity}}</td>
+                                <td>{{RichmondQuantity}}</td>
+                                <td>{{VancouverQuantity}}</td>
+                                <td><button type="button" class="edit btn btn-success">Edit</button>
+                                    <button type="button" class="save btn btn-primary"
+                                        style="display: none">Save</button>
+                                    <button type="button" class="cancel btn btn-danger"
+                                        style="display: none">Cancel</button>
+                                </td>
+                            </tr>
+                            {{/each}}
 
-                    <tbody>
-                        <tr>
-                            <td>Order 1</td>
-                            <td>$1200</td>
-                            <td><span class="status deliever">Completed</span></td>
-                            <td><a href="" style="color: rgb(255, 123, 0);">View</a></td>
-                        </tr>
+                            <img src="/image/change_detail.png"
+                                style="width:350px; height:200px;position:relative;margin:-70px 0 0 700px;">
+                        </tbody>
+                    </table>
 
-                        <tr>
-                            <td>Order 2</td>
-                            <td>$1200</td>
-                            <td><span class="status pending">Pending</span></td>
-                            <td><a href="" style="color: rgb(255, 123, 0);">View</a></td>
-                        </tr>
-
-                        <tr>
-                            <td>Order 3</td>
-                            <td>$1200</td>
-                            <td><span class="status out">Wait List</span></td>
-                            <td><a href="" style="color: rgb(255, 123, 0);">View</a></td>
-                        </tr>
-
-                        <tr>
-                            <td>Order 4</td>
-                            <td>$1200</td>
-                            <td><span class="status return">Rejected</span></td>
-                            <td><a href="" style="color: rgb(255, 123, 0);">View</a></td>
-                        </tr>
-
-                    </tbody>
-                </table>
-
-            </div>
-            <div class="tttt">
-                <div class="cardHeader">
-                    <img src="/image/change_detail.png"
-                        style="width:450px; height:300px;position:relative;margin:-350px 0 0 600px;">
                 </div>
             </div>
         </div>
 
-        {{!-- Order Page --}}
+        {{!-- Order page --}}
         <div class="connect-details" id="matter-3" style="display: none">
-            <div class="recentOrders">
-                <div class="cardHeader">
-                    <h2>Recent Orders</h2>
+            <div class="grid-container">
+                <div class="recentOrders">
+                    <div class="cardHeader">
+                        <h2>Recent Orders</h2>
 
-                    <form id="filters" action="/filter" method="get" style="margin:50px 600px 0 0;">
-                        <select name="category" id="list" onchange="getSelectValue();">
-                            <option value="all">Select by Status</option>
-                            <option value="all" value="">Show Completed</option>
-                            <option value="shirts" value="Shirts">Show Pending</option>
-                            <option value="backpacks" value="Backpack">Show Wait-List</option>
-                            <option value="bottles" value="Bottles">Show Rejected</option>
-                        </select>
-                    </form>
+                        <form id="filters" action="/filter" method="get" style="margin:50px 200px 0 0;">
+                            <select name="category" id="list" onchange="getSelectValue();">
+                                <option value="all">Select by Status</option>
+                                <option value="all" value="">Show Completed</option>
+                                <option value="shirts" value="Shirts">Show Pending</option>
+                                <option value="backpacks" value="Backpack">Show Wait-List</option>
+                                <option value="bottles" value="Bottles">Show Rejected</option>
+                            </select>
+                        </form>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Name</td>
+                                <td>Price</td>
+                                <td>Status</td>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Order 1</td>
+                                <td>$1200</td>
+                                <td><span class="status deliever">Completed</span></td>
+                                <td><a href="" style="color: rgb(255, 123, 0);">View</a></td>
+                            </tr>
+
+                            <tr>
+                                <td>Order 2</td>
+                                <td>$1200</td>
+                                <td><span class="status pending">Pending</span></td>
+                                <td><a href="" style="color: rgb(255, 123, 0);">View</a></td>
+                            </tr>
+
+                            <tr>
+                                <td>Order 3</td>
+                                <td>$1200</td>
+                                <td><span class="status out">Wait List</span></td>
+                                <td><a href="" style="color: rgb(255, 123, 0);">View</a></td>
+                            </tr>
+
+                            <tr>
+                                <td>Order 4</td>
+                                <td>$1200</td>
+                                <td><span class="status return">Rejected</span></td>
+                                <td><a href="" style="color: rgb(255, 123, 0);">View</a></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+
                 </div>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <td>Name</td>
-                            <td>Price</td>
-                            <td>Status</td>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td>Order 1</td>
-                            <td>$1200</td>
-                            <td><span class="status deliever">Completed</span></td>
-                            <td><a href="" style="color: rgb(255, 123, 0);">View</a></td>
-                        </tr>
-
-                        <tr>
-                            <td>Order 2</td>
-                            <td>$1200</td>
-                            <td><span class="status pending">Pending</span></td>
-                            <td><a href="" style="color: rgb(255, 123, 0);">View</a></td>
-                        </tr>
-
-                        <tr>
-                            <td>Order 3</td>
-                            <td>$1200</td>
-                            <td><span class="status out">Wait List</span></td>
-                            <td><a href="" style="color: rgb(255, 123, 0);">View</a></td>
-                        </tr>
-
-                        <tr>
-                            <td>Order 4</td>
-                            <td>$1200</td>
-                            <td><span class="status return">Rejected</span></td>
-                            <td><a href="" style="color: rgb(255, 123, 0);">View</a></td>
-                        </tr>
-
-                    </tbody>
-                </table>
-
-            </div>
-            <div class="tttt">
-                <div class="cardHeader">
-                    <img src="/image/order-check.png"
-                        style="width:300px; height:300px;position:relative;margin:-350px 0 0 700px;">
+                <div class="tttt">
+                    <div class="cardHeader">
+                        <img src="/image/order-check.png" style="width:350px; height:350px;">
+                    </div>
                 </div>
             </div>
         </div>
+
 
         {{!-- Admin Page --}}
         <div class="connect-details" id="matter-4" style="display: none">
-            <div class="recentOrders">
-                <div class="cardHeader">
-                    <h2>Admin List</h2>
+            <div class="grid-container">
+                <div class="recentOrders">
+                    <div class="cardHeader">
+                        <h2 style="margin: 0 0 0 230px;">Admin List</h2>
+                    </div>
+
+                    <table style="margin: 0 0 0 80px;">
+                        <thead>
+                            <tr>
+                                <td>Name</td>
+                                <td>Email</td>
+                                <td>Role</td>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {{#each user}}
+                            <tr>
+                                <td>{{username}}</td>
+                                <td>{{email}}</td>
+                                <td><span class="status admin">{{role}}</span></td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+
                 </div>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <td>Name</td>
-                            <td>Email</td>
-                            <td>Role</td>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {{#each user}}
-                        <tr>
-                            <td>{{username}}</td>
-                            <td>{{email}}</td>
-                            <td><span class="status admin">{{role}}</span></td>
-                        </tr>
-                        {{/each}}
-                    </tbody>
-                </table>
-
-            </div>
-            <div class="tttt">
-                <div class="cardHeader">
-                    <img src="/image/admin.png"
-                        style="width:400px; height:300px;position:relative;margin:-320px 0 0 600px;">
+                <div class="tttt">
+                    <div class="cardHeader">
+                        <img src="/image/admin.png" style="width:400px; height:300px;position:relative;">
+                    </div>
                 </div>
             </div>
         </div>
 
     </div>
 </div>
-
-
-<script>
-    function toggleMenu() {
-        let toggle = document.querySelector('.connect-toggle');
-        let navigation = document.querySelector('.connect-navigation');
-        let main = document.querySelector('.connect-main');
-        toggle.classList.toggle('active');
-        navigation.classList.toggle('active');
-        main.classList.toggle('active');
-    };
-
-
-    function get_option(obj) {
-        var temp = "none";
-        for (var i = 1; i < 5; i++) {
-            if (i == obj)
-                temp = "block";
-            else
-                temp = "none";
-            document.getElementById("matter-" + i).style.display = temp;
-        }
-    }
-
-
-</script>

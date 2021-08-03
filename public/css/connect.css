@@ -1,10 +1,10 @@
 .connect-container{
-    /* position:relative; */
+    position:relative;
     width: 100%;
 }
 
 .connect-navigation{
-    /* position:fixed; */
+    position:fixed;
     width:300px;
     height:100%;
     background:#003147;
@@ -22,7 +22,7 @@
 }
 
 .connect-navigation ul{
-    /* position: absolute; */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -61,6 +61,7 @@
 
 .connect-title1{
     margin: 50px 0 0 10px;
+    display: block;
     position: relative;
     height: 60px;
     white-space: nowrap;
@@ -68,6 +69,7 @@
 .connect-title2{
     margin: 50px 0 0 40px;
     position: relative;
+    display: block;
     height: 60px;
     white-space: nowrap;
 }
@@ -79,7 +81,6 @@
     min-height: 100vh;
     background: #f5f5f5;
     transition: 0.5s;
-    margin:-768px 0 0 0;
 }
 .connect-main.active{
     width:calc(100% - 60px);
@@ -125,7 +126,7 @@
     height:20px;
     padding-top: 0;
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: auto auto;
 }
 
 .connect-details .recentOrders{
@@ -133,7 +134,6 @@
     display: grid;
     background: #fff;
     padding: 20px;
-    margin: 20px 0 0 0;
 }
 
 .cardHeader{
@@ -216,3 +216,18 @@
     background: #fff;
     padding: 50px;
 }
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1.7fr 1fr;
+    grid-gap: 10px;
+    padding: 10px;
+  }
+  
+  .grid-container > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+  }
