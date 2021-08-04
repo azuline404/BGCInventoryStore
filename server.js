@@ -85,4 +85,4 @@ app.use(express.json());
 // })
 // START SERVER
 // ============
-app.listen(SERVER_PORT, () => console.log(`server is running on: http://localhost:${SERVER_PORT}`))
+module.exports = app.listen(SERVER_PORT, () => console.log(`server is running on: http://localhost:${SERVER_PORT}`))

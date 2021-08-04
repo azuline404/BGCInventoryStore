@@ -7,9 +7,9 @@ const orderController = require('../controllers/orderController');
 const productController = require('../controllers/productController');
 const uploadController = require('../controllers/uploadController');
 const faqController = require('../controllers/faqController');
-const Controller404 = require('../controllers/404Controller')
-const cartController = require('../controllers/cartController')
-const checkoutController = require('../controllers/checkoutController')
+const Controller404 = require('../controllers/404Controller');
+const cartController = require('../controllers/cartController');
+const checkoutController = require('../controllers/checkoutController');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
@@ -42,3 +42,4 @@ router.get('/*',Controller404.notFound)
 
 module.exports = router;
 
+module.exports = router;
