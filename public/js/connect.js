@@ -10,7 +10,7 @@
 
     $('#product-table').find('.save, .cancel').hide();
     
-    $('#product-table').on('click', '.edit', function() {
+    $('.edit').on('click',function() {
         $('#product-table').find('.save, .cancel').hide();
         $('#product-table').find('.edit').show();
         $('*').prop('contenteditable', false)

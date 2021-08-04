@@ -119,7 +119,7 @@
                     <div class="cardHeader">
                         <h2>Modify Products Info</h2>
                     </div>
-                    <table>
+                    <table id = "product-table" >
                         <thead>
                             <tr>
                                 <th>Product ID</th>
@@ -161,21 +161,17 @@
                                 <td>{{RichmondQuantity}}</td>
                                 <td>{{VancouverQuantity}}</td>
                                 <td><button type="button" class="edit btn btn-success">Edit</button>
-                                    <button type="button" class="save btn btn-primary"
-                                        style="display: none">Save</button>
-                                    <button type="button" class="cancel btn btn-danger"
-                                        style="display: none">Cancel</button>
+                                    <button type="button" class="save btn btn-primary" style="display: none">Save</button>
+                                    <button type="button" class="cancel btn btn-danger"style="display: none">Cancel</button>
                                 </td>
                             </tr>
                             {{/each}}
 
-                            <img src="/image/change_detail.png"
-                                style="width:350px; height:200px;position:relative;margin:-70px 0 0 700px;">
                         </tbody>
                     </table>
 
-                </div>
-            </div>
+               </div>
+
         </div>
 
         {{!-- Order page --}}
