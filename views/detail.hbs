@@ -1,6 +1,5 @@
+<script src = "/js/productPage.js"></script>
 <div class="detailContainer">
-
-
   <!-- Left Column -->
   <div class="left-column">
     {{#each productImages}}
@@ -27,32 +26,30 @@
 
       <!-- Product Color -->
       <div class="product-config">
-        <span>Color</span>
-        <div class="product-choose">
-          {{#each productColors}}
-          <button>{{color}}</button>
-          {{/each}}
-        </div>
 
 
-        <!-- size Configuration -->
-        <span>Size</span>
-        <div class="product-choose">
-          {{#each productSizes}}
-          <button>{{size}}</button>
-          {{/each}}
-        </div>
-
-
-        <!-- size Configuration -->
-        <span>Gender</span>
-        <div class="product-choose">
-          {{#each productGenders}}
+        <span>Genders</span>
+        <div id="gendersDiv" class="product-choose">
+          {{!-- {{#each productGenders}}
           <button>{{gender}}</button>
-          {{/each}}
+          {{/each}} --}}
         </div>
 
+        <span>Colors</span>
+        <div id="colorsDiv" class="product-choose">
+          {{!-- {{#each productColors}}
+          <button>{{color}}</button>
+          {{/each}} --}}
+        </div>
 
+        <span>Sizes</span>
+        <div id="sizesDiv" class="product-choose">
+          {{!-- {{#each productSizes}}
+          <button>{{size}}</button>
+          {{/each}} --}}
+        </div>
+
+   
       </div>
 
       <!-- Product Cart -->

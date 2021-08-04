@@ -31,7 +31,13 @@ router.get('/shopCart/:order_id',cartController.viewCart)
 router.get('/checkoutPage/:order_id',checkoutController.viewCheckout)
 router.get('/connectPage',productController.viewSettings)
 router.get('/contact',productController.viewcontact)
+
+
+// ajax requests 
 router.post('/updateProduct', productController.updateProduct)
+router.post('/getProductPageDetails', productController.returnProductDetails)
+
+// other routes that are not defined
 router.get('/*',Controller404.notFound)
 
 module.exports = router;
