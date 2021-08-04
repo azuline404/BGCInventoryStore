@@ -60,6 +60,7 @@ const productControls = {
             var products = await productsModel.getAllProducts();
             var officeCounts = await productsModel.getAllProductCounts();
             var productList = [];
+            const user = await userModelControls.getAlluser();
             console.log(officeCounts);
             for (var i = 0; i < products.rows.length; i++) {
                 var currentProduct = products.rows[i];
@@ -92,7 +93,7 @@ const productControls = {
                 productList.push(currentProduct);
             }
             console.log(productList);
-            res.render('connectPage',{items: productList})
+            res.render('connectPage',{items: productList,user:user.rows})
 
         } catch (err) {
             console.log(err)
