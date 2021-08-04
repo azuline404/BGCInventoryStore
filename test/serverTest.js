@@ -15,6 +15,11 @@ let randomProductID = random.int((min=0), (max=Number.MAX_SAFE_INTEGER))
 let randomSkuID = random.int((min=0), (max=Number.MAX_SAFE_INTEGER))
 let randomOrderID = random.int((min=0), (max=Number.MAX_SAFE_INTEGER))
 
+// let sampleBottleProductID = 1;
+// let sampleBottleRandomSkuID = Math.floor(Math.random() * [1454758, 1454759, 1454750].length);
+
+let sampleBottleProductID = 8;
+let sampleBottleRandomSkuID = 4109764;
 
 // TESTS
 // =====
@@ -166,11 +171,11 @@ describe('server routes', () => {
     describe('GET /after_add/product_id/sku_id route', () => {
         it('should return OK status', (done) => {
             chai.request(server)
-                .get('/after_add/'+randomProductID+'/'+randomSkuID)
+                .get('/after_add/8/4109764')
                 .end((err, response) => {
                     response.should.have.status(200)
                 done()
-                })
+                }).catch(done)
         })
     })
 
@@ -184,7 +189,6 @@ describe('server routes', () => {
     //             })
     //     })
     // })
-
 
 })
 

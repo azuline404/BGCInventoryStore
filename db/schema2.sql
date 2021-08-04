@@ -1,6 +1,7 @@
 --USERS
 -------
-CREATE TABLE users (
+CREATE TABLE users 
+(
     user_id serial NOT NULL,
     username varchar(50) NOT NULL,
     email varchar(320) NOT NULL,
@@ -156,4 +157,3 @@ VALUES (6725214, 'New Westminster', 5),(2958512, 'Richmond', 4),
 (7455465, 'New Westminster', 7),(1190943, 'Surry', 10),
 (3681206, 'Richmond', 11),(4506044, 'Burnaby', 12),
 (1150547, 'Richmond', 24);
-
