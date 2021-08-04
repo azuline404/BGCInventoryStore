@@ -3,6 +3,7 @@ window.addEventListener('load', (event) => {
     document.getElementById("matter-2").style.display = "none"
     document.getElementById("matter-3").style.display = "none"
     document.getElementById("matter-4").style.display = "none"
+    document.getElementById("matter-5").style.display = "none"
 
         
 // https://stackoverflow.com/questions/35386064/jquery-editing-one-row-at-a-time
@@ -40,6 +41,8 @@ $('.save').on('click', function() {
         i++
     });
     
+
+    // insert new values. undefined behavior for changing product/sku_id. other values should be fine.
     console.log(obj);
     console.log(prevObj);
 

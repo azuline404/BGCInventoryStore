@@ -7,13 +7,13 @@
 
   /* Columns */
 .left-column {
-    width: 65%;
+    width: 40%;
     position: relative;
     margin-right: 200px;
   }
    
   .right-column {
-    width: 35%;
+    width: 50%;
     margin-top: 60px;
   }
 
