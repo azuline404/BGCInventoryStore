@@ -3,7 +3,7 @@
   <!-- Left Column -->
   <div class="left-column">
     {{#each productImages}}
-    <img data-image="black" src="/uploads/{{product_img}}" alt="123" style="640px">
+    <img src="/uploads/{{product_img}}" style="640px">
     {{/each}}
   </div>
 
@@ -52,10 +52,14 @@
    
       </div>
 
+  
       <!-- Product Cart -->
       <div class="product-cart">
         <!--<span>148$</span>-->
-        <a href="#" class="cart-btn">Add to cart</a>
+        <form id = "addToCartForm" action="https://google.com" onSubmit = "checkForm()">
+          <input type="submit" class = "cart-btn" id = "addCartBtn" value="Add to cart" />
+        </form>
+        
       </div>
     </div>
 
