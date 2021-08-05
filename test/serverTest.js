@@ -168,14 +168,24 @@ describe('server routes', () => {
         })
     })
 
+    /*
+        doesn't work, because req object is not defined?
+    */
     describe('GET /after_add/product_id/sku_id route', () => {
         it('should return OK status', (done) => {
-            chai.request(server)
+            try {
+                console.log("REQUEST SESSION USER ID IS: ")
+                // console.log(req.session.user_id)
+
+                chai.request(server)
                 .get('/after_add/8/4109764')
                 .end((err, response) => {
                     response.should.have.status(200)
                 done()
-                }).catch(done)
+                })
+            } catch (err) {
+                done(err)
+            }
         })
     })
 
