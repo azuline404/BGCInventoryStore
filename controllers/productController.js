@@ -149,8 +149,8 @@ const productControls = {
     },
     updateProduct: async (req,res,next) => {
         try {
+            console.log("new object data");
             console.log(req.body.obj)
-            console.log(req.body.prevObj);
             newProduct = req.body.obj;
             oldProduct = req.body.prevObj;
             productID = oldProduct[0]
@@ -181,6 +181,16 @@ const productControls = {
             await productsModel.updateProductDetailsTable(skuID, newGender, newSize, newColor, newImage);
             await productsModel.updateProductDetailsOfficesTable(skuID, newBurnabyQty, newMetroQty, newNewWestQty, newRichmondQty, newSurreyQty, newVancouverQty);
         } catch (err) {
+            console.log(err)
+        }
+    },
+    returnProductDetails: async (req,res,next) => {
+        try {
+            const product_id = req.body.id;
+            result = await productsModel.getProductByID(product_id);
+            res.json(result.rows);
+        }
+        catch (err) {
             console.log(err)
         }
     }

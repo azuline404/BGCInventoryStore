@@ -20,18 +20,26 @@ router.get('/redirect',authController.redirect);
 router.get('/home',authController.checkAuth, authController.home);
 router.get('/addProductPage', authController.checkAuth, productController.addProductPage);
 router.post('/addProduct', uploadController.uploadFile, productController.addProduct);
-router.get('/shopBottles',productController.viewBottles);
-router.get('/shopBackpacks',productController.viewBackpacks);
-router.get('/shopShirts',productController.viewShirts);
-router.get('/shopAllProducts',productController.viewAllProducts);
-router.get('/detail/:productId',productController.viewDetail);
-router.get('/faq',faqController.viewFAQ);
-router.get('/after_add/:product_id/:sku_id',cartController.viewSubPage);
-router.get('/shopCart/:order_id',cartController.viewCart);
-router.get('/checkoutPage/:order_id',checkoutController.viewCheckout);
-router.get('/connectPage',productController.viewSettings);
-router.get('/contact',productController.viewcontact);
-router.post('/updateProduct', productController.updateProduct);
-router.get('/*',Controller404.notFound);
+router.get('/shopBottles',productController.viewBottles)
+router.get('/shopBackpacks',productController.viewBackpacks)
+router.get('/shopShirts',productController.viewShirts)
+router.get('/shopAllProducts',productController.viewAllProducts)
+router.get('/detail/:productId',productController.viewDetail)
+router.get('/faq',faqController.viewFAQ)
+router.get('/after_add/:product_id/:sku_id',cartController.viewSubPage)
+router.get('/shopCart/:order_id',cartController.viewCart)
+router.get('/checkoutPage/:order_id',checkoutController.viewCheckout)
+router.get('/connectPage',productController.viewSettings)
+router.get('/contact',productController.viewcontact)
+
+
+// ajax requests 
+router.post('/updateProduct', productController.updateProduct)
+router.post('/getProductPageDetails', productController.returnProductDetails)
+
+// other routes that are not defined
+router.get('/*',Controller404.notFound)
+
+module.exports = router;
 
 module.exports = router;

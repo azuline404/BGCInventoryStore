@@ -10,9 +10,17 @@ const pool = new Pool({
   password: 'root',
   port: 5432,
 })
-module.exports = pool;
 
 // const { Pool } = require('pg')
+// const pool = new Pool({
+//   user: 'postgres',
+//   host: 'localhost',
+//   database: 'bgc2',
+//   password: 'ba13641228671',
+//   port: 5432,
+// })
+
+
 // const pool = new Pool({
 //   user: 'postgres',
 //   host: 'localhost',
@@ -20,4 +28,4 @@ module.exports = pool;
 //   password: 'ljc0000312Li',
 //   port: 5432,
 // })
-// module.exports = pool;
+module.exports = pool;

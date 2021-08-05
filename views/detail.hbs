@@ -1,11 +1,13 @@
+<script src = "/js/productPage.js"></script>
 <div class="detailContainer">
-
-
   <!-- Left Column -->
   <div class="left-column">
+    <div class="box-left" onclick="leftButton()">&lt;</div>
     {{#each productImages}}
-    <img data-image="black" src="/uploads/{{product_img}}" alt="123" style="640px">
+    <img data-image="black" src="/uploads/{{product_img}}" class="show-img" style="opacity:1;">
     {{/each}}
+    
+    <div class="box-right" onclick="rightButton()">&gt;</div>
   </div>
 
 
@@ -27,38 +29,40 @@
 
       <!-- Product Color -->
       <div class="product-config">
-        <span>Color</span>
-        <div class="product-choose">
-          {{#each productColors}}
-          <button>{{color}}</button>
-          {{/each}}
-        </div>
 
 
-        <!-- size Configuration -->
-        <span>Size</span>
-        <div class="product-choose">
-          {{#each productSizes}}
-          <button>{{size}}</button>
-          {{/each}}
-        </div>
-
-
-        <!-- size Configuration -->
-        <span>Gender</span>
-        <div class="product-choose">
-          {{#each productGenders}}
+        <span>Genders</span>
+        <div id="gendersDiv" class="product-choose">
+          {{!-- {{#each productGenders}}
           <button>{{gender}}</button>
-          {{/each}}
+          {{/each}} --}}
         </div>
 
+        <span>Colors</span>
+        <div id="colorsDiv" class="product-choose">
+          {{!-- {{#each productColors}}
+          <button>{{color}}</button>
+          {{/each}} --}}
+        </div>
 
+        <span>Sizes</span>
+        <div id="sizesDiv" class="product-choose">
+          {{!-- {{#each productSizes}}
+          <button>{{size}}</button>
+          {{/each}} --}}
+        </div>
+
+   
       </div>
 
+  
       <!-- Product Cart -->
       <div class="product-cart">
         <!--<span>148$</span>-->
-        <a href="#" class="cart-btn">Add to cart</a>
+        <form id = "addToCartForm" action="https://google.com" onSubmit = "checkForm()">
+          <input type="submit" class = "cart-btn" id = "addCartBtn" value="Add to cart" />
+        </form>
+        
       </div>
     </div>
 
