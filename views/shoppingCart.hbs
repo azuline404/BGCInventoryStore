@@ -27,6 +27,29 @@
         </tr>
         {{/each}}
     </table>
+    <table border = "0" width = "100%" height = "20%" bgcolor = "bisque">
+    <tr>
+        <th align = "center">
+            <div class = "container">
+                <a href="/shopAllProducts">
+                    <div class = "categories" style="margin: 20px 0 0 50px; padding:10px;">
+                        <img src="/image/all.jpg" class = "item-image">
+                        <div class = "image-title" >All categories</div>
+                    </div>
+                </a>
+            </div>
+        </th>
 
-    <a href="/checkoutPage/{{order_id}}" class = "check-out-button">Check Out</a>
+        <th align = "center">
+            <div class = "container">
+                <a href="/checkoutPage/{{order_id}}">
+                    <div class = "categories" style="margin-right:100px; padding:10px;">
+                        <img src="/image/cart.jpg" class = "item-image">
+                        <div class = "image-title">View the Cart</div>
+                    </div>
+                </a>
+            </div>
+        </th>
+    </tr>
+</table>
 </div>

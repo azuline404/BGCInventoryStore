@@ -132,6 +132,17 @@ function getAllSizes(gender,color) {
 
 function generateSizeButtons(gender,color) {
     var sizes = getAllSizes(gender,color);
+    sizes = sizes.map(x => x.replace(/XS/g,"1"));
+    sizes = sizes.map(x => x.replace(/S/g,"2"));
+    sizes = sizes.map(x => x.replace(/M/g,"3"));
+    sizes = sizes.map(x => x.replace(/L/g,"4"));
+    sizes = sizes.map(x => x.replace(/XL/g,"5"));
+    sizes.sort();
+    sizes = sizes.map(x => x.replace(/1/g,"XS"));
+    sizes = sizes.map(x => x.replace(/2/g,"S"));
+    sizes = sizes.map(x => x.replace(/3/g,"M"));
+    sizes = sizes.map(x => x.replace(/4/g,"L"));
+    sizes = sizes.map(x => x.replace(/5/g,"XL"));
     var sizesDiv = document.getElementById("sizesDiv");
     // add new sizes based on new gender/color option
     while (sizesDiv.hasChildNodes()) {

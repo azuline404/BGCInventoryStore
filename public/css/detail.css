@@ -15,6 +15,7 @@
   .right-column {
     width: 50%;
     margin-top: 60px;
+    margin-left: 200px;
   }
 
   /* Left Column */
@@ -123,6 +124,48 @@
   .cart-btn:hover {
     background-color: #64af3d;
   }
-#addCartBtn {
-  
+
+  /* ------------- style for viewing picture ------------- */
+  .show-img{
+    width: 640px;
+    height: 640px;
+    opacity: 0;
+  }
+
+  .box-left{
+    position:absolute;
+    width:30px;
+    height:70px;
+    background-color: #00000050;
+    color: #ccc;
+    top:300px;
+    border-radius:5px 0 0 5px;
+    text-align:center;
+    line-height:70px;
+    font-size:27px;
+    left: -30px;
+}
+
+.box-left:hover{
+    background-color:#00000050;
+    color:#fff;
+}
+
+.box-right{
+    position:absolute;
+    width:30px;
+    height:70px;
+    background-color: #00000050;
+    color: #ccc;
+    top:300px;
+    border-radius: 0 5px 5px 0;
+    text-align:center;
+    line-height:70px;
+    font-size:27px;
+    margin-left: 600px;
+}
+
+.box-right:hover{
+    background-color:#00000050;
+    color:#fff;
 }
