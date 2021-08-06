@@ -287,48 +287,10 @@
             </div>
         </div>
 
-        <div class="connect-details" id="matter-5" style="display: none">
-            <div class="grid-container">
-                <div class="recentOrders">
-                    <div class="cardHeader">
-                        <h2 style="margin: 0 0 0 230px;">Admin List</h2>
-                    </div>
-
-                    <table style="margin: 0 0 0 80px;">
-                        <thead>
-                            <tr>
-                                <td>Name</td>
-                                <td>Email</td>
-                                <td>Role</td>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            {{#each user}}
-                            <tr>
-                                <td>{{username}}</td>
-                                <td>{{email}}</td>
-                                <td><span class="status admin">{{role}}</span></td>
-                            </tr>
-                            {{/each}}
-                        </tbody>
-                    </table>
-
-                </div>
-                <div class="tttt">
-                    <div class="cardHeader">
-                        <img src="/image/admin.png" style="width:400px; height:300px;position:relative;">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-
-        <form class="ml-5 mt-5" id="matter-5" action="/addProduct" method="post" enctype="multipart/form-data"
-            id="jacketsForm" >
+        
+        {{!-- upload photo --}}
+        <form class="ml-5 mt-5" id="matter-5" action="/addProduct" method="post" enctype="multipart/form-data" 
+        id="jacketsForm"  style="display: none">
             <div class="form-group" >
                 <label for="exampleFormControlInput1">Product Name</label>
                 <input type="text" class="form-control" style="width: 800px" name="name" placeholder="Name" required>

@@ -84,7 +84,7 @@ main.classList.toggle('active');
 
 function get_option(obj) {
 var temp = "none";
-for (var i = 1; i < 5; i++) {
+for (var i = 1; i < 6; i++) {
     if (i == obj)
         temp = "block";
     else
