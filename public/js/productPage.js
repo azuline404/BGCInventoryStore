@@ -22,6 +22,7 @@ $(document).ready(function() {
         data: JSON.stringify(data),
         success: function(response) {
             jsonData = response;
+            console.log(jsonData);
             generateGenders(jsonData);
             generateGenderButtons(genderList);
         }
@@ -131,26 +132,68 @@ function getAllSizes(gender,color) {
 
 function generateSizeButtons(gender,color) {
     var sizes = getAllSizes(gender,color);
+    sizes = sizes.map(x => x.replace(/XS/g,"1"));
+    sizes = sizes.map(x => x.replace(/S/g,"2"));
+    sizes = sizes.map(x => x.replace(/M/g,"3"));
+    sizes = sizes.map(x => x.replace(/L/g,"4"));
+    sizes = sizes.map(x => x.replace(/XL/g,"5"));
+    sizes.sort();
+    sizes = sizes.map(x => x.replace(/1/g,"XS"));
+    sizes = sizes.map(x => x.replace(/2/g,"S"));
+    sizes = sizes.map(x => x.replace(/3/g,"M"));
+    sizes = sizes.map(x => x.replace(/4/g,"L"));
+    sizes = sizes.map(x => x.replace(/5/g,"XL"));
     var sizesDiv = document.getElementById("sizesDiv");
     // add new sizes based on new gender/color option
     while (sizesDiv.hasChildNodes()) {
         sizesDiv.removeChild(sizesDiv.lastChild);
     }
-
     for (var i = 0; i < sizes.length; i++) {
         var button = document.createElement("button");
         button.setAttribute('class','color-button')
         button.textContent = sizes[i];
+        var count = 0;
+        for (var j = 0; j < jsonData.length; j++) {
+            if (jsonData[j].gender == gender && jsonData[j].color == color && jsonData[j].size == sizes[i]) {
+                count = count + jsonData[j].quantity;
+            }
+        }
+        console.log(count);
+        if (count == 0) {
+            button.disabled = "true";
+            button.style.background = "lightgrey"
+            button.setAttribute('class', 'outOfStock')
+        }
         sizesDiv.appendChild(button);
         button.addEventListener("click", function() {
             currentSelectedSize = this.textContent;
             var sizeButtons = sizesDiv.querySelectorAll(".color-button");
             sizeButtons.forEach(function(sizeButton) {
-                sizeButton.style.border = "#e7e7e7";
-                sizeButton.style.background = "white";
+                if (!sizeButton.classList.contains('outOfStock')) {
+                    sizeButton.style.border = "#e7e7e7";
+                    sizeButton.style.background = "white";
+                }
             });
             this.style.border = "#2196F3";
             this.style.background = "dodgerblue";
         });
     }
+}
+
+function checkForm() {
+    if (currentSelectedGender != null && currentSelectedColor != null && currentSelectedSize != null) {
+        var sku_id;
+        for (var i = 0; i < jsonData.length; i++) {
+            if (jsonData[i].gender == currentSelectedGender && jsonData[i].color == currentSelectedColor && jsonData[i].size == currentSelectedSize) {
+                sku_id = jsonData[i].sku_id;
+            }
+        }
+        console.log(sku_id);
+        var form = document.getElementById("addToCartForm");
+        var path = window.location.origin + "/after_add/" + jsonData[0].product_id + "/" + sku_id;
+        form.action = path;
+        console.log(form.action);
+        return true;
+    }
+    return false;
 }

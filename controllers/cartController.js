@@ -8,22 +8,19 @@ const cartPage = {
     viewSubPage: async (req, res) => {
         try{
             var sku_id = req.params.sku_id;
-            
-            // add new item to order/cart
+            console.log(req.params);
+            // // add new item to order/cart
             var order_id = await productsModel.createCartForRequesterID(req.session.user_id);
             await productsModel.addProductToCart(order_id, sku_id);
             
-            // render new item summary
+            // // render new item summary
             const new_item = await productsModel.getProductBySkuID(sku_id)
 
-            // dispatch order_id to after_add, so it can viewed later at shoppingCart.hbs
-            res.render('after_add',{
-                new_item: new_item.rows,
-                order_id
-            });
+            // // dispatch order_id to after_add, so it can viewed later at shoppingCart.hbs
+            res.redirect('/shopCart/' + order_id);
 
-        }catch (err){
-            console.log(err)
+        }catch (err) {
+            console.log(err);
         }
 
         // let sql = `SELECT * FROM bottles WHERE bottles.id = ${req.params.id}`;
