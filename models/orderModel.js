@@ -38,10 +38,13 @@ const orderModelControls = {
         )
     },
     async updateNewOrderStatus(order_id) {
-        return await queryDB(`UPDATE orders SET status = 'submitted' WHERE order_id = '${order_id}'`)
+        return await queryDB(`UPDATE orders SET status = 'submitted', date_submitted = NOW() WHERE order_id = '${order_id}'`)
     },
     async getOrderByUserID(user_id) {
         return await queryDB(`SELECT order_id FROM orders INNER JOIN users on orders.requester_id = users.user_id where user_id = '${user_id}' and status = 'incomplete'`)
+    },
+    async getAllOrders() {
+        return await queryDB(`SELECT * from orders order by date_submitted`)
     }
 }
 

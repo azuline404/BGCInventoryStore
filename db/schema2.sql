@@ -63,8 +63,8 @@ CREATE TABLE orders
     fulfiller_id int,
     status varchar(50) NOT NULL,
     request_type varchar(50),
-    date_created date NOT NULL,
-    date_completed date,
+    date_submitted timestamp with time zone,
+    date_completed timestamp with time zone,
     PRIMARY KEY (order_id),
     CONSTRAINT requester_id_FK FOREIGN KEY (requester_id) REFERENCES users (user_id),
     CONSTRAINT fulfiller_id_FK FOREIGN KEY (fulfiller_id) REFERENCES users (user_id)
@@ -94,7 +94,7 @@ INSERT INTO users (username, email, role) VALUES ('junchenl', '2664454673@qq.com
 -----------------
 --Locations
 INSERT INTO locations (location_name)
-VALUES ('Burnaby'),('Vancouver'),('Richmond'),('Surry'),('Metrotown'),('New Westminster');
+VALUES ('Burnaby'),('Vancouver'),('Richmond'),('Surrey'),('Metrotown'),('New Westminster');
 
 --Sample Bottle
 INSERT INTO products(product_id,product_name,product_desc,category,value)

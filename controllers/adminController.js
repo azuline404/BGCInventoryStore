@@ -1,15 +1,15 @@
 const productsModel = require('../models/productModel');
-const uploadController = require('../controllers/uploadController');
-const userModelControls = require('../models/userModel');
+const userModel = require('../models/userModel');
+const orderModel = require('../models/orderModel');
 
 const adminControls = {
     viewSettings:async (req,res) =>{
         try {
             var products = await productsModel.getAllProducts();
             var officeCounts = await productsModel.getAllProductCounts();
+            const user = await userModel.getAlluser();
+            const orders = await orderModel.getAllOrders();
             var productList = [];
-            const user = await userModelControls.getAlluser();
-            console.log(officeCounts);
             for (var i = 0; i < products.rows.length; i++) {
                 var currentProduct = products.rows[i];
                 var sku_id = currentProduct.sku_id;
@@ -40,8 +40,7 @@ const adminControls = {
                 }
                 productList.push(currentProduct);
             }
-            console.log(productList);
-            res.render('settingsPage',{items: productList,user:user.rows})
+            res.render('settingsPage',{items: productList,user:user.rows, orders: orders.rows})
 
         } catch (err) {
             console.log(err)

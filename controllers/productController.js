@@ -16,7 +16,6 @@ const productControls = {
     },
     addProduct: async (req,res,next) => {
             console.log(req.body);
-
             // insert into products using first three fields, name, description, and value
             // After insertion, retreieve the product ID, and delete the name, description, and value fields for better indexing of the JSON object
             try {

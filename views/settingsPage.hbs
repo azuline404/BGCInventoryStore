@@ -49,7 +49,7 @@
 
         {{!-- Add product Page --}}
         <script src="/js/productsForm.js"></script>
-        <form class="ml-5 mt-5" id="matter-1" action="/addProduct" method="post" enctype="multipart/form-data"
+        <form class="ml-5 mt-5" id="matter-1" action="/addProduct" method="post" enctype="application/x-www-form-urlencoded"
             id="jacketsForm">
             <div class="form-group">
                 <label for="exampleFormControlInput1">Product Name</label>
@@ -201,41 +201,21 @@
                     <table>
                         <thead>
                             <tr>
-                                <td>Name</td>
-                                <td>Price</td>
+                                <td>ID</td>
                                 <td>Status</td>
+                                <td>Date</td>
                             </tr>
                         </thead>
 
                         <tbody>
+                            {{#each orders}}
                             <tr>
-                                <td>Order 1</td>
-                                <td>$1200</td>
-                                <td><span class="status deliever">Completed</span></td>
-                                <td><a href="" style="color: rgb(255, 123, 0);">View</a></td>
-                            </tr>
-
+                                <td>{{order_id}}</td>
+                                <td>{{status}}</td>
+                                <td>{{date_submitted}}</td>
+                                <td><a href=""style="color: rgb(255, 123, 0);">View</a></td>
                             <tr>
-                                <td>Order 2</td>
-                                <td>$1200</td>
-                                <td><span class="status pending">Pending</span></td>
-                                <td><a href="" style="color: rgb(255, 123, 0);">View</a></td>
-                            </tr>
-
-                            <tr>
-                                <td>Order 3</td>
-                                <td>$1200</td>
-                                <td><span class="status out">Wait List</span></td>
-                                <td><a href="" style="color: rgb(255, 123, 0);">View</a></td>
-                            </tr>
-
-                            <tr>
-                                <td>Order 4</td>
-                                <td>$1200</td>
-                                <td><span class="status return">Rejected</span></td>
-                                <td><a href="" style="color: rgb(255, 123, 0);">View</a></td>
-                            </tr>
-
+                            {{/each}}
                         </tbody>
                     </table>
 

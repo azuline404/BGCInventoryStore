@@ -20,7 +20,7 @@ router.use(express.static(path.join(__dirname, 'public')));
 router.get('/', authController.authenticate);
 router.get('/redirect',authController.redirect);
 router.get('/home',authController.checkAuth, authController.home);
-router.post('/addProduct', uploadController.uploadFile, productController.addProduct);
+router.post('/addProduct',productController.addProduct);
 router.get('/shopBottles',productController.viewBottles)
 router.get('/shopBackpacks',productController.viewBackpacks)
 router.get('/shopShirts',productController.viewShirts)

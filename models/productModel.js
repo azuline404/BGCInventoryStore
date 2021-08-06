@@ -55,7 +55,7 @@ const productModelControls = {
 
     async createCartForRequesterID(requester_id){
         // if cart doesn't exist, create one
-        var order_id = await queryDB(`INSERT INTO orders (requester_id, status, date_created) SELECT '${requester_id}', 'incomplete', NOW() WHERE NOT EXISTS (SELECT * FROM users INNER JOIN orders ON users.user_id = orders.requester_id WHERE status='incomplete') RETURNING order_id`)
+        var order_id = await queryDB(`INSERT INTO orders (requester_id, status) SELECT '${requester_id}', 'incomplete' WHERE NOT EXISTS (SELECT * FROM users INNER JOIN orders ON users.user_id = orders.requester_id WHERE status='incomplete') RETURNING order_id`)
         if (!order_id.rows.length){
             order_id = await queryDB(`SELECT order_id FROM orders WHERE requester_id='${requester_id}' AND status='incomplete'`)
         }
