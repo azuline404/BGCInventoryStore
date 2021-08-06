@@ -37,8 +37,10 @@ const orderModelControls = {
             INNER JOIN products as C ON C.product_id = B.product_id
             WHERE A.order_id = '${order_id}'`
         )
+    },
+    async updateNewOrderStatus(order_id) {
+        return await queryDB(`UPDATE orders SET status = 'submitted' WHERE order_id = '${order_id}'`)
     }
-
 }
 
 module.exports = orderModelControls;

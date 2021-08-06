@@ -69,7 +69,7 @@ const productModelControls = {
         await queryDB(`
             INSERT INTO order_lines (order_id, sku_id, order_count)
             SELECT '${order_id}', '${sku_id}', '1'
-            WHERE NOT EXISTS (SELECT * FROM order_lines WHERE sku_id='${sku_id}');
+            WHERE NOT EXISTS (SELECT * FROM order_lines WHERE sku_id='${sku_id}' and order_id = '${order_id}');
         `)
     },
     

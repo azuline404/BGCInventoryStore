@@ -1,29 +1,15 @@
-<div>
-    <h1 style="margin: 200px 0 0 230px; font-size:50px">successfully added to shopping cart! 🥳🥳</h1>
-</div>
-
-<table border = "0" width = "100%" height = "20%" bgcolor = "bisque">
-    {{#each new_item}}
-    <tr>
-        <th>Product Name</th>
-        <th>Order Number</th>
-        <th>Inventory Balance</th>
-    </tr>
-    <tr>
-        <td>{{product_name}}</td>
-        <td>{{product_desc}}</td>
-    </tr>
-    {{/each}}
-</table>
+<script src = "submitOrder.js"></script>
+<h1>Order successfully submitted!</h1>
+<br/>
 
 <table border = "0" width = "100%" height = "20%" bgcolor = "bisque">
     <tr>
         <th align = "center">
             <div class = "container">
-                <a href="/shopAllProducts">
+                <a href="/home">
                     <div class = "categories" style="margin: 20px 0 0 50px; padding:10px;">
                         <img src="/image/all.jpg" class = "item-image">
-                        <div class = "image-title" >Back to All Categories</div>
+                        <div class = "image-title" >Back to Home Page</div>
                     </div>
                 </a>
             </div>
@@ -31,10 +17,10 @@
 
         <th align = "center">
             <div class = "container">
-                <a href="/shopCart/{{order_id}}">
+                <a href="/shopAllProducts">
                     <div class = "categories" style="margin-right:100px; padding:10px;">
                         <img src="/image/cart.jpg" class = "item-image">
-                        <div class = "image-title">Checkout</div>
+                        <div class = "image-title">Back to All Categories</div>
                     </div>
                 </a>
             </div>

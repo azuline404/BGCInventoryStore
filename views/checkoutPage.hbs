@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-75">
         <div class="checkout_container">
-            <form id="validate" action="#">
+            <form id="validate" method = "post" action="/submitOrder/{{order_id}}">
                 <div class="row">
                     <div class="col-50">
                         <h3>Billing Address</h3>
@@ -21,8 +21,8 @@
                             <option>Surrey</option>
                             <option>Vancouver</option>
                          </select>
-                        <label for="request"><i class="fa fa-institution"></i> Request Type</label>
-                        <select name = "request" class="form-control">
+                        <label for="request"><i class="fa fa-institution"></i>Request Type</label>
+                        <select id = "request" name = "request" class="form-control">
                             <option>Personal</option>
                             <option>Client</option>
                          </select>

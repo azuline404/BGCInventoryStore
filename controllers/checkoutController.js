@@ -6,7 +6,17 @@ const checkoutPage = {
 
         // checkout ...
 
-        res.render('checkoutPage', {email: req.session.email});
+        res.render('checkoutPage', {order_id: req.params.order_id, email: req.session.email});
+    },
+    submitOrder: async (req,res,next) => {
+        try {
+            const bottles = await productsModel.getAllBottles();
+            const shirts = await productsModel.getAllShirts();
+            const backpacks = await productsModel.getAllBackpacks();
+            res.render('allProductsPage', {bottles: bottles.rows, shirts: shirts.rows, backpacks:backpacks.rows});
+        } catch (err) {
+            console.log(err)
+        }
     }
 }
 

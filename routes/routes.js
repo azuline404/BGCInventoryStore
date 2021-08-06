@@ -10,6 +10,7 @@ const faqController = require('../controllers/faqController');
 const Controller404 = require('../controllers/404Controller');
 const cartController = require('../controllers/cartController');
 const checkoutController = require('../controllers/checkoutController');
+const emailController = require('../controllers/emailController');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
@@ -32,6 +33,7 @@ router.get('/shopCart/:order_id',cartController.viewCart)
 router.get('/checkoutPage/:order_id',checkoutController.viewCheckout)
 router.get('/connectPage',productController.viewSettings)
 router.get('/contact',productController.viewcontact)
+router.post('/submitOrder/:order_id', emailController.sendEmail, orderController.updateNewOrder)
 
 
 // ajax requests 
