@@ -30,7 +30,6 @@ const orderModelControls = {
     async getOrderByID(order_id) {
         return await queryDB(`SELECT * FROM order_lines WHERE order_id='${order_id}'`)
     },
-
     async getProductsByOrderID(order_id){
         return await queryDB(`
             SELECT * FROM (order_lines as A INNER JOIN product_details as B ON A.sku_id = B.sku_id)
@@ -40,6 +39,9 @@ const orderModelControls = {
     },
     async updateNewOrderStatus(order_id) {
         return await queryDB(`UPDATE orders SET status = 'submitted' WHERE order_id = '${order_id}'`)
+    },
+    async getOrderByUserID(user_id) {
+        return await queryDB(`SELECT order_id FROM orders INNER JOIN users on orders.requester_id = users.user_id where user_id = '${user_id}' and status = 'incomplete'`)
     }
 }
 

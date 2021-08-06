@@ -35,6 +35,7 @@ router.get('/settings',adminController.viewSettings)
 router.get('/contact',productController.viewcontact)
 router.post('/submitOrder/:order_id', emailController.sendEmail, orderController.updateNewOrder)
 router.post('/uploadPhotos',uploadController.uploadFile)
+router.get('/shopCart', cartController.findCart);
 
 
 // ajax requests 
