@@ -135,4 +135,3 @@ const productModelControls = {
 }
 
 module.exports = productModelControls;
-

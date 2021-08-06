@@ -163,17 +163,10 @@ closeBtns.forEach((closeBtn)=> {
         });
     });
 });
-
-
 const allCategoryPosts = document.querySelectorAll('.all');
-
 function getSelectValue(){
     var selectedValue = document.getElementById("list").value;
-
-
     console.log("here " + selectedValue)
-
-
     if (selectedValue == "all"){
         for (let j = 0; j < allCategoryPosts.length; j++){
             allCategoryPosts[j].style.display = "block"
@@ -190,5 +183,4 @@ function getSelectValue(){
         }
     }
 }
-
 </script>
