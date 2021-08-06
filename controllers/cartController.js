@@ -42,7 +42,7 @@ const cartPage = {
 
             res.render('shoppingCart',{
                 cart: cart.rows,
-                order_id
+                order_id, admin: req.session.isAdmin
             })
         } catch (err) {
             console.log(err)

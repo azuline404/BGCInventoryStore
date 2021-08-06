@@ -13,7 +13,7 @@ const checkoutPage = {
             const bottles = await productsModel.getAllBottles();
             const shirts = await productsModel.getAllShirts();
             const backpacks = await productsModel.getAllBackpacks();
-            res.render('allProductsPage', {bottles: bottles.rows, shirts: shirts.rows, backpacks:backpacks.rows});
+            res.render('allProductsPage', {bottles: bottles.rows, shirts: shirts.rows, backpacks:backpacks.rows, admin: req.session.isAdmin});
         } catch (err) {
             console.log(err)
         }

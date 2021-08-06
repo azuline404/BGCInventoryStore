@@ -11,6 +11,7 @@ const Controller404 = require('../controllers/404Controller');
 const cartController = require('../controllers/cartController');
 const checkoutController = require('../controllers/checkoutController');
 const emailController = require('../controllers/emailController');
+const adminController = require('../controllers/adminController');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
@@ -19,7 +20,6 @@ router.use(express.static(path.join(__dirname, 'public')));
 router.get('/', authController.authenticate);
 router.get('/redirect',authController.redirect);
 router.get('/home',authController.checkAuth, authController.home);
-router.get('/addProductPage', authController.checkAuth, productController.addProductPage);
 router.post('/addProduct', uploadController.uploadFile, productController.addProduct);
 router.get('/shopBottles',productController.viewBottles)
 router.get('/shopBackpacks',productController.viewBackpacks)
@@ -31,9 +31,10 @@ router.get('/guideline',faqController.viewGuideline)
 router.get('/after_add/:product_id/:sku_id',cartController.viewSubPage)
 router.get('/shopCart/:order_id',cartController.viewCart)
 router.get('/checkoutPage/:order_id',checkoutController.viewCheckout)
-router.get('/connectPage',productController.viewSettings)
+router.get('/settings',adminController.viewSettings)
 router.get('/contact',productController.viewcontact)
 router.post('/submitOrder/:order_id', emailController.sendEmail, orderController.updateNewOrder)
+router.post('/uploadPhotos',uploadController.uploadFile)
 
 
 // ajax requests 
@@ -42,7 +43,5 @@ router.post('/getProductPageDetails', productController.returnProductDetails)
 
 // other routes that are not defined
 router.get('/*',Controller404.notFound)
-
-module.exports = router;
 
 module.exports = router;

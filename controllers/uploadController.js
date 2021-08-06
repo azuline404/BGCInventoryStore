@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
 
 // https://stackoverflow.com/questions/30838901/error-handling-when-uploading-file-using-multer-with-expressjs
 function uploadFile(req, res, next) {
-    var upload = multer({ storage : storage }).array('jacketPhotos',10)
+    var upload = multer({ storage : storage }).array('productPhotos',10)
     upload(req, res, function (err) {
         if (err instanceof multer.MulterError) {
             res.render('404');
@@ -23,8 +23,9 @@ function uploadFile(req, res, next) {
             res.render('404');
         }
         // No errors during upload, call the next middleware function (leads to controller)
-        next()
     })
+    console.log(req.session.isAdmin);
+    res.render('home', {admin: req.session.isAdmin});
 }
 module.exports = {
   uploadFile
