@@ -28,7 +28,7 @@ async function queryDB(q) {
 const orderModelControls = {
 
     async getOrderByID(order_id) {
-        return await queryDB(`SELECT * FROM order_lines WHERE order_id='${order_id}'`)
+        return await queryDB(`SELECT * FROM orders where order_id = '${order_id}'`)
     },
     async getProductsByOrderID(order_id){
         return await queryDB(`

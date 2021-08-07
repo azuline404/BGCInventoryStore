@@ -112,10 +112,10 @@
             </div>
 
             <div id="lastDiv">
-                <button type="button" class="btn btn-primary" id="addJacketBtn">Add Row</button>
-                <button type="button" class="btn btn-primary" id="deleteJacketBtn">Delete Row</button>
+                <button type="button" class="btn-lg btn-primary" id="addJacketBtn">Add Row</button>
+                <button type="button" class="btn-lg btn-primary" id="deleteJacketBtn">Delete Row</button>
                 {{!-- <input type="file" name="jacketPhotos" required multiple /> --}}
-                <input type="submit" value="Submit" />
+                <input type="submit" class = "btn-lg" value="Submit" />
             </div>
         </form>
 
@@ -201,9 +201,9 @@
                     <table>
                         <thead>
                             <tr>
-                                <td>ID</td>
-                                <td>Status</td>
-                                <td>Date</td>
+                                <td>Order ID</td>
+                                <td>Order Status</td>
+                                <td>Date Submitted</td>
                             </tr>
                         </thead>
 
@@ -213,7 +213,7 @@
                                 <td>{{order_id}}</td>
                                 <td>{{status}}</td>
                                 <td>{{date_submitted}}</td>
-                                <td><a href=""style="color: rgb(255, 123, 0);">View</a></td>
+                                <td><a href= "/viewOrder/{{order_id}}" style="color: rgb(255, 123, 0);">View Order</a></td>
                             <tr>
                             {{/each}}
                         </tbody>

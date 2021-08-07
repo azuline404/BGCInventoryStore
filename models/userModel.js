@@ -19,6 +19,9 @@ const userModelControls = {
 
     async getAlluser(){
         return await pg.query(`SELECT * FROM users`)
+    },
+    async getUserByID(user_id) {
+        return await pg.query(`SELECT * FROM users where user_id = '${user_id}'`);
     }
 }
 module.exports = userModelControls;
