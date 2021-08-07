@@ -31,6 +31,7 @@ const orderControls = {
         }
     },
     updateOrder: async(req,res,next) => {
+        console.log(req.body);
         // try {
         //     const order_id = req.params.order_id;
         //     res.render('reviewOrderPage', {products: productsInOrder.rows, user: userInformation.rows, email, order_id});
