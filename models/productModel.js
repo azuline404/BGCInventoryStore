@@ -45,6 +45,23 @@ const productModelControls = {
         return await queryDB(`SELECT * FROM users`)
     },
 
+    //get distinct products by category
+    async getDistinctBottles() {
+        return await queryDB(`SELECT distinct * FROM products WHERE products.category = 'bottle'`)
+    },
+
+    async getDistinctImage(n) {
+        return await queryDB(`SELECT product_img FROM product_details
+        INNER JOIN products
+        ON products.product_id = product_details.product_id 
+        WHERE products.product_id = ` + n)
+    },
+
+    async getDistinctBottleID() {
+        return await queryDB(`SELECT product_id FROM products WHERE products.category = 'bottle'`)
+    },
+
+    //
     async getProductByID(product_id){
         return await queryDB(`SELECT * FROM products INNER JOIN product_details ON products.product_id = product_details.product_id INNER JOIN product_details_offices ON product_details_offices.sku_id = product_details.sku_id WHERE products.product_id = ${product_id}`)
     },

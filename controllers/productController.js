@@ -54,10 +54,33 @@ const productControls = {
     },
     viewAllProducts: async (req,res,next) => {
         try {
-            const bottles = await productsModel.getAllBottles();
+            /*const bottlesID = await productsModel.getDistinctBottleID();
+            const bottleIdList = new Array();
+            const bottleImage = new Array();
+            for(var i = 0; i < bottlesID.rows.length; i++){
+                bottleIdList.push(Object.keys(bottlesID.rows[i]) = bottlesID.rows[i],product_id);
+            }
+            console.log(bottleIdList);*/
+
+            /*for(var i = 0; i < bottlesID.rows.length; i++){
+                bottleImage.push(await productsModel.getDistinctImage(i));
+            }
+            console.log(bottleImage);*/
+
+            const bottlesID = await productsModel.getDistinctBottleID();
+            const bottlesList = new Map();
+            for(var i = 0; i < bottlesID.rows.length; i++){
+                bottlesList.set(bottlesID.rows[i], await productsModel.getDistinctImage(bottlesID.rows[i].product_id));
+            }
+
+            console.log(bottlesList);
+
+            const bottles = await productsModel.getDistinctBottles();
             const shirts = await productsModel.getAllShirts();
             const backpacks = await productsModel.getAllBackpacks();
-            res.render('allProductsPage', {bottles: bottles.rows, shirts: shirts.rows, backpacks:backpacks.rows, admin: req.session.isAdmin});
+            
+            res.render('allProductsPage', {bottles: bottles.rows, 
+                bottlesList: bottlesList, shirts: shirts.rows, backpacks:backpacks.rows, admin: req.session.isAdmin});
         } catch (err) {
             console.log(err)
         }
