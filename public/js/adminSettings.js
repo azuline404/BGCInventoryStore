@@ -5,7 +5,6 @@ window.addEventListener('load', (event) => {
     document.getElementById("matter-4").style.display = "none"
     document.getElementById("matter-5").style.display = "none"
 
-        
 // https://stackoverflow.com/questions/35386064/jquery-editing-one-row-at-a-time
 
 $('#product-table').find('.save, .cancel').hide();
@@ -72,6 +71,17 @@ $('.cancel').on('click', function() {
 
 
 
+function validateForm() {
+    
+    console.log("clicked submit");
+    var $fileUpload = $("#files");
+    if (parseInt($fileUpload.get(0).files.length) > 10) {
+        alert("You are only allowed to upload a maximum of 10 files");
+        return false;
+    };
+    return true;
+}
+
 function toggleMenu() {
 let toggle = document.querySelector('.connect-toggle');
 let navigation = document.querySelector('.connect-navigation');
@@ -84,7 +94,7 @@ main.classList.toggle('active');
 
 function get_option(obj) {
 var temp = "none";
-for (var i = 1; i < 5; i++) {
+for (var i = 1; i < 6; i++) {
     if (i == obj)
         temp = "block";
     else

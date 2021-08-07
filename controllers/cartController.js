@@ -49,8 +49,24 @@ const cartPage = {
 
             res.render('shoppingCart',{
                 cart: cart.rows,
-                order_id
+                order_id, admin: req.session.isAdmin
             })
+        } catch (err) {
+            console.log(err)
+        }
+    },
+    findCart: async (req, res)=>{
+        try {
+            const result = await ordersModel.getOrderByUserID(req.session.user_id);
+            if (result.rows.length != 0) {
+                const order_id = result.rows[0].order_id;
+                console.log(order_id);
+                res.redirect('/shopCart/' + order_id);
+            }
+            else {
+                console.log("user has no incomplete cart");
+                res.render('emptyCartPage', {admin: req.session.isAdmin});
+            }
         } catch (err) {
             console.log(err)
         }

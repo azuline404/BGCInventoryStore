@@ -195,5 +195,8 @@ function checkForm() {
         console.log(form.action);
         return true;
     }
-    return false;
+    else {
+        alert('Please select a valid Gender/Color/Size combination!');
+        return false;
+    }
 }

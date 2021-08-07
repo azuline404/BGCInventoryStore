@@ -55,7 +55,7 @@ const productModelControls = {
 
     async createCartForRequesterID(requester_id){
         // if cart doesn't exist, create one
-        var order_id = await queryDB(`INSERT INTO orders (requester_id, status, date_created) SELECT '${requester_id}', 'incomplete', NOW() WHERE NOT EXISTS (SELECT * FROM users INNER JOIN orders ON users.user_id = orders.requester_id WHERE status='incomplete') RETURNING order_id`)
+        var order_id = await queryDB(`INSERT INTO orders (requester_id, status) SELECT '${requester_id}', 'incomplete' WHERE NOT EXISTS (SELECT * FROM users INNER JOIN orders ON users.user_id = orders.requester_id WHERE status='incomplete') RETURNING order_id`)
         if (!order_id.rows.length){
             order_id = await queryDB(`SELECT order_id FROM orders WHERE requester_id='${requester_id}' AND status='incomplete'`)
         }
@@ -69,7 +69,7 @@ const productModelControls = {
         await queryDB(`
             INSERT INTO order_lines (order_id, sku_id, order_count)
             SELECT '${order_id}', '${sku_id}', '1'
-            WHERE NOT EXISTS (SELECT * FROM order_lines WHERE sku_id='${sku_id}');
+            WHERE NOT EXISTS (SELECT * FROM order_lines WHERE sku_id='${sku_id}' and order_id = '${order_id}');
         `)
     },
     
@@ -132,7 +132,9 @@ const productModelControls = {
         await queryDB(`UPDATE product_details_offices SET quantity = '${newSurreyQty}' WHERE location = 'Surrey' and sku_id = '${skuID}'`)
         await queryDB(`UPDATE product_details_offices SET quantity = '${newVancouverQty}' WHERE location = 'Vancouver' and sku_id = '${skuID}'`)
     },
+    async deductProductCount(sku_id, order_count,location){
+        return await queryDB(`UPDATE product_details_offices SET quantity = quantity - '${order_count}' WHERE location = '${location}' and sku_id = '${sku_id}'`);
+    }
 }
 
 module.exports = productModelControls;
-

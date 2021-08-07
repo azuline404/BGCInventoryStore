@@ -14,12 +14,8 @@ const productControls = {
         console.log(req.session);
         res.render('home', {name: req.session.name, email: req.session.email, admin: req.session.isAdmin});
     },
-    addProductPage: (req,res,next) => {
-        res.render('addProductPage', {name: req.session.name, email: req.session.email});
-    },
     addProduct: async (req,res,next) => {
             console.log(req.body);
-
             // insert into products using first three fields, name, description, and value
             // After insertion, retreieve the product ID, and delete the name, description, and value fields for better indexing of the JSON object
             try {
@@ -50,51 +46,7 @@ const productControls = {
     retrieveAllProducts: async(req,res,next) => {
         try {
             const products = await productsModel.getAllProducts();
-            res.render('allProductsPage', {bottles: bottles.rows, shirts: shirts.rows, backpacks:backpacks.rows});
-        } catch (err) {
-            console.log(err)
-        }
-    },
-    viewSettings:async (req,res) =>{
-        try {
-            var products = await productsModel.getAllProducts();
-            var officeCounts = await productsModel.getAllProductCounts();
-            var productList = [];
-            const user = await userModelControls.getAlluser();
-            console.log(officeCounts);
-            for (var i = 0; i < products.rows.length; i++) {
-                var currentProduct = products.rows[i];
-                var sku_id = currentProduct.sku_id;
-                for (var j = 0; j < officeCounts.rows.length; j++) {
-                    var currentQuantity = officeCounts.rows[j];
-                    if (currentQuantity["sku_id"] == sku_id) {
-                        switch (currentQuantity.location) {
-                            case "Burnaby":
-                                currentProduct["BurnabyQuantity"] = currentQuantity["quantity"];
-                                break;
-                            case "Metrotown":
-                                currentProduct["MetrotownQuantity"] = currentQuantity["quantity"];
-                                break;
-                            case "New Westminster":
-                                currentProduct["NewWestminsterQuantity"] = currentQuantity["quantity"];
-                                break;
-                            case "Richmond":
-                                currentProduct["RichmondQuantity"] = currentQuantity["quantity"];
-                                break;
-                            case "Surrey":
-                                currentProduct["SurreyQuantity"] = currentQuantity["quantity"];
-                                break;
-                            case "Vancouver":
-                                currentProduct["VancouverQuantity"] = currentQuantity["quantity"];
-                                break;
-                        }
-                    }
-                }
-                productList.push(currentProduct);
-            }
-            console.log(productList);
-            res.render('connectPage',{items: productList,user:user.rows})
-
+            res.render('allProductsPage', {bottles: bottles.rows, shirts: shirts.rows, backpacks:backpacks.rows, admin: req.session.isAdmin});
         } catch (err) {
             console.log(err)
         }
@@ -104,7 +56,7 @@ const productControls = {
             const bottles = await productsModel.getAllBottles();
             const shirts = await productsModel.getAllShirts();
             const backpacks = await productsModel.getAllBackpacks();
-            res.render('allProductsPage', {bottles: bottles.rows, shirts: shirts.rows, backpacks:backpacks.rows});
+            res.render('allProductsPage', {bottles: bottles.rows, shirts: shirts.rows, backpacks:backpacks.rows, admin: req.session.isAdmin});
         } catch (err) {
             console.log(err)
         }
@@ -113,7 +65,7 @@ const productControls = {
         try {
             const bottles = await productsModel.getAllBottles();
             console.log(bottles.rows);
-            res.render('bottlesPage', {bottles: bottles.rows, category: "Bottles"})
+            res.render('bottlesPage', {bottles: bottles.rows, category: "Bottles", admin: req.session.isAdmin})
         } catch (err) {
             console.log(err)
         }
@@ -121,7 +73,7 @@ const productControls = {
     viewBackpacks: async (req,res,next) => {
         try {
             const backpacks = await productsModel.getAllBackpacks();
-            res.render('backpacksPage', {backpacks: backpacks.rows, category: "Backpacks"})
+            res.render('backpacksPage', {backpacks: backpacks.rows, category: "Backpacks", admin: req.session.isAdmin})
         } catch (err) {
             console.log(err)
         }
@@ -129,7 +81,7 @@ const productControls = {
     viewShirts: async (req,res,next) => {
         try {
             const shirts = await productsModel.getAllShirts();
-            res.render('shirtsPage', {shirts: shirts.rows, category: "Shirts"})
+            res.render('shirtsPage', {shirts: shirts.rows, category: "Shirts", admin: req.session.isAdmin})
         } catch (err) {
             console.log(err)
         }
@@ -142,7 +94,7 @@ const productControls = {
             const productColors = await productsModel.getAllColors(productId);
             const productImages = await productsModel.getAllImage(productId);
             const productGenders = await productsModel.getAllGenders(productId);
-            res.render('detail',{productDetails: productDetail.rows, productSizes: productSizes.rows, productColors: productColors.rows, productImages: productImages.rows, productGenders: productGenders.rows});
+            res.render('detail',{productDetails: productDetail.rows, productSizes: productSizes.rows, productColors: productColors.rows, productImages: productImages.rows, productGenders: productGenders.rows, admin: req.session.isAdmin});
         } catch (err) {
             console.log(err)
         }
