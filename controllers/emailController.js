@@ -11,8 +11,8 @@ var transporter = nodemailer.createTransport({
 var mailOptions = {
   from: 'bgcpromoteam@gmail.com',
   to: 'tommychang97@gmail.com',
-  subject: 'New order received',
-  html: 'New order received! Order id: '
+  subject: 'New promotion gear order request received',
+  html: 'Hello BGC Promotional Gear team, a new order has just been received. The order # is: '
 };
 
 function sendEmail(req, res, next) {

@@ -132,6 +132,9 @@ const productModelControls = {
         await queryDB(`UPDATE product_details_offices SET quantity = '${newSurreyQty}' WHERE location = 'Surrey' and sku_id = '${skuID}'`)
         await queryDB(`UPDATE product_details_offices SET quantity = '${newVancouverQty}' WHERE location = 'Vancouver' and sku_id = '${skuID}'`)
     },
+    async deductProductCount(sku_id, order_count,location){
+        return await queryDB(`UPDATE product_details_offices SET quantity = quantity - '${order_count}' WHERE location = '${location}' and sku_id = '${sku_id}'`);
+    }
 }
 
 module.exports = productModelControls;

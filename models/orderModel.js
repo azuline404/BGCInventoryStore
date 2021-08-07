@@ -37,14 +37,17 @@ const orderModelControls = {
             WHERE A.order_id = '${order_id}'`
         )
     },
-    async updateNewOrderStatus(order_id) {
-        return await queryDB(`UPDATE orders SET status = 'submitted', date_submitted = NOW() WHERE order_id = '${order_id}'`)
+    async updateNewOrderStatus(order_id, location, request) {
+        return await queryDB(`UPDATE orders SET status = 'submitted', date_submitted = NOW(), location = '${location}', request_type = '${request}' WHERE order_id = '${order_id}'`)
     },
     async getOrderByUserID(user_id) {
         return await queryDB(`SELECT order_id FROM orders INNER JOIN users on orders.requester_id = users.user_id where user_id = '${user_id}' and status = 'incomplete'`)
     },
     async getAllOrders() {
         return await queryDB(`SELECT * from orders order by date_submitted`)
+    },
+    async updateCurrentOrderStatus(order_id, status,fulfiller_id) {
+        return await queryDB(`UPDATE orders SET status = '${status}', fulfiller_id = '${fulfiller_id}' WHERE order_id = '${order_id}'`)
     }
 }
 

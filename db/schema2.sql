@@ -65,6 +65,7 @@ CREATE TABLE orders
     request_type varchar(50),
     date_submitted timestamp with time zone,
     date_completed timestamp with time zone,
+    location varchar(50),
     PRIMARY KEY (order_id),
     CONSTRAINT requester_id_FK FOREIGN KEY (requester_id) REFERENCES users (user_id),
     CONSTRAINT fulfiller_id_FK FOREIGN KEY (fulfiller_id) REFERENCES users (user_id)
