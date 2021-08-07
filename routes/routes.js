@@ -40,6 +40,6 @@ router.post('/getProductPageDetails', productController.returnProductDetails)
 // other routes that are not defined
 router.get('/*',Controller404.notFound)
 
-module.exports = router;
+module.exports = router
 
-module.exports = router;
+module.exports = router

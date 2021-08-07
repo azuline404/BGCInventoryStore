@@ -10,6 +10,10 @@ const cartPage = {
             var sku_id = req.params.sku_id;
             console.log(req.params);
             // // add new item to order/cart
+            console.log('REQ SESSION: **************************************************')
+            console.log(req.session)
+            console.log(req.session.user_id)
+
             var order_id = await productsModel.createCartForRequesterID(req.session.user_id);
             await productsModel.addProductToCart(order_id, sku_id);
             
@@ -34,6 +38,9 @@ const cartPage = {
         try {
             // retrieve order_id form after_add
             var order_id = req.params.order_id
+
+            console.log('REQ PARAMS: **************************************************')
+            console.log(req.params)
 
             // retrieve shopping cart and dispatch to shoppingCart.hbs
             const cart = await ordersModel.getProductsByOrderID(order_id)

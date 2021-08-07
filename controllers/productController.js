@@ -148,7 +148,7 @@ const productControls = {
         }
     },
     updateProduct: async (req,res,next) => {
-        try {
+        try {            
             console.log("new object data");
             console.log(req.body.obj)
             newProduct = req.body.obj;

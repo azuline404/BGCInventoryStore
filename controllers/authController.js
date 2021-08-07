@@ -38,6 +38,16 @@ const authControls = {
             scopes: ["user.read"],
             redirectUri: REDIRECT_URI,
         };
+        
+        console.log('TOKEN REQUEST: **************************************************')
+        console.log(tokenRequest)
+
+        console.log('REQUEST SESSION: **************************************************')
+        console.log(req.session)
+        console.log(req.session.email)
+        console.log(req.session.name)
+        console.log(req.session.isAdmin)
+
         pca.acquireTokenByCode(tokenRequest).then((response) => {
             console.log("\nResponse: \n:", response);
             req.session.email = response.account.username;
