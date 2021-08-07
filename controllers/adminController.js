@@ -40,7 +40,7 @@ const adminControls = {
                 }
                 productList.push(currentProduct);
             }
-            res.render('settingsPage',{items: productList,user:user.rows, orders: orders.rows})
+            res.render('settingsPage',{items: productList,user:user.rows, orders: orders.rows, admin: req.session.isAdmin})
 
         } catch (err) {
             console.log(err)

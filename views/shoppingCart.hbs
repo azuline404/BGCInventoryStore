@@ -3,7 +3,11 @@
         <tr>
             <th class = "cartTh">Product</th>
             <th class = "cartTh">Quantity</th>
+            <th class = "cartTh">Gender</th>
+            <th class = "cartTh">Size</th>
+            <th class = "cartTh">Color</th>
             <th class = "cartTh">Description</th>
+
         </tr>
 
         {{#each cart}}
@@ -12,14 +16,20 @@
                 <div class = "cart-info">
                     <img src="/uploads/{{product_img}}" alt="">
                     <div>
+                        <br/>
+                        <br/>
                         <p>{{product_name}}</p>
                         <br>
-                        <a href="">Remove</a>
                     </div>
                 </div>
             </td>
 
             <td class="cartTd"><input type="number" value={{order_count}}></td>
+             <td class="cartTd"><p>{{gender}}</p></td>
+
+            <td class="cartTd"><p>{{size}}</p></td>
+
+            <td class="cartTd"><p>{{color}}</p></td>
 
             <td class="cartTd">
                 <p>{{product_desc}}</p>
